@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <title>EG 3.3 · Portada adaptable · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/player.css">
+  <link rel="icon" href="assets/logo.svg">
+</head>
+<body>
+  <header class="eg-cabecera">
+    <div class="marca"><img src="assets/logo.svg" alt="Logotipo del módulo LMSGI"> <span>LMSGI · 1.º ASIR · UP3 · Prof. Andreu Juan Luna</span></div>
+    <span class="eg-etiqueta">Ejemplo guiado EG 3.3 · Grid, media queries y mobile first</span>
+    <h1>Portada adaptable</h1>
+    <p>La portada del Hotel Levante para móvil, tableta y escritorio con áreas de Grid, Flexbox y dos media queries.</p>
+  </header>
+
+  <nav class="eg-controles" aria-label="Controles del reproductor">
+    <div class="eg-botones">
+      <button type="button" id="eg-reiniciar" title="Reiniciar (R)">⏮</button>
+      <button type="button" id="eg-ant" title="Paso anterior (←)">◀</button>
+      <button type="button" id="eg-play" class="principal" title="Reproducir / pausa (Espacio)">▶ Reproducir</button>
+      <button type="button" id="eg-sig" title="Paso siguiente (→)">▶</button>
+      <button type="button" id="eg-final" title="Ver el resultado final">⏭</button>
+    </div>
+    <span class="eg-paso" id="eg-num" aria-live="polite">Paso 0 / 0</span>
+    <div class="eg-progreso" aria-hidden="true"><span id="eg-barra"></span></div>
+    <div class="eg-velocidad" role="group" aria-label="Velocidad">
+      Velocidad:
+      <button type="button" data-v="lenta" aria-pressed="false">Lenta</button>
+      <button type="button" data-v="normal" aria-pressed="true">Normal</button>
+      <button type="button" data-v="rapida" aria-pressed="false">Rápida</button>
+    </div>
+    <div class="eg-ayuda">
+      <button type="button" id="eg-info" aria-label="Ayuda" title="Ayuda">i</button>
+      <div class="eg-ayuda-panel" id="eg-ayuda-panel">
+        <p><strong>Cómo usar el reproductor</strong></p>
+        <p><kbd>←</kbd> <kbd>→</kbd> paso a paso · <kbd>Espacio</kbd> reproducir o pausar · <kbd>R</kbd> reiniciar.</p>
+        <p>Haz clic en cualquier paso del enunciado para saltar a él. El código nuevo de cada paso aparece resaltado.</p>
+      </div>
+    </div>
+  </nav>
+
+  <main class="eg-rejilla">
+    <section class="eg-panel eg-enunciado" aria-labelledby="t-enunciado">
+      <h2 id="t-enunciado">Enunciado del ejercicio</h2>
+      <div class="intro"><p>Construimos la portada con la estrategia <strong>mobile first</strong>: primero una columna para el móvil y después, con <code>@media (min-width: …)</code>, la versión de tableta y la de escritorio (CE 2h).</p><p>La vista previa tiene botones para <strong>simular anchos de pantalla</strong>. En DevTools puedes hacer lo mismo con el modo dispositivo (<kbd>Ctrl</kbd> + <kbd>Mayús</kbd> + <kbd>M</kbd>).</p></div>
+      <p class="pista">Haz clic en un paso para saltar a él.</p>
+      <ol class="eg-pasos" id="eg-pasos"></ol>
+    </section>
+    <section class="eg-panel eg-codigo" aria-labelledby="t-codigo">
+      <h2 id="t-codigo"><span>Código fuente</span><span class="eg-pestanas" id="eg-pestanas" role="tablist"></span></h2>
+      <pre class="eg-pre" id="eg-pre" tabindex="0" aria-label="Código del fichero seleccionado"></pre>
+    </section>
+    <section class="eg-panel eg-vista" aria-labelledby="t-vista">
+      <h2 id="t-vista"><span>Vista previa · <span id="eg-vista-titulo"></span></span><span id="eg-vista-estado" class="eg-estado"></span></h2>
+      <iframe id="eg-iframe" title="Vista previa del resultado" sandbox="allow-same-origin"></iframe>
+    </section>
+  </main>
+
+  <footer class="eg-pie">
+    <span>Lenguajes de Marcas y Sistemas de Gestión de Información · CFGS ASIR · Curso 2026-2027</span>
+    <span>Relacionado con las secciones 9-10 de la teoría, con la PR 3.5 y con el Proyecto 3</span>
+  </footer>
+
+  <script>window.EJEMPLO = {
+ "pasos": [
+  {
+   "titulo": "El HTML de la portada",
+   "detalle": "Una portada semántica: cabecera con menú, contenido principal con una galería, un <code>aside<\/code> con la oferta y el pie. Lo envolvemos todo en <code>.pagina<\/code>, que será la rejilla. El <code>viewport<\/code> es imprescindible para el diseño adaptable.",
+   "fichero": "index.html",
+   "codigo": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Hotel Levante · Benidorm<\/title>\n  <link rel=\"stylesheet\" href=\"adaptable.css\">\n<\/head>\n<body>\n  <div class=\"pagina\">\n    <header class=\"cabecera\">\n      <p class=\"marca\">Hotel Levante<\/p>\n      <nav aria-label=\"Menú principal\">\n        <ul class=\"menu\">\n          <li><a href=\"#\" aria-current=\"page\">Inicio<\/a><\/li>\n          <li><a href=\"#\">Habitaciones<\/a><\/li>\n          <li><a href=\"#\">Reservas<\/a><\/li>\n          <li><a href=\"#\">Contacto<\/a><\/li>\n        <\/ul>\n      <\/nav>\n    <\/header>\n    <main class=\"principal\">\n      <section class=\"bienvenida\">\n        <h1>A 50 metros de la playa<\/h1>\n        <p>Hotel familiar con piscina climatizada y desayuno buffet.<\/p>\n      <\/section>\n      <section>\n        <h2>El hotel en imágenes<\/h2>\n        <ul class=\"galeria\">\n          <li class=\"g1\">Piscina<\/li>\n          <li class=\"g2\">Terraza<\/li>\n          <li class=\"g3\">Desayuno<\/li>\n          <li class=\"g4\">Habitación doble<\/li>\n          <li class=\"g5\">Recepción<\/li>\n          <li class=\"g6\">Vistas al mar<\/li>\n        <\/ul>\n      <\/section>\n    <\/main>\n    <aside class=\"lateral\">\n      <h2>Oferta de otoño<\/h2>\n      <p>3 noches al precio de 2 en noviembre.<\/p>\n    <\/aside>\n    <footer class=\"pie\">\n      <p>Avda. del Mediterráneo, 1 · 03503 Benidorm<\/p>\n    <\/footer>\n  <\/div>\n<\/body>\n<\/html>\n"
+  },
+  {
+   "titulo": "Estilos base para el móvil",
+   "detalle": "<strong>Mobile first<\/strong>: escribimos primero los estilos del móvil, sin ninguna media query. Usa los botones <em>375 px / 768 px / 1200 px<\/em> de la vista previa para simular pantallas.",
+   "fichero": "adaptable.css",
+   "codigo": "/* ===== Base (móvil): una sola columna ===== */\n*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.5;\n  color: #2B2B2B;\n}\nh1, h2 { font-family: Georgia, serif; line-height: 1.2; }\n.cabecera { background: #2F6690; color: #FFFFFF; padding: 1rem;\n}\n.marca { margin: 0; font-size: 1.4rem; font-family: Georgia, serif; }\n.principal, .lateral { padding: 1rem; }\n.lateral { background: #FDF0DF; }\n.pie { background: #3B3D35; color: #FFFFFF; padding: 1rem; text-align: center; }\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "La maqueta con áreas de Grid",
+   "detalle": "<code>grid-template-areas<\/code> dibuja la página con texto: en el móvil, una sola columna. <code>grid-template-rows: auto 1fr …<\/code> estira el contenido para que el pie quede abajo.",
+   "fichero": "adaptable.css",
+   "codigo": "/* ===== Base (móvil): una sola columna ===== */\n*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.5;\n  color: #2B2B2B;\n}\nh1, h2 { font-family: Georgia, serif; line-height: 1.2; }\n.cabecera { background: #2F6690; color: #FFFFFF; padding: 1rem;\n}\n.marca { margin: 0; font-size: 1.4rem; font-family: Georgia, serif; }\n.principal, .lateral { padding: 1rem; }\n.lateral { background: #FDF0DF; }\n.pie { background: #3B3D35; color: #FFFFFF; padding: 1rem; text-align: center; }\n\n/* ===== Grid: la maqueta en áreas ===== */\n.pagina {\n  display: grid;\n  grid-template-areas:\n    \"cabecera\"\n    \"principal\"\n    \"lateral\"\n    \"pie\";\n  min-height: 100vh;\n  grid-template-rows: auto 1fr auto auto;\n}\n.cabecera { grid-area: cabecera; }\n.principal { grid-area: principal; }\n.lateral { grid-area: lateral; }\n.pie { grid-area: pie; }\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "El menú con Flexbox",
+   "detalle": "Grid para la página y <strong>Flexbox<\/strong> para el componente: el menú es una fila que baja de línea con <code>flex-wrap<\/code> si no cabe.",
+   "fichero": "adaptable.css",
+   "codigo": "/* ===== Base (móvil): una sola columna ===== */\n*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.5;\n  color: #2B2B2B;\n}\nh1, h2 { font-family: Georgia, serif; line-height: 1.2; }\n.cabecera { background: #2F6690; color: #FFFFFF; padding: 1rem;\n}\n.marca { margin: 0; font-size: 1.4rem; font-family: Georgia, serif; }\n.principal, .lateral { padding: 1rem; }\n.lateral { background: #FDF0DF; }\n.pie { background: #3B3D35; color: #FFFFFF; padding: 1rem; text-align: center; }\n\n/* ===== Grid: la maqueta en áreas ===== */\n.pagina {\n  display: grid;\n  grid-template-areas:\n    \"cabecera\"\n    \"principal\"\n    \"lateral\"\n    \"pie\";\n  min-height: 100vh;\n  grid-template-rows: auto 1fr auto auto;\n}\n.cabecera { grid-area: cabecera; }\n.principal { grid-area: principal; }\n.lateral { grid-area: lateral; }\n.pie { grid-area: pie; }\n\n/* ===== Flexbox: el menú ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.25rem;\n}\n.menu a {\n  display: block;\n  padding: 0.5rem 0.75rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover, .menu a:focus-visible, .menu a[aria-current=\"page\"] {\n  background: #F3A447; color: #2B2B2B;\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Galería adaptable en una sola regla",
+   "detalle": "<code>repeat(auto-fit, minmax(min(150px, 100%), 1fr))<\/code> crea tantas columnas de al menos 150 px como quepan. Compara 375 px y 1200 px: cambia el número de columnas <strong>sin media queries<\/strong>.",
+   "fichero": "adaptable.css",
+   "codigo": "/* ===== Base (móvil): una sola columna ===== */\n*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.5;\n  color: #2B2B2B;\n}\nh1, h2 { font-family: Georgia, serif; line-height: 1.2; }\n.cabecera { background: #2F6690; color: #FFFFFF; padding: 1rem;\n}\n.marca { margin: 0; font-size: 1.4rem; font-family: Georgia, serif; }\n.principal, .lateral { padding: 1rem; }\n.lateral { background: #FDF0DF; }\n.pie { background: #3B3D35; color: #FFFFFF; padding: 1rem; text-align: center; }\n\n/* ===== Grid: la maqueta en áreas ===== */\n.pagina {\n  display: grid;\n  grid-template-areas:\n    \"cabecera\"\n    \"principal\"\n    \"lateral\"\n    \"pie\";\n  min-height: 100vh;\n  grid-template-rows: auto 1fr auto auto;\n}\n.cabecera { grid-area: cabecera; }\n.principal { grid-area: principal; }\n.lateral { grid-area: lateral; }\n.pie { grid-area: pie; }\n\n/* ===== Flexbox: el menú ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.25rem;\n}\n.menu a {\n  display: block;\n  padding: 0.5rem 0.75rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover, .menu a:focus-visible, .menu a[aria-current=\"page\"] {\n  background: #F3A447; color: #2B2B2B;\n}\n\n/* ===== Galería adaptable sin media queries ===== */\n.galeria {\n  list-style: none;\n  padding: 0;\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));\n  gap: 0.75rem;\n}\n.galeria li {\n  aspect-ratio: 4 / 3;\n  display: flex;\n  align-items: flex-end;\n  padding: 0.5rem;\n  border-radius: 8px;\n  color: #FFFFFF;\n  font-weight: bold;\n  text-shadow: 0 1px 3px rgb(0 0 0 / 60%);\n}\n.g1 { background: linear-gradient(135deg, #809EC2, #5F7EA6); }\n.g2 { background: linear-gradient(135deg, #F3A447, #C77A1E); }\n.g3 { background: linear-gradient(135deg, #A5B592, #6E7F5A); }\n.g4 { background: linear-gradient(135deg, #E3A6BB, #B76E8C); }\n.g5 { background: linear-gradient(135deg, #B6B1BF, #6E6A78); }\n.g6 { background: linear-gradient(135deg, #9FC1E8, #2F6690); }\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Tableta: la primera media query",
+   "detalle": "Desde 600 px la cabecera pasa a ser una fila flex con la marca a la izquierda y el menú a la derecha, y el título crece. Pulsa 768 px.",
+   "fichero": "adaptable.css",
+   "codigo": "/* ===== Base (móvil): una sola columna ===== */\n*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.5;\n  color: #2B2B2B;\n}\nh1, h2 { font-family: Georgia, serif; line-height: 1.2; }\n.cabecera { background: #2F6690; color: #FFFFFF; padding: 1rem;\n}\n.marca { margin: 0; font-size: 1.4rem; font-family: Georgia, serif; }\n.principal, .lateral { padding: 1rem; }\n.lateral { background: #FDF0DF; }\n.pie { background: #3B3D35; color: #FFFFFF; padding: 1rem; text-align: center; }\n\n/* ===== Grid: la maqueta en áreas ===== */\n.pagina {\n  display: grid;\n  grid-template-areas:\n    \"cabecera\"\n    \"principal\"\n    \"lateral\"\n    \"pie\";\n  min-height: 100vh;\n  grid-template-rows: auto 1fr auto auto;\n}\n.cabecera { grid-area: cabecera; }\n.principal { grid-area: principal; }\n.lateral { grid-area: lateral; }\n.pie { grid-area: pie; }\n\n/* ===== Flexbox: el menú ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.25rem;\n}\n.menu a {\n  display: block;\n  padding: 0.5rem 0.75rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover, .menu a:focus-visible, .menu a[aria-current=\"page\"] {\n  background: #F3A447; color: #2B2B2B;\n}\n\n/* ===== Galería adaptable sin media queries ===== */\n.galeria {\n  list-style: none;\n  padding: 0;\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));\n  gap: 0.75rem;\n}\n.galeria li {\n  aspect-ratio: 4 / 3;\n  display: flex;\n  align-items: flex-end;\n  padding: 0.5rem;\n  border-radius: 8px;\n  color: #FFFFFF;\n  font-weight: bold;\n  text-shadow: 0 1px 3px rgb(0 0 0 / 60%);\n}\n.g1 { background: linear-gradient(135deg, #809EC2, #5F7EA6); }\n.g2 { background: linear-gradient(135deg, #F3A447, #C77A1E); }\n.g3 { background: linear-gradient(135deg, #A5B592, #6E7F5A); }\n.g4 { background: linear-gradient(135deg, #E3A6BB, #B76E8C); }\n.g5 { background: linear-gradient(135deg, #B6B1BF, #6E6A78); }\n.g6 { background: linear-gradient(135deg, #9FC1E8, #2F6690); }\n\n/* ===== Tableta: desde 600 px ===== */\n@media (min-width: 600px) {\n  .cabecera {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n  .menu { margin: 0; }\n  .bienvenida h1 { font-size: 2.25rem; }\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Escritorio: dos columnas",
+   "detalle": "Desde 1000 px basta con <strong>redefinir las áreas<\/strong>: la oferta pasa a una columna lateral de 300 px. El HTML no cambia. Pulsa 1200 px.",
+   "fichero": "adaptable.css",
+   "codigo": "/* ===== Base (móvil): una sola columna ===== */\n*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.5;\n  color: #2B2B2B;\n}\nh1, h2 { font-family: Georgia, serif; line-height: 1.2; }\n.cabecera { background: #2F6690; color: #FFFFFF; padding: 1rem;\n}\n.marca { margin: 0; font-size: 1.4rem; font-family: Georgia, serif; }\n.principal, .lateral { padding: 1rem; }\n.lateral { background: #FDF0DF; }\n.pie { background: #3B3D35; color: #FFFFFF; padding: 1rem; text-align: center; }\n\n/* ===== Grid: la maqueta en áreas ===== */\n.pagina {\n  display: grid;\n  grid-template-areas:\n    \"cabecera\"\n    \"principal\"\n    \"lateral\"\n    \"pie\";\n  min-height: 100vh;\n  grid-template-rows: auto 1fr auto auto;\n}\n.cabecera { grid-area: cabecera; }\n.principal { grid-area: principal; }\n.lateral { grid-area: lateral; }\n.pie { grid-area: pie; }\n\n/* ===== Flexbox: el menú ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.25rem;\n}\n.menu a {\n  display: block;\n  padding: 0.5rem 0.75rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover, .menu a:focus-visible, .menu a[aria-current=\"page\"] {\n  background: #F3A447; color: #2B2B2B;\n}\n\n/* ===== Galería adaptable sin media queries ===== */\n.galeria {\n  list-style: none;\n  padding: 0;\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));\n  gap: 0.75rem;\n}\n.galeria li {\n  aspect-ratio: 4 / 3;\n  display: flex;\n  align-items: flex-end;\n  padding: 0.5rem;\n  border-radius: 8px;\n  color: #FFFFFF;\n  font-weight: bold;\n  text-shadow: 0 1px 3px rgb(0 0 0 / 60%);\n}\n.g1 { background: linear-gradient(135deg, #809EC2, #5F7EA6); }\n.g2 { background: linear-gradient(135deg, #F3A447, #C77A1E); }\n.g3 { background: linear-gradient(135deg, #A5B592, #6E7F5A); }\n.g4 { background: linear-gradient(135deg, #E3A6BB, #B76E8C); }\n.g5 { background: linear-gradient(135deg, #B6B1BF, #6E6A78); }\n.g6 { background: linear-gradient(135deg, #9FC1E8, #2F6690); }\n\n/* ===== Tableta: desde 600 px ===== */\n@media (min-width: 600px) {\n  .cabecera {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n  .menu { margin: 0; }\n  .bienvenida h1 { font-size: 2.25rem; }\n}\n\n/* ===== Escritorio: desde 1000 px ===== */\n@media (min-width: 1000px) {\n  .pagina {\n    grid-template-columns: 1fr 300px;\n    grid-template-areas:\n      \"cabecera  cabecera\"\n      \"principal lateral\"\n      \"pie       pie\";\n    grid-template-rows: auto 1fr auto;\n  }\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Cabecera pegada arriba",
+   "detalle": "<code>position: sticky<\/code> con <code>top: 0<\/code> mantiene la cabecera visible al hacer scroll; <code>z-index<\/code> la deja por encima de la galería.",
+   "fichero": "adaptable.css",
+   "codigo": "/* ===== Base (móvil): una sola columna ===== */\n*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.5;\n  color: #2B2B2B;\n}\nh1, h2 { font-family: Georgia, serif; line-height: 1.2; }\n.cabecera { background: #2F6690; color: #FFFFFF; padding: 1rem;\n  position: sticky; top: 0; z-index: 10;\n}\n.marca { margin: 0; font-size: 1.4rem; font-family: Georgia, serif; }\n.principal, .lateral { padding: 1rem; }\n.lateral { background: #FDF0DF; }\n.pie { background: #3B3D35; color: #FFFFFF; padding: 1rem; text-align: center; }\n\n/* ===== Grid: la maqueta en áreas ===== */\n.pagina {\n  display: grid;\n  grid-template-areas:\n    \"cabecera\"\n    \"principal\"\n    \"lateral\"\n    \"pie\";\n  min-height: 100vh;\n  grid-template-rows: auto 1fr auto auto;\n}\n.cabecera { grid-area: cabecera; }\n.principal { grid-area: principal; }\n.lateral { grid-area: lateral; }\n.pie { grid-area: pie; }\n\n/* ===== Flexbox: el menú ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.25rem;\n}\n.menu a {\n  display: block;\n  padding: 0.5rem 0.75rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover, .menu a:focus-visible, .menu a[aria-current=\"page\"] {\n  background: #F3A447; color: #2B2B2B;\n}\n\n/* ===== Galería adaptable sin media queries ===== */\n.galeria {\n  list-style: none;\n  padding: 0;\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));\n  gap: 0.75rem;\n}\n.galeria li {\n  aspect-ratio: 4 / 3;\n  display: flex;\n  align-items: flex-end;\n  padding: 0.5rem;\n  border-radius: 8px;\n  color: #FFFFFF;\n  font-weight: bold;\n  text-shadow: 0 1px 3px rgb(0 0 0 / 60%);\n}\n.g1 { background: linear-gradient(135deg, #809EC2, #5F7EA6); }\n.g2 { background: linear-gradient(135deg, #F3A447, #C77A1E); }\n.g3 { background: linear-gradient(135deg, #A5B592, #6E7F5A); }\n.g4 { background: linear-gradient(135deg, #E3A6BB, #B76E8C); }\n.g5 { background: linear-gradient(135deg, #B6B1BF, #6E6A78); }\n.g6 { background: linear-gradient(135deg, #9FC1E8, #2F6690); }\n\n/* ===== Tableta: desde 600 px ===== */\n@media (min-width: 600px) {\n  .cabecera {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n  .menu { margin: 0; }\n  .bienvenida h1 { font-size: 2.25rem; }\n}\n\n/* ===== Escritorio: desde 1000 px ===== */\n@media (min-width: 1000px) {\n  .pagina {\n    grid-template-columns: 1fr 300px;\n    grid-template-areas:\n      \"cabecera  cabecera\"\n      \"principal lateral\"\n      \"pie       pie\";\n    grid-template-rows: auto 1fr auto;\n  }\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Hoja de impresión",
+   "detalle": "<code>@media print<\/code> oculta lo que no sirve en papel. Pruébalo con <kbd>Ctrl<\/kbd> + <kbd>P<\/kbd> en la página final y valida la hoja en el validador CSS del W3C.",
+   "fichero": "adaptable.css",
+   "codigo": "/* ===== Base (móvil): una sola columna ===== */\n*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.5;\n  color: #2B2B2B;\n}\nh1, h2 { font-family: Georgia, serif; line-height: 1.2; }\n.cabecera { background: #2F6690; color: #FFFFFF; padding: 1rem;\n  position: sticky; top: 0; z-index: 10;\n}\n.marca { margin: 0; font-size: 1.4rem; font-family: Georgia, serif; }\n.principal, .lateral { padding: 1rem; }\n.lateral { background: #FDF0DF; }\n.pie { background: #3B3D35; color: #FFFFFF; padding: 1rem; text-align: center; }\n\n/* ===== Grid: la maqueta en áreas ===== */\n.pagina {\n  display: grid;\n  grid-template-areas:\n    \"cabecera\"\n    \"principal\"\n    \"lateral\"\n    \"pie\";\n  min-height: 100vh;\n  grid-template-rows: auto 1fr auto auto;\n}\n.cabecera { grid-area: cabecera; }\n.principal { grid-area: principal; }\n.lateral { grid-area: lateral; }\n.pie { grid-area: pie; }\n\n/* ===== Flexbox: el menú ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n  display: flex;\n  flex-wrap: wrap;\n  gap: 0.25rem;\n}\n.menu a {\n  display: block;\n  padding: 0.5rem 0.75rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover, .menu a:focus-visible, .menu a[aria-current=\"page\"] {\n  background: #F3A447; color: #2B2B2B;\n}\n\n/* ===== Galería adaptable sin media queries ===== */\n.galeria {\n  list-style: none;\n  padding: 0;\n  display: grid;\n  grid-template-columns: repeat(auto-fit, minmax(min(150px, 100%), 1fr));\n  gap: 0.75rem;\n}\n.galeria li {\n  aspect-ratio: 4 / 3;\n  display: flex;\n  align-items: flex-end;\n  padding: 0.5rem;\n  border-radius: 8px;\n  color: #FFFFFF;\n  font-weight: bold;\n  text-shadow: 0 1px 3px rgb(0 0 0 / 60%);\n}\n.g1 { background: linear-gradient(135deg, #809EC2, #5F7EA6); }\n.g2 { background: linear-gradient(135deg, #F3A447, #C77A1E); }\n.g3 { background: linear-gradient(135deg, #A5B592, #6E7F5A); }\n.g4 { background: linear-gradient(135deg, #E3A6BB, #B76E8C); }\n.g5 { background: linear-gradient(135deg, #B6B1BF, #6E6A78); }\n.g6 { background: linear-gradient(135deg, #9FC1E8, #2F6690); }\n\n/* ===== Tableta: desde 600 px ===== */\n@media (min-width: 600px) {\n  .cabecera {\n    display: flex;\n    justify-content: space-between;\n    align-items: center;\n  }\n  .menu { margin: 0; }\n  .bienvenida h1 { font-size: 2.25rem; }\n}\n\n/* ===== Escritorio: desde 1000 px ===== */\n@media (min-width: 1000px) {\n  .pagina {\n    grid-template-columns: 1fr 300px;\n    grid-template-areas:\n      \"cabecera  cabecera\"\n      \"principal lateral\"\n      \"pie       pie\";\n    grid-template-rows: auto 1fr auto;\n  }\n}\n\n/* ===== Impresión ===== */\n@media print {\n  .menu, .galeria { display: none; }\n  .cabecera { position: static; }\n}\n",
+   "vista": "index.html"
+  }
+ ],
+ "anchos": [
+  375,
+  768,
+  1200
+ ]
+};</script>
+  <script src="assets/player.js"></script>
+</body>
+</html>

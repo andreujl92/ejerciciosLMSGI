@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <title>EG 3.1 · Mismo HTML, distinto CSS · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/player.css">
+  <link rel="icon" href="assets/logo.svg">
+</head>
+<body>
+  <header class="eg-cabecera">
+    <div class="marca"><img src="assets/logo.svg" alt="Logotipo del módulo LMSGI"> <span>LMSGI · 1.º ASIR · UP3 · Prof. Andreu Juan Luna</span></div>
+    <span class="eg-etiqueta">Ejemplo guiado EG 3.1 · Selectores, cascada, colores y tipografía</span>
+    <h1>Mismo HTML, distinto CSS</h1>
+    <p>Damos estilo a la portada del Hotel Levante paso a paso y, al final, cambiamos todo su aspecto con una segunda hoja.</p>
+  </header>
+
+  <nav class="eg-controles" aria-label="Controles del reproductor">
+    <div class="eg-botones">
+      <button type="button" id="eg-reiniciar" title="Reiniciar (R)">⏮</button>
+      <button type="button" id="eg-ant" title="Paso anterior (←)">◀</button>
+      <button type="button" id="eg-play" class="principal" title="Reproducir / pausa (Espacio)">▶ Reproducir</button>
+      <button type="button" id="eg-sig" title="Paso siguiente (→)">▶</button>
+      <button type="button" id="eg-final" title="Ver el resultado final">⏭</button>
+    </div>
+    <span class="eg-paso" id="eg-num" aria-live="polite">Paso 0 / 0</span>
+    <div class="eg-progreso" aria-hidden="true"><span id="eg-barra"></span></div>
+    <div class="eg-velocidad" role="group" aria-label="Velocidad">
+      Velocidad:
+      <button type="button" data-v="lenta" aria-pressed="false">Lenta</button>
+      <button type="button" data-v="normal" aria-pressed="true">Normal</button>
+      <button type="button" data-v="rapida" aria-pressed="false">Rápida</button>
+    </div>
+    <div class="eg-ayuda">
+      <button type="button" id="eg-info" aria-label="Ayuda" title="Ayuda">i</button>
+      <div class="eg-ayuda-panel" id="eg-ayuda-panel">
+        <p><strong>Cómo usar el reproductor</strong></p>
+        <p><kbd>←</kbd> <kbd>→</kbd> paso a paso · <kbd>Espacio</kbd> reproducir o pausar · <kbd>R</kbd> reiniciar.</p>
+        <p>Haz clic en cualquier paso del enunciado para saltar a él. El código nuevo de cada paso aparece resaltado.</p>
+      </div>
+    </div>
+  </nav>
+
+  <main class="eg-rejilla">
+    <section class="eg-panel eg-enunciado" aria-labelledby="t-enunciado">
+      <h2 id="t-enunciado">Enunciado del ejercicio</h2>
+      <div class="intro"><p>Partimos de la portada <strong>semántica</strong> del Hotel Levante (UP2) y le aplicamos una <strong>hoja de estilos externa</strong>: reinicio, variables, selectores de clase, descendientes, pseudoclases y pseudoelementos (CE 2h).</p><p>En el último paso enlazamos una segunda hoja y la página cambia por completo sin tocar el contenido: es la principal <strong>ventaja de las hojas de estilo</strong> (CE 2g), la misma que vimos en el CSS Zen Garden.</p></div>
+      <p class="pista">Haz clic en un paso para saltar a él.</p>
+      <ol class="eg-pasos" id="eg-pasos"></ol>
+    </section>
+    <section class="eg-panel eg-codigo" aria-labelledby="t-codigo">
+      <h2 id="t-codigo"><span>Código fuente</span><span class="eg-pestanas" id="eg-pestanas" role="tablist"></span></h2>
+      <pre class="eg-pre" id="eg-pre" tabindex="0" aria-label="Código del fichero seleccionado"></pre>
+    </section>
+    <section class="eg-panel eg-vista" aria-labelledby="t-vista">
+      <h2 id="t-vista"><span>Vista previa · <span id="eg-vista-titulo"></span></span><span id="eg-vista-estado" class="eg-estado"></span></h2>
+      <iframe id="eg-iframe" title="Vista previa del resultado" sandbox="allow-same-origin"></iframe>
+    </section>
+  </main>
+
+  <footer class="eg-pie">
+    <span>Lenguajes de Marcas y Sistemas de Gestión de Información · CFGS ASIR · Curso 2026-2027</span>
+    <span>Relacionado con las secciones 1-5 de la teoría y con la PR 3.1</span>
+  </footer>
+
+  <script>window.EJEMPLO = {
+ "pasos": [
+  {
+   "titulo": "El HTML, sin ningún estilo",
+   "detalle": "Partimos de una portada del hotel semántica y válida, como la de la PR 2.5. Ya enlaza <code>estilos.css<\/code> con <code>link<\/code>, pero la hoja todavía no existe: el navegador aplica solo sus estilos por defecto.",
+   "fichero": "index.html",
+   "codigo": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Hotel Levante · Benidorm<\/title>\n  <link rel=\"stylesheet\" href=\"estilos.css\">\n<\/head>\n<body>\n  <header class=\"cabecera\">\n    <p class=\"marca\">Hotel Levante<\/p>\n    <nav aria-label=\"Menú principal\">\n      <ul class=\"menu\">\n        <li><a href=\"#\" aria-current=\"page\">Inicio<\/a><\/li>\n        <li><a href=\"#\">Habitaciones<\/a><\/li>\n        <li><a href=\"#\">Reservas<\/a><\/li>\n        <li><a href=\"#\">Contacto<\/a><\/li>\n      <\/ul>\n    <\/nav>\n  <\/header>\n  <main class=\"contenedor\">\n    <h1>A 50 metros de la playa de Levante<\/h1>\n    <p>Hotel familiar con 48 habitaciones, piscina climatizada y\n      desayuno buffet con productos de la Marina Baixa.<\/p>\n    <section>\n      <h2>Servicios<\/h2>\n      <ul class=\"servicios\">\n        <li>Piscina climatizada<\/li>\n        <li>Wifi gratuito<\/li>\n        <li>Parking (12 € al día)<\/li>\n        <li>Admitimos mascotas<\/li>\n      <\/ul>\n    <\/section>\n    <aside class=\"oferta\">\n      <h2>Oferta de otoño<\/h2>\n      <p>3 noches al precio de 2 del 1 al 30 de noviembre.<\/p>\n    <\/aside>\n  <\/main>\n  <footer class=\"pie\">\n    <p>Avda. del Mediterráneo, 1 · 03503 Benidorm ·\n      <a href=\"tel:+34965000000\">965 000 000<\/a><\/p>\n  <\/footer>\n<\/body>\n<\/html>\n"
+  },
+  {
+   "titulo": "Reinicio y tipografía base",
+   "detalle": "Creamos la hoja <strong>externa<\/strong>. <code>box-sizing: border-box<\/code> para todos los elementos y la tipografía en <code>body<\/code>: por <strong>herencia<\/strong>, todo el texto de la página la recibe.",
+   "fichero": "estilos.css",
+   "codigo": "/* ===== 1. Reinicio y base ===== */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.6;\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Variables y cabecera",
+   "detalle": "Guardamos la paleta corporativa en <strong>variables<\/strong> (<code>--azul<\/code>…) dentro de <code>:root<\/code>. La cabecera usa un selector de <strong>clase<\/strong>. Fíjate en que <code>body<\/code> ya usa <code>var(--texto)<\/code>: se pueden usar antes de definirlas en el fichero.",
+   "fichero": "estilos.css",
+   "codigo": "/* ===== 1. Reinicio y base ===== */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.6;\n  color: var(--texto);\n  background: var(--fondo);\n}\n\n/* ===== 2. Variables: la paleta del hotel ===== */\n:root {\n  --azul: #2F6690;\n  --naranja: #F3A447;\n  --crema: #FDF0DF;\n  --texto: #2B2B2B;\n  --fondo: #FFFFFF;\n}\n\n/* ===== 3. Cabecera ===== */\n.cabecera {\n  background: var(--azul);\n  color: #FFFFFF;\n  padding: 1rem;\n}\n.marca {\n  margin: 0;\n  font-family: Georgia, serif;\n  font-size: 1.5rem;\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Menú: descendientes y pseudoclases",
+   "detalle": "<code>.menu a<\/code> selecciona los enlaces <em>dentro<\/em> del menú. <code>:hover<\/code> y <code>:focus-visible<\/code> dan la misma respuesta al ratón y al teclado (prueba con <kbd>Tab<\/kbd>), y el selector de atributo marca la página actual.",
+   "fichero": "estilos.css",
+   "codigo": "/* ===== 1. Reinicio y base ===== */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.6;\n  color: var(--texto);\n  background: var(--fondo);\n}\n\n/* ===== 2. Variables: la paleta del hotel ===== */\n:root {\n  --azul: #2F6690;\n  --naranja: #F3A447;\n  --crema: #FDF0DF;\n  --texto: #2B2B2B;\n  --fondo: #FFFFFF;\n}\n\n/* ===== 3. Cabecera ===== */\n.cabecera {\n  background: var(--azul);\n  color: #FFFFFF;\n  padding: 1rem;\n}\n.marca {\n  margin: 0;\n  font-family: Georgia, serif;\n  font-size: 1.5rem;\n}\n\n/* ===== 4. Menú: selectores descendientes y pseudoclases ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n}\n.menu li {\n  display: inline-block;\n}\n.menu a {\n  display: inline-block;\n  padding: 0.4rem 0.8rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover,\n.menu a:focus-visible,\n.menu a[aria-current=\"page\"] {\n  background: var(--naranja);\n  color: var(--texto);\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Títulos y contenedor central",
+   "detalle": "Agrupamos <code>h1, h2<\/code> en una regla. <code>max-width<\/code> + <code>margin: 0 auto<\/code> centra el contenido y limita el ancho de las líneas para que se lean bien.",
+   "fichero": "estilos.css",
+   "codigo": "/* ===== 1. Reinicio y base ===== */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.6;\n  color: var(--texto);\n  background: var(--fondo);\n}\n\n/* ===== 2. Variables: la paleta del hotel ===== */\n:root {\n  --azul: #2F6690;\n  --naranja: #F3A447;\n  --crema: #FDF0DF;\n  --texto: #2B2B2B;\n  --fondo: #FFFFFF;\n}\n\n/* ===== 3. Cabecera ===== */\n.cabecera {\n  background: var(--azul);\n  color: #FFFFFF;\n  padding: 1rem;\n}\n.marca {\n  margin: 0;\n  font-family: Georgia, serif;\n  font-size: 1.5rem;\n}\n\n/* ===== 4. Menú: selectores descendientes y pseudoclases ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n}\n.menu li {\n  display: inline-block;\n}\n.menu a {\n  display: inline-block;\n  padding: 0.4rem 0.8rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover,\n.menu a:focus-visible,\n.menu a[aria-current=\"page\"] {\n  background: var(--naranja);\n  color: var(--texto);\n}\n\n/* ===== 5. Títulos y contenedor central ===== */\n.contenedor {\n  max-width: 900px;\n  margin: 0 auto;\n  padding: 1rem;\n}\nh1, h2 {\n  font-family: Georgia, serif;\n  line-height: 1.2;\n  color: var(--azul);\n}\nh1 {\n  font-size: 2rem;\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Una clase para destacar la oferta",
+   "detalle": "La clase <code>.oferta<\/code> da fondo, borde izquierdo y relleno al <code>aside<\/code>. <code>.oferta h2<\/code> tiene más <strong>especificidad<\/strong> (0,1,1) que <code>h2<\/code> (0,0,1).",
+   "fichero": "estilos.css",
+   "codigo": "/* ===== 1. Reinicio y base ===== */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.6;\n  color: var(--texto);\n  background: var(--fondo);\n}\n\n/* ===== 2. Variables: la paleta del hotel ===== */\n:root {\n  --azul: #2F6690;\n  --naranja: #F3A447;\n  --crema: #FDF0DF;\n  --texto: #2B2B2B;\n  --fondo: #FFFFFF;\n}\n\n/* ===== 3. Cabecera ===== */\n.cabecera {\n  background: var(--azul);\n  color: #FFFFFF;\n  padding: 1rem;\n}\n.marca {\n  margin: 0;\n  font-family: Georgia, serif;\n  font-size: 1.5rem;\n}\n\n/* ===== 4. Menú: selectores descendientes y pseudoclases ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n}\n.menu li {\n  display: inline-block;\n}\n.menu a {\n  display: inline-block;\n  padding: 0.4rem 0.8rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover,\n.menu a:focus-visible,\n.menu a[aria-current=\"page\"] {\n  background: var(--naranja);\n  color: var(--texto);\n}\n\n/* ===== 5. Títulos y contenedor central ===== */\n.contenedor {\n  max-width: 900px;\n  margin: 0 auto;\n  padding: 1rem;\n}\nh1, h2 {\n  font-family: Georgia, serif;\n  line-height: 1.2;\n  color: var(--azul);\n}\nh1 {\n  font-size: 2rem;\n}\n\n/* ===== 6. Una clase para destacar ===== */\n.oferta {\n  background: var(--crema);\n  border-left: 6px solid var(--naranja);\n  padding: 0.5rem 1rem;\n  border-radius: 0 8px 8px 0;\n}\n.oferta h2 {\n  margin-top: 0.5rem;\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Viñetas propias con ::before",
+   "detalle": "Quitamos las viñetas con <code>list-style: none<\/code> y generamos una marca con el <strong>pseudoelemento<\/strong> <code>::before<\/code> y <code>content<\/code>. Es decorativa: la información sigue en el HTML.",
+   "fichero": "estilos.css",
+   "codigo": "/* ===== 1. Reinicio y base ===== */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.6;\n  color: var(--texto);\n  background: var(--fondo);\n}\n\n/* ===== 2. Variables: la paleta del hotel ===== */\n:root {\n  --azul: #2F6690;\n  --naranja: #F3A447;\n  --crema: #FDF0DF;\n  --texto: #2B2B2B;\n  --fondo: #FFFFFF;\n}\n\n/* ===== 3. Cabecera ===== */\n.cabecera {\n  background: var(--azul);\n  color: #FFFFFF;\n  padding: 1rem;\n}\n.marca {\n  margin: 0;\n  font-family: Georgia, serif;\n  font-size: 1.5rem;\n}\n\n/* ===== 4. Menú: selectores descendientes y pseudoclases ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n}\n.menu li {\n  display: inline-block;\n}\n.menu a {\n  display: inline-block;\n  padding: 0.4rem 0.8rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover,\n.menu a:focus-visible,\n.menu a[aria-current=\"page\"] {\n  background: var(--naranja);\n  color: var(--texto);\n}\n\n/* ===== 5. Títulos y contenedor central ===== */\n.contenedor {\n  max-width: 900px;\n  margin: 0 auto;\n  padding: 1rem;\n}\nh1, h2 {\n  font-family: Georgia, serif;\n  line-height: 1.2;\n  color: var(--azul);\n}\nh1 {\n  font-size: 2rem;\n}\n\n/* ===== 6. Una clase para destacar ===== */\n.oferta {\n  background: var(--crema);\n  border-left: 6px solid var(--naranja);\n  padding: 0.5rem 1rem;\n  border-radius: 0 8px 8px 0;\n}\n.oferta h2 {\n  margin-top: 0.5rem;\n}\n\n/* ===== 7. Pseudoelemento: viñeta propia ===== */\n.servicios {\n  list-style: none;\n  padding: 0;\n}\n.servicios li::before {\n  content: \"✓ \";\n  color: var(--naranja);\n  font-weight: bold;\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "El pie",
+   "detalle": "El enlace del pie no hereda el color de su padre (el navegador le pone azul): <code>color: inherit<\/code> fuerza la herencia.",
+   "fichero": "estilos.css",
+   "codigo": "/* ===== 1. Reinicio y base ===== */\n*, *::before, *::after {\n  box-sizing: border-box;\n}\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  line-height: 1.6;\n  color: var(--texto);\n  background: var(--fondo);\n}\n\n/* ===== 2. Variables: la paleta del hotel ===== */\n:root {\n  --azul: #2F6690;\n  --naranja: #F3A447;\n  --crema: #FDF0DF;\n  --texto: #2B2B2B;\n  --fondo: #FFFFFF;\n}\n\n/* ===== 3. Cabecera ===== */\n.cabecera {\n  background: var(--azul);\n  color: #FFFFFF;\n  padding: 1rem;\n}\n.marca {\n  margin: 0;\n  font-family: Georgia, serif;\n  font-size: 1.5rem;\n}\n\n/* ===== 4. Menú: selectores descendientes y pseudoclases ===== */\n.menu {\n  list-style: none;\n  margin: 0.5rem 0 0;\n  padding: 0;\n}\n.menu li {\n  display: inline-block;\n}\n.menu a {\n  display: inline-block;\n  padding: 0.4rem 0.8rem;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 6px;\n}\n.menu a:hover,\n.menu a:focus-visible,\n.menu a[aria-current=\"page\"] {\n  background: var(--naranja);\n  color: var(--texto);\n}\n\n/* ===== 5. Títulos y contenedor central ===== */\n.contenedor {\n  max-width: 900px;\n  margin: 0 auto;\n  padding: 1rem;\n}\nh1, h2 {\n  font-family: Georgia, serif;\n  line-height: 1.2;\n  color: var(--azul);\n}\nh1 {\n  font-size: 2rem;\n}\n\n/* ===== 6. Una clase para destacar ===== */\n.oferta {\n  background: var(--crema);\n  border-left: 6px solid var(--naranja);\n  padding: 0.5rem 1rem;\n  border-radius: 0 8px 8px 0;\n}\n.oferta h2 {\n  margin-top: 0.5rem;\n}\n\n/* ===== 7. Pseudoelemento: viñeta propia ===== */\n.servicios {\n  list-style: none;\n  padding: 0;\n}\n.servicios li::before {\n  content: \"✓ \";\n  color: var(--naranja);\n  font-weight: bold;\n}\n\n/* ===== 8. Pie ===== */\n.pie {\n  background: #3B3D35;\n  color: #FFFFFF;\n  text-align: center;\n  padding: 1rem;\n}\n.pie a {\n  color: inherit;\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Una segunda hoja: tema de noche",
+   "detalle": "Creamos otra hoja que <strong>solo redefine las variables<\/strong>. Todavía no se ve: ningún HTML la enlaza.",
+   "fichero": "noche.css",
+   "codigo": "/* Tema de noche: solo se redefinen las variables.\n   El HTML y estilos.css no cambian. */\n:root {\n  --azul: #9FC1E8;\n  --naranja: #F0CF5A;\n  --crema: #2F2B36;\n  --texto: #ECE8E1;\n  --fondo: #1E1E24;\n}\n.cabecera {\n  background: #2F2B36;\n}\n",
+   "vista": "index.html"
+  },
+  {
+   "titulo": "Mismo HTML, distinto CSS",
+   "detalle": "Enlazamos <code>noche.css<\/code> <strong>después<\/strong> de <code>estilos.css<\/code>: a igual especificidad gana la última regla (cascada). Con una línea cambia el aspecto de todo el sitio sin tocar el contenido: la idea del CSS Zen Garden (CE 2g). Valida las dos hojas en jigsaw.w3.org/css-validator.",
+   "fichero": "index.html",
+   "codigo": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Hotel Levante · Benidorm<\/title>\n  <link rel=\"stylesheet\" href=\"estilos.css\">\n  <link rel=\"stylesheet\" href=\"noche.css\">\n<\/head>\n<body>\n  <header class=\"cabecera\">\n    <p class=\"marca\">Hotel Levante<\/p>\n    <nav aria-label=\"Menú principal\">\n      <ul class=\"menu\">\n        <li><a href=\"#\" aria-current=\"page\">Inicio<\/a><\/li>\n        <li><a href=\"#\">Habitaciones<\/a><\/li>\n        <li><a href=\"#\">Reservas<\/a><\/li>\n        <li><a href=\"#\">Contacto<\/a><\/li>\n      <\/ul>\n    <\/nav>\n  <\/header>\n  <main class=\"contenedor\">\n    <h1>A 50 metros de la playa de Levante<\/h1>\n    <p>Hotel familiar con 48 habitaciones, piscina climatizada y\n      desayuno buffet con productos de la Marina Baixa.<\/p>\n    <section>\n      <h2>Servicios<\/h2>\n      <ul class=\"servicios\">\n        <li>Piscina climatizada<\/li>\n        <li>Wifi gratuito<\/li>\n        <li>Parking (12 € al día)<\/li>\n        <li>Admitimos mascotas<\/li>\n      <\/ul>\n    <\/section>\n    <aside class=\"oferta\">\n      <h2>Oferta de otoño<\/h2>\n      <p>3 noches al precio de 2 del 1 al 30 de noviembre.<\/p>\n    <\/aside>\n  <\/main>\n  <footer class=\"pie\">\n    <p>Avda. del Mediterráneo, 1 · 03503 Benidorm ·\n      <a href=\"tel:+34965000000\">965 000 000<\/a><\/p>\n  <\/footer>\n<\/body>\n<\/html>\n"
+  }
+ ]
+};</script>
+  <script src="assets/player.js"></script>
+</body>
+</html>

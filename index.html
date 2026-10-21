@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Ejemplos guiados de maquetación CSS3, Flexbox, Grid y diseño adaptable para LMSGI (1.º ASIR)">
+  <title>LMSGI · Ejemplos Guiados UP3 · Prof. Andreu Juan Luna</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/logo.svg">
+  <style>
+    :root {
+      --naranja: #F3A447;
+      --salvia: #A5B592;
+      --amarillo: #E7BC29;
+      --rosa: #D092A7;
+      --lila: #9C85C0;
+      --azul: #809EC2;
+      --oscuro: #444D26;
+      --texto: #3B3D35;
+      --suave: #6E7064;
+      --fondo: #FAF8F4;
+      --panel: #FFFFFF;
+      --borde: #E6E1D8;
+      --sombra: 0 4px 16px rgba(68, 77, 38, .08);
+      --sombra-hover: 0 10px 24px rgba(68, 77, 38, .15);
+      --radio: 14px;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: "Open Sans", system-ui, -apple-system, sans-serif;
+      background: var(--fondo);
+      color: var(--texto);
+      line-height: 1.6;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* Cabecera */
+    .eg-cabecera {
+      background: linear-gradient(120deg, var(--salvia) 0%, var(--naranja) 35%, var(--rosa) 70%, var(--azul) 100%);
+      color: #fff;
+      padding: 36px 24px;
+      text-align: center;
+    }
+    .eg-cabecera .marca {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.95rem;
+      opacity: 0.95;
+      font-weight: 600;
+    }
+    .eg-cabecera .marca img {
+      width: 44px;
+      height: 44px;
+    }
+    .eg-cabecera h1 {
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      margin: 16px 0 8px;
+      font-weight: 700;
+    }
+    .eg-cabecera p {
+      max-width: 680px;
+      margin: 0 auto;
+      font-size: 1.05rem;
+      opacity: 0.95;
+    }
+
+    /* Contenedor principal */
+    main {
+      flex: 1;
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      width: 100%;
+    }
+
+    .seccion-intro {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .seccion-intro h2 {
+      color: var(--oscuro);
+      margin-bottom: 8px;
+      font-size: 1.5rem;
+    }
+    .seccion-intro p {
+      color: var(--suave);
+      margin: 0 auto;
+      max-width: 640px;
+    }
+
+    /* Rejilla de tarjetas */
+    .rejilla-ejemplos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    .tarjeta {
+      background: var(--panel);
+      border: 1px solid var(--borde);
+      border-radius: var(--radio);
+      box-shadow: var(--sombra);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+      text-decoration: none;
+      color: inherit;
+    }
+    .tarjeta:hover, .tarjeta:focus-visible {
+      transform: translateY(-4px);
+      box-shadow: var(--sombra-hover);
+      border-color: var(--naranja);
+      outline: none;
+    }
+
+    .tarjeta-cinta {
+      height: 8px;
+    }
+    .cinta-1 { background: linear-gradient(90deg, var(--salvia), var(--naranja)); }
+    .cinta-2 { background: linear-gradient(90deg, var(--naranja), var(--rosa)); }
+    .cinta-3 { background: linear-gradient(90deg, var(--rosa), var(--azul)); }
+
+    .tarjeta-cuerpo {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+    }
+
+    .tarjeta-num {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--suave);
+      margin-bottom: 6px;
+      display: block;
+    }
+
+    .tarjeta h3 {
+      margin: 0 0 10px 0;
+      font-size: 1.25rem;
+      color: var(--oscuro);
+    }
+
+    .tarjeta p {
+      margin: 0 0 18px 0;
+      color: var(--suave);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+
+    .tarjeta-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      background: var(--fondo);
+      border: 1px solid var(--borde);
+      color: var(--texto);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+    }
+
+    .tarjeta-boton {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      background: var(--oscuro);
+      color: #fff;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: background 0.2s ease;
+    }
+    .tarjeta:hover .tarjeta-boton {
+      background: var(--naranja);
+    }
+
+    /* Pie de página */
+    footer {
+      background: #ECE8E1;
+      border-top: 1px solid var(--borde);
+      padding: 24px;
+      text-align: center;
+      font-size: 0.88rem;
+      color: var(--suave);
+    }
+    footer a {
+      color: var(--oscuro);
+      font-weight: 600;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="eg-cabecera">
+    <div class="marca">
+      <img src="assets/logo.svg" alt="Logotipo LMSGI">
+      <span>LMSGI · 1.º ASIR · Prof. Andreu Juan Luna</span>
+    </div>
+    <h1>Unidad 3: CSS3 y Maquetación Adaptable</h1>
+    <p>Ejemplos interactivos guiados paso a paso para el aprendizaje de diseño web responsivo, Flexbox y CSS Grid.</p>
+  </header>
+
+  <main>
+    <div class="seccion-intro">
+      <h2>Prácticas y Ejemplos Guiados</h2>
+      <p>Selecciona cualquiera de los ejercicios para acceder al reproductor interactivo con código en vivo y vista previa.</p>
+    </div>
+
+    <div class="rejilla-ejemplos">
+
+      <!-- EG 3.1 -->
+      <a class="tarjeta" href="EG3.1_mismo-html-distinto-css.html">
+        <div class="tarjeta-cinta cinta-1"></div>
+        <div class="tarjeta-cuerpo">
+          <span class="tarjeta-num">Ejemplo Guiado 3.1</span>
+          <h3>Mismo HTML, distinto CSS</h3>
+          <p>Estilo a la portada del Hotel Levante paso a paso con reinicio, variables, selectores, cascada y cambio de hoja de estilos.</p>
+          <div class="tarjeta-tags">
+            <span class="tag">Selectores</span>
+            <span class="tag">Cascada</span>
+            <span class="tag">Variables CSS</span>
+            <span class="tag">Tipografía</span>
+          </div>
+          <span class="tarjeta-boton">Abrir reproductor &rarr;</span>
+        </div>
+      </a>
+
+      <!-- EG 3.2 -->
+      <a class="tarjeta" href="EG3.2_tarjetas-de-habitaciones.html">
+        <div class="tarjeta-cinta cinta-2"></div>
+        <div class="tarjeta-cuerpo">
+          <span class="tarjeta-num">Ejemplo Guiado 3.2</span>
+          <h3>Tarjetas de habitaciones</h3>
+          <p>Construcción de componentes tipo tarjeta con modelo de cajas, botones estilizados, maquetación con Flexbox, posicionamiento y transiciones.</p>
+          <div class="tarjeta-tags">
+            <span class="tag">Modelo de cajas</span>
+            <span class="tag">Flexbox</span>
+            <span class="tag">Position</span>
+            <span class="tag">Transiciones</span>
+          </div>
+          <span class="tarjeta-boton">Abrir reproductor &rarr;</span>
+        </div>
+      </a>
+
+      <!-- EG 3.3 -->
+      <a class="tarjeta" href="EG3.3_portada-adaptable.html">
+        <div class="tarjeta-cinta cinta-3"></div>
+        <div class="tarjeta-cuerpo">
+          <span class="tarjeta-num">Ejemplo Guiado 3.3</span>
+          <h3>Portada adaptable</h3>
+          <p>Maquetación responsiva completa con Grid (áreas), Flexbox anidado y media queries siguiendo una estrategia Mobile First.</p>
+          <div class="tarjeta-tags">
+            <span class="tag">CSS Grid</span>
+            <span class="tag">Media Queries</span>
+            <span class="tag">Mobile First</span>
+            <span class="tag">Responsive</span>
+          </div>
+          <span class="tarjeta-boton">Abrir reproductor &rarr;</span>
+        </div>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    <p>LMSGI (Lenguajes de Marcas y Sistemas de Gestión de Información) &middot; IES &middot; Curso 2026-2027</p>
+    <p>Profesor: Andreu Juan Luna</p>
+  </footer>
+
+</body>
+</html>

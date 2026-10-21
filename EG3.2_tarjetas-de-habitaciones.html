@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <title>EG 3.2 · Tarjetas de habitaciones · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/player.css">
+  <link rel="icon" href="assets/logo.svg">
+</head>
+<body>
+  <header class="eg-cabecera">
+    <div class="marca"><img src="assets/logo.svg" alt="Logotipo del módulo LMSGI"> <span>LMSGI · 1.º ASIR · UP3 · Prof. Andreu Juan Luna</span></div>
+    <span class="eg-etiqueta">Ejemplo guiado EG 3.2 · Modelo de cajas, Flexbox y posicionamiento</span>
+    <h1>Tarjetas de habitaciones</h1>
+    <p>Las tres habitaciones del Hotel Levante como tarjetas: cajas, botones, Flexbox, un sello posicionado y una transición.</p>
+  </header>
+
+  <nav class="eg-controles" aria-label="Controles del reproductor">
+    <div class="eg-botones">
+      <button type="button" id="eg-reiniciar" title="Reiniciar (R)">⏮</button>
+      <button type="button" id="eg-ant" title="Paso anterior (←)">◀</button>
+      <button type="button" id="eg-play" class="principal" title="Reproducir / pausa (Espacio)">▶ Reproducir</button>
+      <button type="button" id="eg-sig" title="Paso siguiente (→)">▶</button>
+      <button type="button" id="eg-final" title="Ver el resultado final">⏭</button>
+    </div>
+    <span class="eg-paso" id="eg-num" aria-live="polite">Paso 0 / 0</span>
+    <div class="eg-progreso" aria-hidden="true"><span id="eg-barra"></span></div>
+    <div class="eg-velocidad" role="group" aria-label="Velocidad">
+      Velocidad:
+      <button type="button" data-v="lenta" aria-pressed="false">Lenta</button>
+      <button type="button" data-v="normal" aria-pressed="true">Normal</button>
+      <button type="button" data-v="rapida" aria-pressed="false">Rápida</button>
+    </div>
+    <div class="eg-ayuda">
+      <button type="button" id="eg-info" aria-label="Ayuda" title="Ayuda">i</button>
+      <div class="eg-ayuda-panel" id="eg-ayuda-panel">
+        <p><strong>Cómo usar el reproductor</strong></p>
+        <p><kbd>←</kbd> <kbd>→</kbd> paso a paso · <kbd>Espacio</kbd> reproducir o pausar · <kbd>R</kbd> reiniciar.</p>
+        <p>Haz clic en cualquier paso del enunciado para saltar a él. El código nuevo de cada paso aparece resaltado.</p>
+      </div>
+    </div>
+  </nav>
+
+  <main class="eg-rejilla">
+    <section class="eg-panel eg-enunciado" aria-labelledby="t-enunciado">
+      <h2 id="t-enunciado">Enunciado del ejercicio</h2>
+      <div class="intro"><p>Maquetamos la página de habitaciones con el <strong>modelo de cajas</strong> (relleno, borde, márgenes), <strong>Flexbox</strong> en dos niveles (la fila de tarjetas y cada tarjeta en columna) y <strong>posicionamiento absoluto</strong> para el sello de oferta (CE 2h).</p><p>Cambia el ancho de la ventana en los pasos 6 y 7 para ver la diferencia entre <code>nowrap</code> y <code>wrap</code>, o usa los botones de ancho de la vista previa.</p></div>
+      <p class="pista">Haz clic en un paso para saltar a él.</p>
+      <ol class="eg-pasos" id="eg-pasos"></ol>
+    </section>
+    <section class="eg-panel eg-codigo" aria-labelledby="t-codigo">
+      <h2 id="t-codigo"><span>Código fuente</span><span class="eg-pestanas" id="eg-pestanas" role="tablist"></span></h2>
+      <pre class="eg-pre" id="eg-pre" tabindex="0" aria-label="Código del fichero seleccionado"></pre>
+    </section>
+    <section class="eg-panel eg-vista" aria-labelledby="t-vista">
+      <h2 id="t-vista"><span>Vista previa · <span id="eg-vista-titulo"></span></span><span id="eg-vista-estado" class="eg-estado"></span></h2>
+      <iframe id="eg-iframe" title="Vista previa del resultado" sandbox="allow-same-origin"></iframe>
+    </section>
+  </main>
+
+  <footer class="eg-pie">
+    <span>Lenguajes de Marcas y Sistemas de Gestión de Información · CFGS ASIR · Curso 2026-2027</span>
+    <span>Relacionado con las secciones 6-8 de la teoría y con las PR 3.2 – 3.4</span>
+  </footer>
+
+  <script>window.EJEMPLO = {
+ "pasos": [
+  {
+   "titulo": "El HTML de las tres habitaciones",
+   "detalle": "Cada habitación es un <code>article<\/code> con la misma estructura. La «foto» es un <code>div<\/code> con <code>role=\"img\"<\/code> y <code>aria-label<\/code> para que el ejemplo no necesite ficheros de imagen; en tu práctica usarás <code>img<\/code> con <code>alt<\/code>.",
+   "fichero": "habitaciones.html",
+   "codigo": "<!DOCTYPE html>\n<html lang=\"es\">\n<head>\n  <meta charset=\"UTF-8\">\n  <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n  <title>Habitaciones · Hotel Levante<\/title>\n  <link rel=\"stylesheet\" href=\"tarjetas.css\">\n<\/head>\n<body>\n  <main class=\"contenedor\">\n    <h1>Nuestras habitaciones<\/h1>\n    <div class=\"habitaciones\">\n      <article class=\"tarjeta\">\n        <div class=\"foto foto-individual\" role=\"img\" aria-label=\"Habitación individual luminosa\"><\/div>\n        <h2>Individual<\/h2>\n        <p>15 m², cama de 105 cm y ducha.<\/p>\n        <p class=\"precio\">Desde <strong>59 €<\/strong><\/p>\n        <a class=\"boton\" href=\"#\">Reservar<\/a>\n      <\/article>\n      <article class=\"tarjeta\">\n        <div class=\"foto foto-doble\" role=\"img\" aria-label=\"Habitación doble con balcón\"><\/div>\n        <h2>Doble<\/h2>\n        <p>22 m², dos camas o cama de matrimonio y balcón con vistas a la ciudad.<\/p>\n        <p class=\"precio\">Desde <strong>79 €<\/strong><\/p>\n        <a class=\"boton\" href=\"#\">Reservar<\/a>\n      <\/article>\n      <article class=\"tarjeta\">\n        <span class=\"sello\">Oferta<\/span>\n        <div class=\"foto foto-suite\" role=\"img\" aria-label=\"Suite con jacuzzi y vistas al mar\"><\/div>\n        <h2>Suite<\/h2>\n        <p>40 m², salón, jacuzzi y vistas al mar.<\/p>\n        <p class=\"precio\">Desde <strong>149 €<\/strong><\/p>\n        <a class=\"boton\" href=\"#\">Reservar<\/a>\n      <\/article>\n    <\/div>\n  <\/main>\n<\/body>\n<\/html>\n"
+  },
+  {
+   "titulo": "Base y contenedor",
+   "detalle": "Reinicio con <code>border-box<\/code>, fondo crema y contenedor central de 1100 px como máximo.",
+   "fichero": "tarjetas.css",
+   "codigo": "*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  background: #F7F5F0;\n  color: #2B2B2B;\n}\n.contenedor {\n  max-width: 1100px;\n  margin: 0 auto;\n  padding: 1rem;\n}\n",
+   "vista": "habitaciones.html"
+  },
+  {
+   "titulo": "El modelo de cajas de la tarjeta",
+   "detalle": "<strong>padding<\/strong> separa el contenido del borde, <strong>border<\/strong> dibuja el contorno y <code>border-radius<\/code> y <code>box-shadow<\/code> la decoran. Abre DevTools &gt; Calculado para ver el diagrama de cajas.",
+   "fichero": "tarjetas.css",
+   "codigo": "*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  background: #F7F5F0;\n  color: #2B2B2B;\n}\n.contenedor {\n  max-width: 1100px;\n  margin: 0 auto;\n  padding: 1rem;\n}\n\n/* Modelo de cajas: relleno, borde, esquinas y sombra */\n.tarjeta {\n  background: #FFFFFF;\n  padding: 1rem;\n  border: 1px solid #E2DED6;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);\n}\n.tarjeta h2 {\n  margin: 0.75rem 0 0.25rem;\n  font-family: Georgia, serif;\n}\n",
+   "vista": "habitaciones.html"
+  },
+  {
+   "titulo": "Una caja con alto fijo",
+   "detalle": "El <code>div<\/code> vacío no tiene alto: se lo damos con <code>height<\/code>. Un <strong>margen negativo<\/strong> la acerca a los bordes de la tarjeta y un degradado hace de fondo.",
+   "fichero": "tarjetas.css",
+   "codigo": "*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  background: #F7F5F0;\n  color: #2B2B2B;\n}\n.contenedor {\n  max-width: 1100px;\n  margin: 0 auto;\n  padding: 1rem;\n}\n\n/* Modelo de cajas: relleno, borde, esquinas y sombra */\n.tarjeta {\n  background: #FFFFFF;\n  padding: 1rem;\n  border: 1px solid #E2DED6;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);\n}\n.tarjeta h2 {\n  margin: 0.75rem 0 0.25rem;\n  font-family: Georgia, serif;\n}\n\n/* La «foto»: una caja con alto fijo y un degradado */\n.foto {\n  height: 160px;\n  border-radius: 8px;\n  margin: -0.25rem -0.25rem 0;\n}\n.foto-individual { background: linear-gradient(135deg, #A5B592, #E6D3B3); }\n.foto-doble      { background: linear-gradient(135deg, #F3A447, #FDF0DF); }\n.foto-suite      { background: linear-gradient(135deg, #809EC2, #9C85C0); }\n",
+   "vista": "habitaciones.html"
+  },
+  {
+   "titulo": "Enlaces con aspecto de botón",
+   "detalle": "Un <code>a<\/code> es <code>inline<\/code>: con <code>inline-block<\/code> acepta relleno vertical. Sigue siendo un enlace accesible con el teclado.",
+   "fichero": "tarjetas.css",
+   "codigo": "*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  background: #F7F5F0;\n  color: #2B2B2B;\n}\n.contenedor {\n  max-width: 1100px;\n  margin: 0 auto;\n  padding: 1rem;\n}\n\n/* Modelo de cajas: relleno, borde, esquinas y sombra */\n.tarjeta {\n  background: #FFFFFF;\n  padding: 1rem;\n  border: 1px solid #E2DED6;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);\n}\n.tarjeta h2 {\n  margin: 0.75rem 0 0.25rem;\n  font-family: Georgia, serif;\n}\n\n/* La «foto»: una caja con alto fijo y un degradado */\n.foto {\n  height: 160px;\n  border-radius: 8px;\n  margin: -0.25rem -0.25rem 0;\n}\n.foto-individual { background: linear-gradient(135deg, #A5B592, #E6D3B3); }\n.foto-doble      { background: linear-gradient(135deg, #F3A447, #FDF0DF); }\n.foto-suite      { background: linear-gradient(135deg, #809EC2, #9C85C0); }\n\n/* El enlace se comporta como un botón */\n.boton {\n  display: inline-block;\n  padding: 0.6rem 1.2rem;\n  background: #2F6690;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 8px;\n  text-align: center;\n}\n.boton:hover, .boton:focus-visible { background: #1F4A6B; }\n.precio strong { font-size: 1.4rem; color: #9A5B00; }\n",
+   "vista": "habitaciones.html"
+  },
+  {
+   "titulo": "Flexbox: tarjetas en fila",
+   "detalle": "<code>display: flex<\/code> en el <strong>contenedor<\/strong> coloca a sus hijos directos en fila; <code>gap<\/code> los separa. Si el panel es estrecho, las tarjetas se aprietan demasiado…",
+   "fichero": "tarjetas.css",
+   "codigo": "*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  background: #F7F5F0;\n  color: #2B2B2B;\n}\n.contenedor {\n  max-width: 1100px;\n  margin: 0 auto;\n  padding: 1rem;\n}\n\n/* Modelo de cajas: relleno, borde, esquinas y sombra */\n.tarjeta {\n  background: #FFFFFF;\n  padding: 1rem;\n  border: 1px solid #E2DED6;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);\n}\n.tarjeta h2 {\n  margin: 0.75rem 0 0.25rem;\n  font-family: Georgia, serif;\n}\n\n/* La «foto»: una caja con alto fijo y un degradado */\n.foto {\n  height: 160px;\n  border-radius: 8px;\n  margin: -0.25rem -0.25rem 0;\n}\n.foto-individual { background: linear-gradient(135deg, #A5B592, #E6D3B3); }\n.foto-doble      { background: linear-gradient(135deg, #F3A447, #FDF0DF); }\n.foto-suite      { background: linear-gradient(135deg, #809EC2, #9C85C0); }\n\n/* El enlace se comporta como un botón */\n.boton {\n  display: inline-block;\n  padding: 0.6rem 1.2rem;\n  background: #2F6690;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 8px;\n  text-align: center;\n}\n.boton:hover, .boton:focus-visible { background: #1F4A6B; }\n.precio strong { font-size: 1.4rem; color: #9A5B00; }\n\n/* Flexbox: las tarjetas en fila */\n.habitaciones {\n  display: flex;\n  gap: 1.5rem;\n}\n",
+   "vista": "habitaciones.html"
+  },
+  {
+   "titulo": "Que bajen cuando no caben",
+   "detalle": "<code>flex-wrap: wrap<\/code> permite varias líneas y <code>flex: 1 1 240px<\/code> da a cada tarjeta una base de 240 px que crece y encoge. Ya es <strong>adaptable sin media queries<\/strong>: cambia el ancho de la ventana.",
+   "fichero": "tarjetas.css",
+   "codigo": "*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  background: #F7F5F0;\n  color: #2B2B2B;\n}\n.contenedor {\n  max-width: 1100px;\n  margin: 0 auto;\n  padding: 1rem;\n}\n\n/* Modelo de cajas: relleno, borde, esquinas y sombra */\n.tarjeta {\n  background: #FFFFFF;\n  padding: 1rem;\n  border: 1px solid #E2DED6;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);\n}\n.tarjeta h2 {\n  margin: 0.75rem 0 0.25rem;\n  font-family: Georgia, serif;\n}\n\n/* La «foto»: una caja con alto fijo y un degradado */\n.foto {\n  height: 160px;\n  border-radius: 8px;\n  margin: -0.25rem -0.25rem 0;\n}\n.foto-individual { background: linear-gradient(135deg, #A5B592, #E6D3B3); }\n.foto-doble      { background: linear-gradient(135deg, #F3A447, #FDF0DF); }\n.foto-suite      { background: linear-gradient(135deg, #809EC2, #9C85C0); }\n\n/* El enlace se comporta como un botón */\n.boton {\n  display: inline-block;\n  padding: 0.6rem 1.2rem;\n  background: #2F6690;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 8px;\n  text-align: center;\n}\n.boton:hover, .boton:focus-visible { background: #1F4A6B; }\n.precio strong { font-size: 1.4rem; color: #9A5B00; }\n\n/* Flexbox: las tarjetas en fila */\n.habitaciones {\n  display: flex;\n  gap: 1.5rem;\n  flex-wrap: wrap;\n}\n.habitaciones .tarjeta {\n  flex: 1 1 240px;\n}\n",
+   "vista": "habitaciones.html"
+  },
+  {
+   "titulo": "Botones alineados abajo",
+   "detalle": "Cada tarjeta es también un contenedor flex en <strong>columna<\/strong>. <code>margin-top: auto<\/code> en el botón absorbe el espacio libre y lo empuja al final: los tres botones quedan a la misma altura aunque los textos midan distinto.",
+   "fichero": "tarjetas.css",
+   "codigo": "*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  background: #F7F5F0;\n  color: #2B2B2B;\n}\n.contenedor {\n  max-width: 1100px;\n  margin: 0 auto;\n  padding: 1rem;\n}\n\n/* Modelo de cajas: relleno, borde, esquinas y sombra */\n.tarjeta {\n  background: #FFFFFF;\n  padding: 1rem;\n  border: 1px solid #E2DED6;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);\n  display: flex;\n  flex-direction: column;\n}\n.tarjeta h2 {\n  margin: 0.75rem 0 0.25rem;\n  font-family: Georgia, serif;\n}\n\n/* La «foto»: una caja con alto fijo y un degradado */\n.foto {\n  height: 160px;\n  border-radius: 8px;\n  margin: -0.25rem -0.25rem 0;\n}\n.foto-individual { background: linear-gradient(135deg, #A5B592, #E6D3B3); }\n.foto-doble      { background: linear-gradient(135deg, #F3A447, #FDF0DF); }\n.foto-suite      { background: linear-gradient(135deg, #809EC2, #9C85C0); }\n\n/* El enlace se comporta como un botón */\n.boton {\n  display: inline-block;\n  padding: 0.6rem 1.2rem;\n  background: #2F6690;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 8px;\n  text-align: center;\n  margin-top: auto;   /* empuja el botón al final de la tarjeta */\n}\n.boton:hover, .boton:focus-visible { background: #1F4A6B; }\n.precio strong { font-size: 1.4rem; color: #9A5B00; }\n\n/* Flexbox: las tarjetas en fila */\n.habitaciones {\n  display: flex;\n  gap: 1.5rem;\n  flex-wrap: wrap;\n}\n.habitaciones .tarjeta {\n  flex: 1 1 240px;\n}\n",
+   "vista": "habitaciones.html"
+  },
+  {
+   "titulo": "Posicionamiento absoluto del sello",
+   "detalle": "La tarjeta es <code>position: relative<\/code> y se convierte en la referencia del sello, que es <code>absolute<\/code>: sale del flujo y se coloca a 1,5 rem de la esquina superior derecha.",
+   "fichero": "tarjetas.css",
+   "codigo": "*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  background: #F7F5F0;\n  color: #2B2B2B;\n}\n.contenedor {\n  max-width: 1100px;\n  margin: 0 auto;\n  padding: 1rem;\n}\n\n/* Modelo de cajas: relleno, borde, esquinas y sombra */\n.tarjeta {\n  background: #FFFFFF;\n  padding: 1rem;\n  border: 1px solid #E2DED6;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);\n  display: flex;\n  flex-direction: column;\n  position: relative;\n}\n.tarjeta h2 {\n  margin: 0.75rem 0 0.25rem;\n  font-family: Georgia, serif;\n}\n\n/* La «foto»: una caja con alto fijo y un degradado */\n.foto {\n  height: 160px;\n  border-radius: 8px;\n  margin: -0.25rem -0.25rem 0;\n}\n.foto-individual { background: linear-gradient(135deg, #A5B592, #E6D3B3); }\n.foto-doble      { background: linear-gradient(135deg, #F3A447, #FDF0DF); }\n.foto-suite      { background: linear-gradient(135deg, #809EC2, #9C85C0); }\n\n/* El enlace se comporta como un botón */\n.boton {\n  display: inline-block;\n  padding: 0.6rem 1.2rem;\n  background: #2F6690;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 8px;\n  text-align: center;\n  margin-top: auto;   /* empuja el botón al final de la tarjeta */\n}\n.boton:hover, .boton:focus-visible { background: #1F4A6B; }\n.precio strong { font-size: 1.4rem; color: #9A5B00; }\n\n/* Flexbox: las tarjetas en fila */\n.habitaciones {\n  display: flex;\n  gap: 1.5rem;\n  flex-wrap: wrap;\n}\n.habitaciones .tarjeta {\n  flex: 1 1 240px;\n}\n\n/* Posicionamiento: el sello sobre la tarjeta */\n.sello {\n  position: absolute;\n  top: 1.5rem;\n  right: 1.5rem;\n  z-index: 1;\n  background: #B00020;\n  color: #FFFFFF;\n  padding: 0.2rem 0.6rem;\n  border-radius: 999px;\n  font-size: 0.85rem;\n  font-weight: bold;\n}\n",
+   "vista": "habitaciones.html"
+  },
+  {
+   "titulo": "Transición con el ratón y el teclado",
+   "detalle": "<code>transition<\/code> suaviza el cambio; <code>:focus-within<\/code> activa el efecto cuando el foco está en el botón de la tarjeta. Respetamos <code>prefers-reduced-motion<\/code>. Valida la hoja en el validador CSS del W3C.",
+   "fichero": "tarjetas.css",
+   "codigo": "*, *::before, *::after { box-sizing: border-box; }\nbody {\n  margin: 0;\n  font-family: \"Open Sans\", Arial, sans-serif;\n  background: #F7F5F0;\n  color: #2B2B2B;\n}\n.contenedor {\n  max-width: 1100px;\n  margin: 0 auto;\n  padding: 1rem;\n}\n\n/* Modelo de cajas: relleno, borde, esquinas y sombra */\n.tarjeta {\n  background: #FFFFFF;\n  padding: 1rem;\n  border: 1px solid #E2DED6;\n  border-radius: 12px;\n  box-shadow: 0 4px 12px rgb(0 0 0 / 8%);\n  display: flex;\n  flex-direction: column;\n  position: relative;\n  transition: transform 0.25s ease, box-shadow 0.25s ease;\n}\n.tarjeta h2 {\n  margin: 0.75rem 0 0.25rem;\n  font-family: Georgia, serif;\n}\n\n/* La «foto»: una caja con alto fijo y un degradado */\n.foto {\n  height: 160px;\n  border-radius: 8px;\n  margin: -0.25rem -0.25rem 0;\n}\n.foto-individual { background: linear-gradient(135deg, #A5B592, #E6D3B3); }\n.foto-doble      { background: linear-gradient(135deg, #F3A447, #FDF0DF); }\n.foto-suite      { background: linear-gradient(135deg, #809EC2, #9C85C0); }\n\n/* El enlace se comporta como un botón */\n.boton {\n  display: inline-block;\n  padding: 0.6rem 1.2rem;\n  background: #2F6690;\n  color: #FFFFFF;\n  text-decoration: none;\n  border-radius: 8px;\n  text-align: center;\n  margin-top: auto;   /* empuja el botón al final de la tarjeta */\n}\n.boton:hover, .boton:focus-visible { background: #1F4A6B; }\n.precio strong { font-size: 1.4rem; color: #9A5B00; }\n\n/* Flexbox: las tarjetas en fila */\n.habitaciones {\n  display: flex;\n  gap: 1.5rem;\n  flex-wrap: wrap;\n}\n.habitaciones .tarjeta {\n  flex: 1 1 240px;\n}\n\n/* Posicionamiento: el sello sobre la tarjeta */\n.sello {\n  position: absolute;\n  top: 1.5rem;\n  right: 1.5rem;\n  z-index: 1;\n  background: #B00020;\n  color: #FFFFFF;\n  padding: 0.2rem 0.6rem;\n  border-radius: 999px;\n  font-size: 0.85rem;\n  font-weight: bold;\n}\n\n/* Transición al pasar el ratón o con el foco del teclado */\n.tarjeta:hover,\n.tarjeta:focus-within {\n  transform: translateY(-4px);\n  box-shadow: 0 10px 24px rgb(0 0 0 / 15%);\n}\n@media (prefers-reduced-motion: reduce) {\n  .tarjeta { transition: none; }\n}\n",
+   "vista": "habitaciones.html"
+  }
+ ],
+ "anchos": [
+  375,
+  768,
+  1200
+ ]
+};</script>
+  <script src="assets/player.js"></script>
+</body>
+</html>
