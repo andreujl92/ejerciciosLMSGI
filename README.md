@@ -20,6 +20,10 @@ Puedes ver y utilizar los reproductores interactivos directamente desde el naveg
 3. **[EG 3.3 · Portada adaptable](https://andreujl92.github.io/ejerciciosLMSGI/EG3.3_portada-adaptable.html)**
    * CSS Grid (áreas), Flexbox anidado, Media Queries y Mobile First.
 
+### Laboratorio:
+- **[LAB 3 · Laboratorio CSS](https://andreujl92.github.io/ejerciciosLMSGI/LAB3_laboratorio-css.html)**
+  * Prueba cada propiedad CSS de la unidad en directo sobre ejemplos HTML.
+
 ---
 
 ## 📁 Estructura del Proyecto
@@ -30,6 +34,7 @@ Puedes ver y utilizar los reproductores interactivos directamente desde el naveg
 ├── EG3.1_mismo-html-distinto-css.html    # Ejemplo Guiado 3.1
 ├── EG3.2_tarjetas-de-habitaciones.html  # Ejemplo Guiado 3.2
 ├── EG3.3_portada-adaptable.html         # Ejemplo Guiado 3.3
+├── LAB3_laboratorio-css.html            # Laboratorio CSS interactivo
 └── assets/
     ├── logo.svg                         # Logotipo LMSGI
     ├── player.css                       # Estilos del reproductor interactivo

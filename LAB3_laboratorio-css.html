@@ -1,0 +1,1409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Laboratorio CSS interactivo de la UP3 de LMSGI (1.º ASIR): cambia propiedades CSS sobre ejemplos HTML y observa el efecto en directo">
+  <title>Laboratorio CSS · UP3 · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20viewBox%3D%270%200%2064%2064%27%3E%3Cdefs%3E%3ClinearGradient%20id%3D%27g%27%20x1%3D%270%27%20y1%3D%270%27%20x2%3D%271%27%20y2%3D%271%27%3E%3Cstop%20offset%3D%270%27%20stop-color%3D%27%23A5B592%27%2F%3E%3Cstop%20offset%3D%27.45%27%20stop-color%3D%27%23F3A447%27%2F%3E%3Cstop%20offset%3D%271%27%20stop-color%3D%27%23D092A7%27%2F%3E%3C%2FlinearGradient%3E%3C%2Fdefs%3E%3Crect%20width%3D%2764%27%20height%3D%2764%27%20rx%3D%2714%27%20fill%3D%27url%28%23g%29%27%2F%3E%3Ctext%20x%3D%2732%27%20y%3D%2740%27%20text-anchor%3D%27middle%27%20font-family%3D%27monospace%27%20font-size%3D%2722%27%20font-weight%3D%27700%27%20fill%3D%27%23fff%27%3E%7B%7D%3C%2Ftext%3E%3C%2Fsvg%3E">
+  <style>
+    :root {
+      --naranja: #F3A447;
+      --naranja-oscuro: #B76E12;
+      --salvia: #A5B592;
+      --rosa: #D092A7;
+      --lila: #9C85C0;
+      --azul: #809EC2;
+      --oscuro: #444D26;
+      --texto: #34362F;
+      --suave: #6E7064;
+      --fondo: #FFFFFF;
+      --fondo-alt: #FAF8F4;
+      --borde: #E6E1D8;
+      --tinta: #FDF0DF;
+      --ok: #3E7B3A;
+      --ok-fondo: #EEF2E9;
+      --mal: #A33A22;
+      --mal-fondo: #FBEDEA;
+      --codigo-fondo: #2F2B36;
+      --codigo-texto: #ECE8E1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; background: var(--fondo-alt); color: var(--texto);
+      font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif; font-size: 16px; line-height: 1.55;
+    }
+    a { color: var(--naranja-oscuro); }
+    code, pre, textarea.codigo, .mono { font-family: Consolas, "DejaVu Sans Mono", monospace; }
+    code { background: #F2EEE6; padding: 1px 5px; border-radius: 4px; font-size: .9em; }
+    button { font: inherit; cursor: pointer; }
+    :focus-visible { outline: 3px solid var(--naranja-oscuro); outline-offset: 2px; }
+    #modulo:focus { outline: none; }
+
+    /* cabecera y portada (mismo estilo que los enunciados) */
+    .cabecera { background: #fff; border-bottom: 4px solid var(--naranja); }
+    .cabecera .fila { max-width: 1480px; margin: 0 auto; padding: 14px 20px; display: flex; align-items: center; gap: 16px; }
+    .cabecera svg { width: 52px; height: 52px; flex: none; }
+    .cabecera .modulo { font-weight: 700; color: var(--oscuro); line-height: 1.3; }
+    .cabecera .autor { font-size: .9rem; color: var(--suave); }
+    .cabecera .curso { margin-left: auto; font-size: .85rem; color: var(--suave); text-align: right; }
+    .portada { background: linear-gradient(120deg, var(--salvia) 0%, var(--naranja) 40%, var(--rosa) 75%, var(--azul) 100%); color: #fff; }
+    .portada .fila { max-width: 1480px; margin: 0 auto; padding: 26px 20px; }
+    .etiqueta { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; background: rgba(255,255,255,.22); padding: 4px 12px; border-radius: 999px; }
+    .portada h1 { font-size: clamp(1.6rem, 4vw, 2.3rem); line-height: 1.2; margin: 10px 0 6px; }
+    .portada p { margin: 0; max-width: 75ch; }
+
+    /* aplicación */
+    .app { max-width: 1480px; margin: 0 auto; padding: 18px 20px 30px; display: grid; grid-template-columns: 240px minmax(0, 1fr); gap: 20px; align-items: start; }
+    .indice-lab { position: sticky; top: 12px; background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 12px; max-height: calc(100vh - 24px); overflow-y: auto; }
+    .indice-lab h2 { font-size: .75rem; text-transform: uppercase; letter-spacing: .08em; color: var(--suave); margin: 12px 6px 4px; }
+    .indice-lab h2:first-of-type { margin-top: 0; }
+    .indice-lab ul { list-style: none; margin: 0; padding: 0; }
+    .indice-lab a { display: flex; justify-content: space-between; gap: 8px; padding: 6px 8px; border-radius: 8px; color: var(--texto); text-decoration: none; font-size: .92rem; }
+    .indice-lab a:hover { background: var(--fondo-alt); }
+    .indice-lab a[aria-current="page"] { background: var(--tinta); color: var(--oscuro); font-weight: 700; }
+    .indice-lab .marca { font-size: .78rem; color: var(--suave); white-space: nowrap; }
+    .indice-lab .marca.hecho { color: var(--ok); font-weight: 700; }
+    .progreso { font-size: .85rem; color: var(--suave); margin: 12px 6px 0; border-top: 1px solid var(--borde); padding-top: 10px; }
+    .solo-movil { display: none; }
+
+    .mod-cab { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 16px 20px; margin-bottom: 16px; }
+    .mod-grupo { margin: 0; font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--naranja-oscuro); }
+    .mod-cab h2 { margin: 2px 0 6px; color: var(--oscuro); font-size: 1.5rem; }
+    .mod-cab p { margin: 0; }
+    .mod-cab .intro { max-width: 95ch; }
+    .mod-cuerpo { display: grid; grid-template-columns: minmax(280px, 360px) minmax(0, 1fr); grid-template-areas: "controles vista" "retos codigo"; gap: 16px; align-items: start; }
+    .panel { background: #fff; border: 1px solid var(--borde); border-radius: 12px; padding: 14px 16px; min-width: 0; }
+    .controles { grid-area: controles; } .vista { grid-area: vista; } .codigo { grid-area: codigo; } .retos { grid-area: retos; }
+    .panel-cab { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+    .panel-cab h3 { margin: 0; font-size: 1.02rem; color: var(--oscuro); }
+    .btn-sec { background: var(--fondo-alt); border: 1px solid var(--borde); border-radius: 999px; padding: 4px 12px; font-size: .85rem; color: var(--texto); }
+    .btn-sec:hover { border-color: var(--naranja); }
+    .btn-pri { background: var(--naranja-oscuro); color: #fff; border: 0; border-radius: 999px; padding: 5px 14px; font-size: .85rem; font-weight: 700; }
+    .btn-pri:hover { background: #8F560E; }
+
+    /* controles */
+    .ctrl { padding: 8px 8px 10px; border-radius: 8px; border: 1px solid transparent; }
+    .ctrl + .ctrl { border-top-color: var(--borde); border-radius: 0 0 8px 8px; }
+    .ctrl:hover, .ctrl:focus-within { background: var(--fondo-alt); border-color: var(--borde); border-radius: 8px; }
+    .ctrl > label, .ctrl > .rotulo { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 8px; font-weight: 600; font-size: .92rem; margin-bottom: 4px; }
+    .ctrl .sel { font-family: Consolas, monospace; font-size: .78rem; color: var(--suave); font-weight: 400; }
+    .ctrl .campo { display: flex; align-items: center; gap: 8px; }
+    .ctrl input[type="range"] { flex: 1; accent-color: var(--naranja-oscuro); min-width: 0; }
+    .ctrl input[type="color"] { width: 46px; height: 32px; border: 1px solid var(--borde); border-radius: 6px; padding: 2px; background: #fff; }
+    .ctrl select, .ctrl input[type="text"], .ctrl input[type="number"], .ctrl textarea { font: inherit; font-size: .9rem; padding: 5px 8px; border: 1px solid #C9C2B4; border-radius: 6px; background: #fff; color: var(--texto); min-width: 0; }
+    .ctrl select { flex: 1; }
+    .ctrl input[type="text"], .ctrl textarea { flex: 1; width: 100%; font-family: Consolas, monospace; }
+    .ctrl input[type="number"] { width: 80px; }
+    .ctrl output { font-family: Consolas, monospace; font-size: .85rem; min-width: 64px; text-align: right; color: var(--oscuro); }
+    .ctrl .ayuda { margin: 4px 0 0; font-size: .82rem; color: var(--suave); }
+    .ctrl .chips { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 6px; }
+    .ctrl .chips button { font-family: Consolas, monospace; font-size: .76rem; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--borde); background: #fff; color: var(--texto); }
+    .ctrl .chips button:hover { border-color: var(--naranja); background: var(--tinta); }
+    .ctrl .casilla { display: flex; align-items: center; gap: 8px; font-weight: 400; }
+    .ctrl .casilla input { width: 18px; height: 18px; accent-color: var(--naranja-oscuro); }
+    .ctrl .partes { display: grid; grid-template-columns: auto 1fr auto; gap: 2px 8px; align-items: center; font-size: .85rem; }
+    .ctrl-titulo { margin: 14px 8px 4px; font-size: .8rem; text-transform: uppercase; letter-spacing: .08em; color: var(--naranja-oscuro); font-weight: 700; }
+    .ctrl-titulo:first-child { margin-top: 0; }
+
+    /* vista previa */
+    .anchos { display: flex; gap: 4px; flex-wrap: wrap; }
+    .anchos button { font-size: .8rem; padding: 3px 10px; border-radius: 999px; border: 1px solid var(--borde); background: var(--fondo-alt); color: var(--texto); }
+    .anchos button[aria-pressed="true"] { background: var(--naranja); border-color: var(--naranja); color: #fff; font-weight: 700; }
+    .lienzo-marco { overflow-x: auto; background: repeating-linear-gradient(45deg, #F4F1EA 0 10px, #EFEBE2 10px 20px); border: 1px solid var(--borde); border-radius: 10px; padding: 8px; }
+    .lienzo { margin: 0 auto; max-width: none; transition: width .25s ease; }
+    .lienzo iframe { display: block; width: 100%; height: 400px; border: 1px solid #D8D2C6; border-radius: 6px; background: #fff; resize: vertical; overflow: auto; }
+    .regla-ancho { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: .85rem; color: var(--suave); }
+    .regla-ancho input { flex: 1; accent-color: var(--naranja-oscuro); }
+    .regla-ancho output { font-family: Consolas, monospace; min-width: 70px; text-align: right; color: var(--oscuro); }
+    .info { margin-top: 12px; font-size: .9rem; }
+    .info:empty { display: none; }
+    .info table { width: 100%; border-collapse: collapse; font-size: .88rem; }
+    .info th, .info td { border: 1px solid var(--borde); padding: 5px 8px; text-align: left; vertical-align: top; }
+    .info thead th { background: var(--fondo-alt); color: var(--oscuro); }
+    .info .nota { margin: 8px 0 0; color: var(--suave); font-size: .85rem; }
+    .info .dato { font-family: Consolas, monospace; font-weight: 700; color: var(--oscuro); }
+    .insignia { display: inline-block; font-size: .75rem; font-weight: 700; padding: 1px 8px; border-radius: 999px; margin: 1px 2px; }
+    .insignia.si { background: var(--ok-fondo); color: var(--ok); }
+    .insignia.no { background: var(--mal-fondo); color: var(--mal); }
+    .muestra { display: inline-block; width: 14px; height: 14px; border-radius: 3px; border: 1px solid #0002; vertical-align: -2px; margin-right: 4px; }
+
+    /* diagrama del modelo de cajas */
+    .cajas-dia { font-family: Consolas, monospace; font-size: .78rem; text-align: center; max-width: 420px; margin: 0 auto; }
+    .cajas-dia div { position: relative; padding: 20px 34px; border-radius: 4px; }
+    .cajas-dia .m { background: #F9CC9D; border: 1px dashed #B76E12; }
+    .cajas-dia .b { background: #FDDD9B; border: 2px solid #333; }
+    .cajas-dia .p { background: #C3D08B; }
+    .cajas-dia .c { background: #8CB6C0; padding: 10px; color: #12343B; font-weight: 700; }
+    .cajas-dia span { position: absolute; font-size: .72rem; }
+    .cajas-dia .et { top: 2px; left: 6px; color: #444; }
+    .cajas-dia .ar { top: 2px; left: 50%; transform: translateX(-50%); }
+    .cajas-dia .ab { bottom: 2px; left: 50%; transform: translateX(-50%); }
+    .cajas-dia .iz { left: 6px; top: 50%; transform: translateY(-50%); }
+    .cajas-dia .de { right: 6px; top: 50%; transform: translateY(-50%); }
+
+    /* código */
+    pre.css { background: var(--codigo-fondo); color: var(--codigo-texto); padding: 12px 14px; border-radius: 10px; overflow-x: auto; font-size: .86rem; line-height: 1.5; margin: 0; max-height: 360px; }
+    pre.css code { background: none; padding: 0; color: inherit; font-size: inherit; }
+    pre.css .s { color: #F3A447; } pre.css .p { color: #9CC4E4; } pre.css .v { color: #C9E3A5; } pre.css .c { color: #8F8A99; font-style: italic; } pre.css .a { color: #D092A7; }
+    pre.html { background: #F7F4EE; color: var(--texto); border: 1px solid var(--borde); padding: 10px 12px; border-radius: 8px; overflow-x: auto; font-size: .8rem; max-height: 280px; margin: 8px 0 0; }
+    .usr-label { display: block; margin: 14px 0 4px; font-weight: 700; color: var(--oscuro); font-size: .95rem; }
+    .usr-label span { font-weight: 400; color: var(--suave); font-size: .85rem; }
+    textarea.codigo { width: 100%; min-height: 110px; padding: 10px 12px; border: 1px solid #C9C2B4; border-radius: 8px; font-size: .86rem; line-height: 1.5; resize: vertical; background: #FFFDF9; color: var(--texto); }
+    details { margin-top: 10px; }
+    summary { cursor: pointer; font-weight: 600; font-size: .92rem; color: var(--oscuro); }
+
+    /* retos */
+    .retos ol { margin: 0; padding-left: 0; list-style: none; counter-reset: reto; }
+    .retos li { counter-increment: reto; position: relative; padding: 10px 10px 10px 42px; border: 1px solid var(--borde); border-radius: 10px; margin-bottom: 8px; background: var(--fondo-alt); }
+    .retos li::before { content: counter(reto); position: absolute; left: 10px; top: 10px; width: 24px; height: 24px; border-radius: 50%; background: var(--naranja); color: #fff; font-weight: 700; font-size: .85rem; display: grid; place-items: center; }
+    .retos li.hecho { background: var(--ok-fondo); border-color: #C9D8BE; }
+    .retos li.hecho::before { content: "✓"; background: var(--ok); }
+    .retos p { margin: 0 0 6px; font-size: .93rem; }
+    .retos .resultado { display: block; font-size: .85rem; margin-top: 6px; }
+    .retos .resultado.si { color: var(--ok); font-weight: 700; }
+    .retos .resultado.no { color: var(--mal); }
+    .aviso { font-size: .85rem; color: var(--suave); margin: 10px 0 0; }
+
+    .pie { color: var(--suave); font-size: .85rem; padding: 10px 20px 30px; text-align: center; }
+
+    @media (max-width: 1180px) {
+      .mod-cuerpo { grid-template-columns: minmax(0, 1fr); grid-template-areas: "vista" "controles" "codigo" "retos"; }
+    }
+    @media (max-width: 900px) {
+      .app { grid-template-columns: minmax(0, 1fr); }
+      .indice-lab { position: static; max-height: none; }
+      .indice-lab .grupos { display: none; }
+      .solo-movil { display: block; }
+      .indice-lab select { width: 100%; font: inherit; padding: 6px 8px; border-radius: 8px; border: 1px solid #C9C2B4; }
+      .cabecera .curso { display: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .lienzo { transition: none; } }
+  </style>
+</head>
+<body>
+  <header class="cabecera">
+    <div class="fila">
+      <svg viewBox="0 0 64 64" role="img" aria-label="Logotipo del módulo LMSGI"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#A5B592"/><stop offset=".45" stop-color="#F3A447"/><stop offset="1" stop-color="#D092A7"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="url(#lg)"/><text x="32" y="30" text-anchor="middle" font-family="Consolas, monospace" font-size="20" font-weight="700" fill="#fff">&lt;/&gt;</text><text x="32" y="50" text-anchor="middle" font-family="Open Sans, Arial, sans-serif" font-size="12" font-weight="700" fill="#fff" letter-spacing="1">LMSGI</text></svg>
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="fila">
+      <span class="etiqueta">UP3 · CSS3 · Laboratorio interactivo</span>
+      <h1>Laboratorio CSS: prueba cada propiedad en directo</h1>
+      <p>Elige un módulo, cambia los valores y mira cómo responde el HTML de ejemplo. Debajo tienes el CSS que estás escribiendo, un hueco para tus propias reglas y unos retos para comprobar que lo has entendido.</p>
+    </div>
+  </section>
+
+  <div class="app">
+    <nav class="indice-lab" aria-label="Módulos del laboratorio">
+      <label for="saltar-modulo" class="solo-movil"><strong>Módulo</strong></label>
+      <select id="saltar-modulo" class="solo-movil"></select>
+      <div class="grupos" id="lista-modulos"></div>
+      <p class="progreso" id="progreso"></p>
+    </nav>
+
+    <main id="modulo" tabindex="-1">
+      <header class="mod-cab">
+        <p class="mod-grupo" id="m-grupo"></p>
+        <h2 id="m-titulo">Laboratorio CSS</h2>
+        <p class="intro" id="m-intro"></p>
+      </header>
+      <div class="mod-cuerpo">
+        <section class="panel controles" aria-labelledby="t-controles">
+          <div class="panel-cab"><h3 id="t-controles">Propiedades</h3><button type="button" id="b-reset" class="btn-sec">Restablecer</button></div>
+          <div id="controles"></div>
+          <p class="aviso">Pasa el ratón o el foco por una propiedad para ver en la vista previa a qué elementos afecta.</p>
+        </section>
+        <section class="panel vista" aria-labelledby="t-vista">
+          <div class="panel-cab">
+            <h3 id="t-vista">Vista previa</h3>
+            <div class="anchos" role="group" aria-label="Ancho de la vista previa">
+              <button type="button" data-ancho="375" aria-pressed="false">Móvil · 375</button>
+              <button type="button" data-ancho="768" aria-pressed="false">Tableta · 768</button>
+              <button type="button" data-ancho="1200" aria-pressed="false">Escritorio · 1200</button>
+              <button type="button" data-ancho="0" aria-pressed="true">Ajustar</button>
+            </div>
+          </div>
+          <div class="lienzo-marco"><div class="lienzo" id="lienzo"><iframe id="marco" title="Vista previa del ejemplo"></iframe></div></div>
+          <div class="regla-ancho"><label for="r-ancho">Ancho de la vista previa</label><input type="range" id="r-ancho" min="280" max="1400" step="1"><output id="o-ancho" for="r-ancho"></output></div>
+          <div id="info" class="info" aria-live="polite"></div>
+        </section>
+        <section class="panel codigo" aria-labelledby="t-codigo">
+          <div class="panel-cab"><h3 id="t-codigo">El CSS que estás escribiendo</h3><button type="button" id="b-copiar" class="btn-sec">Copiar</button></div>
+          <pre class="css" id="css-gen"><code></code></pre>
+          <label for="usr" class="usr-label">Tu CSS <span>· se aplica después del generado: si choca con él, decide la cascada</span></label>
+          <textarea id="usr" class="codigo" spellcheck="false" rows="5" placeholder="/* Escribe aquí tus propias reglas, por ejemplo:
+.item { border: 2px solid black; } */"></textarea>
+          <details><summary>HTML del ejemplo</summary><pre class="html" id="html-ej"><code></code></pre></details>
+          <details><summary>CSS de partida del ejemplo</summary><pre class="css" id="css-base"><code></code></pre></details>
+        </section>
+        <section class="panel retos" aria-labelledby="t-retos">
+          <div class="panel-cab"><h3 id="t-retos">Retos</h3><button type="button" id="b-borrar-retos" class="btn-sec">Reiniciar retos</button></div>
+          <ol id="lista-retos"></ol>
+          <p class="aviso">Tus valores y los retos superados se recuerdan solo en este navegador.</p>
+        </section>
+      </div>
+    </main>
+  </div>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+  <script>
+/* =========================================================
+   Módulos del laboratorio CSS · LMSGI · UP3
+   Solo contenidos de la UP3 (secciones 2 – 11 de la teoría).
+   ========================================================= */
+const IMG_MAR = "data:image/svg+xml," + encodeURIComponent("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 300'><rect width='400' height='170' fill='#8EC9E8'/><circle cx='310' cy='70' r='30' fill='#F6C453'/><rect y='170' width='400' height='130' fill='#2A7FA8'/><path d='M0 205 q25 -10 50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0 t50 0' fill='none' stroke='#fff' stroke-width='3' opacity='.45'/><path d='M0 250 q30 -12 60 0 t60 0 t60 0 t60 0 t60 0 t60 0 t60 0' fill='none' stroke='#fff' stroke-width='4' opacity='.35'/><path d='M190 212 L190 92 L252 202 Z' fill='#fff'/><path d='M184 206 L184 118 L146 204 Z' fill='#FCE7C8'/><path d='M138 212 L262 212 L246 232 L152 232 Z' fill='#C8472B'/></svg>");
+
+const TEXTO_LARGO = "La bahía de Benidorm tiene aguas tranquilas casi todo el año y la isla protege del oleaje, por eso es un lugar ideal para aprender a navegar. Las salidas se hacen en grupos reducidos, con material revisado cada temporada y un protocolo de seguridad que se repasa antes de cada salida.";
+
+const MODULOS = [
+  /* ------------------------------------------------------------ 2-3 · SELECTORES */
+  {
+    id: "selectores", grupo: "2 – 3 · Selectores y cascada", diapos: "12 – 27", titulo: "Selectores y especificidad",
+    intro: "Escribe un selector y mira qué elementos selecciona (se marcan en amarillo) y cuál es su especificidad. En el «duelo», dos reglas dan color al precio: averigua cuál gana y por qué. Recuerda: gana la de más especificidad; si empatan, la última; <code>!important</code> se salta las dos.",
+    html: `<header class="cab">
+  <nav>
+    <ul class="menu">
+      <li><a href="#" class="activo">Inicio</a></li>
+      <li><a href="#">Cursos</a></li>
+      <li><a href="#">Contacto</a></li>
+    </ul>
+  </nav>
+</header>
+<article class="tarjeta" id="oferta">
+  <h2>Kayak de mar</h2>
+  <p class="nivel">Todos los niveles</p>
+  <p>Ruta guiada hasta la cala del Mal Pas.</p>
+  <p class="precio destacado">35 €</p>
+  <ul class="lista">
+    <li>3 horas</li>
+    <li>Bolsa estanca</li>
+    <li>Seguro incluido</li>
+    <li>Fotos de la ruta</li>
+  </ul>
+  <p><a href="tel:+34965000111">Llamar</a> · <a href="https://www.aemet.es/" rel="external">AEMET</a></p>
+</article>
+<form>
+  <label>Correo <input type="email" required></label>
+  <label>Teléfono <input type="tel"></label>
+</form>`,
+    base: `.menu { display: flex; gap: 12px; list-style: none; padding: 0; }
+.tarjeta { border: 1px solid #DDE3E8; border-radius: 10px; padding: 4px 16px; max-width: 420px; }
+.precio { font-size: 1.6rem; font-weight: 800; }
+form { margin-top: 12px; display: flex; gap: 12px; flex-wrap: wrap; }`,
+    alto: 470,
+    controles: [
+      { tipo: "titulo", texto: "Prueba un selector" },
+      { k: "sel", tipo: "texto", etiqueta: "Selector", valor: ".lista li", resaltar: (v) => v.sel,
+        opciones: ["p", ".precio", "#oferta", "article p", ".menu > li", "h2 + p", "h2 ~ p", 'a[href^="tel:"]', 'a[rel="external"]', "input[required]", "li:first-child", ".lista li:nth-child(even)", "p:not(.precio)", "a.activo", "*"] },
+      { tipo: "titulo", texto: "Duelo de reglas sobre el precio" },
+      { k: "selA", tipo: "texto", etiqueta: "Regla A · selector", valor: "#oferta .precio", resaltar: (v) => v.selA, opciones: [".precio", "p.precio", "#oferta .precio", ".tarjeta .destacado", "p"] },
+      { k: "colA", tipo: "color", etiqueta: "Regla A · <code>color</code>", valor: "#12695f" },
+      { k: "impA", tipo: "casilla", etiqueta: "Regla A · <code>!important</code>", texto: "Añadir !important", valor: false },
+      { k: "selB", tipo: "texto", etiqueta: "Regla B · selector (va después)", valor: ".precio.destacado", resaltar: (v) => v.selB, opciones: [".precio", ".precio.destacado", "article .precio", "p", "#oferta p.precio"] },
+      { k: "colB", tipo: "color", etiqueta: "Regla B · <code>color</code>", valor: "#c8472b" },
+    ],
+    generar: (v) => `/* Prueba de selector */
+${v.sel || "/* escribe un selector */"} {
+  background-color: #FDE68A;
+  box-shadow: 0 0 0 2px #B76E12;
+}
+
+/* Duelo: ¿de qué color se ve el precio? */
+${v.selA || "/* regla A */"} {
+  color: ${v.colA}${v.impA ? " !important" : ""};
+}
+
+${v.selB || "/* regla B */"} {
+  color: ${v.colB};
+}`,
+    info: (c) => {
+      let n = "—", aviso = "";
+      const limpio = c.partirComas(c.v.sel).map(c.quitarPseudoelementos).join(", ");
+      try { n = limpio ? c.qa(limpio).length : 0; } catch (e) { aviso = "<span class='insignia no'>Selector no válido</span>"; }
+      if (/::?(before|after|first-line|first-letter|marker)/.test(c.v.sel)) aviso += " <span class='nota'>Un pseudoelemento selecciona una <em>parte</em> de cada elemento (se marca el elemento entero).</span>";
+      if (/:(hover|focus|active|visited)/.test(c.v.sel)) aviso += " <span class='nota'>Las pseudoclases dinámicas solo seleccionan mientras ocurre el estado: pasa el ratón por la vista previa.</span>";
+      const precio = c.q(".precio"), col = c.rgbAHex(c.cssARgb(c.cs(precio, "color")));
+      const casa = (s) => { try { return s && precio.matches(c.quitarPseudoelementos(s)); } catch (e) { return false; } };
+      const gana = col === c.v.colA.toLowerCase() ? "A" : col === c.v.colB.toLowerCase() ? "B" : "ninguna";
+      return `<table><thead><tr><th></th><th>Selector</th><th>Especificidad</th><th>¿Selecciona el precio?</th></tr></thead><tbody>
+<tr><th>Prueba</th><td><code>${c.esc(c.v.sel)}</code></td><td class="dato">${c.especificidadTexto(c.v.sel)}</td><td>${n} elemento(s) ${aviso}</td></tr>
+<tr><th>Regla A</th><td><code>${c.esc(c.v.selA)}</code>${c.v.impA ? " <code>!important</code>" : ""}</td><td class="dato">${c.especificidadTexto(c.v.selA)}</td><td>${casa(c.v.selA) ? "Sí" : "No"}</td></tr>
+<tr><th>Regla B</th><td><code>${c.esc(c.v.selB)}</code></td><td class="dato">${c.especificidadTexto(c.v.selB)}</td><td>${casa(c.v.selB) ? "Sí" : "No"}</td></tr>
+</tbody></table><p class="nota">El precio se ve de color <span class="muestra" style="background:${col}"></span><span class="dato">${col.toUpperCase()}</span>: gana <strong>${gana === "ninguna" ? "ninguna de las dos (otra regla o la herencia)" : "la regla " + gana}</strong>.</p>`;
+    },
+    retos: [
+      { texto: "Selecciona <strong>solo</strong> los elementos de la lista que ocupan posición par (2.º y 4.º).",
+        comprobar: (c) => { let a; try { a = c.qa(c.quitarPseudoelementos(c.v.sel)); } catch (e) { return "El selector no es válido."; } const b = c.qa(".lista li:nth-child(even)"); return (a.length === b.length && b.every((x) => a.includes(x))) || "Deben quedar marcados exactamente «Bolsa estanca» y «Fotos de la ruta». Pista: :nth-child()."; } },
+      { texto: "Selecciona solo el enlace de teléfono <strong>sin usar clases ni id</strong>.",
+        comprobar: (c) => { if (/[.#]/.test(c.v.sel)) return "No uses . ni #: busca un selector de atributo."; let a; try { a = c.qa(c.v.sel); } catch (e) { return "El selector no es válido."; } return (a.length === 1 && a[0] === c.q('a[href^="tel:"]')) || "Debe quedar marcado solo «Llamar». Pista: el atributo href empieza por «tel:»."; } },
+      { texto: "En el duelo, haz que gane la regla B <strong>sin</strong> <code>!important</code>, aunque la regla A también seleccione el precio.",
+        comprobar: (c) => { const p = c.q(".precio"); const casa = (s) => { try { return p.matches(s); } catch (e) { return false; } }; if (c.v.impA) return "Quita el !important de la regla A."; if (!casa(c.v.selA) || !casa(c.v.selB)) return "Las dos reglas deben seleccionar el precio."; return c.rgbAHex(c.cssARgb(c.cs(p, "color"))) === c.v.colB.toLowerCase() && c.v.colA.toLowerCase() !== c.v.colB.toLowerCase() || "Todavía gana A. B necesita igual o más especificidad (va después)."; },
+        explicacion: "Con igual especificidad gana la última regla; con más, gana aunque vaya antes." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 4 · COLORES */
+  {
+    id: "colores", grupo: "4 · Colores y unidades", diapos: "28 – 32", titulo: "Colores y contraste",
+    intro: "Elige colores y la notación en la que se escriben (hexadecimal, <code>rgb()</code> o <code>hsl()</code>): es el mismo color escrito de tres formas. La tabla calcula el contraste según las WCAG 2.2: el texto normal necesita al menos 4,5:1 y el texto grande, 3:1.",
+    html: `<div class="tarjeta">
+  <h2>Oferta de verano</h2>
+  <p>Kayak + pádel surf por 80 € hasta el 30 de junio.</p>
+  <a class="boton" href="#">Reservar</a>
+</div>`,
+    base: `.tarjeta { padding: 24px; border-radius: 14px; max-width: 440px; }
+.tarjeta h2 { margin-top: 0; }
+.boton { display: inline-block; padding: 10px 22px; border-radius: 999px; font-weight: 700; text-decoration: none; }`,
+    alto: 300,
+    controles: [
+      { k: "fmt", tipo: "select", etiqueta: "Notación de los colores", opciones: [{ t: "Hexadecimal (#RRGGBB)", v: "hex" }, { t: "rgb()", v: "rgb" }, { t: "hsl()", v: "hsl" }], valor: "hex", ayuda: "Solo cambia cómo se escribe el color en el CSS, no el color." },
+      { k: "fondo", sel: ".tarjeta", prop: "background-color", tipo: "color", valor: "#0b3c5d" },
+      { k: "texto", sel: ".tarjeta", prop: "color", tipo: "color", valor: "#ffffff" },
+      { k: "titulo", sel: ".tarjeta h2", prop: "color", tipo: "color", valor: "#f6c453" },
+      { k: "bfondo", sel: ".boton", prop: "background-color", tipo: "color", valor: "#c8472b" },
+      { k: "btexto", sel: ".boton", prop: "color", tipo: "color", valor: "#ffffff" },
+      { k: "opac", sel: ".tarjeta", prop: "opacity", tipo: "rango", min: 0.2, max: 1, paso: 0.05, valor: 1, ayuda: "La opacidad afecta a toda la caja y a sus hijos." },
+    ],
+    info: (c) => {
+      const fila = (t, a, b) => { const r = c.contraste(a, b); return `<tr><th>${t}</th><td><span class="muestra" style="background:${a}"></span>${c.formatoColor(a, "hex")}<br><span class="dato">${c.formatoColor(a, "rgb")}</span><br><span class="dato">${c.formatoColor(a, "hsl")}</span></td><td><span class="muestra" style="background:${b}"></span>${c.formatoColor(b, "hex")}<br><span class="dato">${c.formatoColor(b, "rgb")}</span><br><span class="dato">${c.formatoColor(b, "hsl")}</span></td><td class="dato">${c.redondear(r, 2)}:1<br>${c.insigniasContraste(r)}</td></tr>`; };
+      return `<table><thead><tr><th>Par</th><th>Texto</th><th>Fondo</th><th>Contraste</th></tr></thead><tbody>${fila("Párrafo", c.v.texto, c.v.fondo)}${fila("Título", c.v.titulo, c.v.fondo)}${fila("Botón", c.v.btexto, c.v.bfondo)}</tbody></table>${c.v.opac < 1 ? "<p class='nota'>Con opacidad menor que 1 el contraste real baja: el fondo de la página se mezcla con la tarjeta.</p>" : ""}`;
+    },
+    retos: [
+      { texto: "Pon al botón el fondo naranja claro <code>#F3A447</code> y elige un color de texto que apruebe AA (≥ 4,5:1).",
+        comprobar: (c) => c.v.bfondo.toLowerCase() !== "#f3a447" ? "Primero pon el fondo del botón en #F3A447." : c.contraste(c.v.btexto, c.v.bfondo) >= 4.5 || `Contraste ${c.redondear(c.contraste(c.v.btexto, c.v.bfondo))}:1. Con blanco no llega: prueba un texto muy oscuro.` },
+      { texto: "Escribe los colores en <code>hsl()</code> y elige para la tarjeta un fondo turquesa (tono entre 160 y 200) que mantenga el párrafo en AA.",
+        comprobar: (c) => { if (c.v.fmt !== "hsl") return "Cambia la notación a hsl()."; const h = c.rgbAHsl(c.hexARgb(c.v.fondo))[0]; if (h < 160 || h > 200) return `El tono del fondo es ${h}: busca un turquesa (160 – 200).`; return c.contraste(c.v.texto, c.v.fondo) >= 4.5 || "El párrafo no llega a 4,5:1: oscurece el fondo (baja la luminosidad)."; },
+        explicacion: "En hsl() el primer número es el tono (0 – 360), y bajar la luminosidad mantiene el tono y sube el contraste." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 4 · UNIDADES */
+  {
+    id: "unidades", grupo: "4 · Colores y unidades", diapos: "33 – 34", titulo: "Unidades de medida",
+    intro: "Compara unidades absolutas y relativas. <code>em</code> en <code>font-size</code> se calcula sobre el tamaño de letra del <strong>padre</strong>; <code>rem</code>, sobre el de la raíz (<code>html</code>); <code>%</code> en <code>width</code>, sobre el ancho del contenedor, y <code>vw</code>, sobre el ancho de la ventana. Cambia el tamaño de la raíz y mira qué se mueve.",
+    html: `<div class="padre">
+  Padre
+  <p class="hijo">Hijo: este texto cambia de tamaño</p>
+  <div class="barra">barra</div>
+</div>`,
+    base: `.padre { border: 2px dashed #809EC2; padding: 12px; }
+.hijo { background-color: #FDF0DF; margin: 10px 0; }
+.barra { background-color: #A5B592; color: #fff; height: 28px; font-size: 14px; line-height: 28px; padding-left: 6px; }`,
+    alto: 300,
+    controles: [
+      { k: "raiz", sel: "html", prop: "font-size", tipo: "rango", min: 10, max: 24, unidad: "px", valor: 16, ayuda: "Es el tamaño que el usuario puede cambiar en su navegador." },
+      { k: "padre", sel: ".padre", prop: "font-size", tipo: "medida", unidades: ["px", "em", "rem", "%"], valor: { n: 1.25, u: "em" } },
+      { k: "hijo", sel: ".hijo", prop: "font-size", tipo: "medida", unidades: ["px", "em", "rem", "%"], valor: { n: 1.5, u: "em" } },
+      { k: "pad", sel: ".hijo", prop: "padding", tipo: "medida", unidades: ["px", "em", "rem"], valor: { n: 0.5, u: "em" }, ayuda: "En padding, em usa el tamaño de letra del propio elemento." },
+      { k: "barra", sel: ".barra", prop: "width", tipo: "medida", unidades: ["px", "%", "vw", "em", "rem"], valor: { n: 50, u: "%" } },
+    ],
+    info: (c) => {
+      const px = (s, p) => c.redondear(c.num(c.cs(s, p)), 1) + " px";
+      return `<table><thead><tr><th>Elemento</th><th>Escrito</th><th>Calculado</th></tr></thead><tbody>
+<tr><td><code>html</code> font-size</td><td>${c.v.raiz}px</td><td class="dato">${px("html", "font-size")}</td></tr>
+<tr><td><code>.padre</code> font-size</td><td>${c.v.padre.n}${c.v.padre.u}</td><td class="dato">${px(".padre", "font-size")}</td></tr>
+<tr><td><code>.hijo</code> font-size</td><td>${c.v.hijo.n}${c.v.hijo.u}</td><td class="dato">${px(".hijo", "font-size")}</td></tr>
+<tr><td><code>.hijo</code> padding</td><td>${c.v.pad.n}${c.v.pad.u}</td><td class="dato">${px(".hijo", "padding-top")}</td></tr>
+<tr><td><code>.barra</code> width</td><td>${c.v.barra.n}${c.v.barra.u}</td><td class="dato">${c.redondear(c.rect(".barra").width, 1)} px</td></tr>
+</tbody></table><p class="nota">Ventana de la vista previa: ${c.win.innerWidth} px de ancho (1vw = ${c.redondear(c.win.innerWidth / 100, 2)} px).</p>`;
+    },
+    retos: [
+      { texto: "Haz que el texto del hijo mida exactamente <strong>24 px</strong> usando <code>em</code>.",
+        comprobar: (c) => c.v.hijo.u !== "em" ? "Usa la unidad em en el hijo." : Math.abs(c.num(c.cs(".hijo", "font-size")) - 24) < 0.1 || `Ahora mide ${c.redondear(c.num(c.cs(".hijo", "font-size")), 1)} px. Divide 24 entre el tamaño del padre.` },
+      { texto: "Haz que el hijo mida 24 px con <code>rem</code> y comprueba que ya no cambia al tocar el tamaño del padre.",
+        comprobar: (c) => c.v.hijo.u !== "rem" ? "Usa la unidad rem en el hijo." : Math.abs(c.num(c.cs(".hijo", "font-size")) - 24) < 0.1 || "Ahora no mide 24 px: el cálculo es rem × tamaño de html.", explicacion: "rem solo depende de la raíz, por eso es la unidad habitual para tamaños de letra." },
+      { texto: "Haz que la barra ocupe la mitad de la <strong>ventana</strong> (no del contenedor), aunque cambies el ancho de la vista previa.",
+        comprobar: (c) => c.v.barra.u === "vw" && c.v.barra.n === 50 || "Busca la unidad relativa al ancho de la ventana." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 5 · TIPOGRAFÍA */
+  {
+    id: "tipografia", grupo: "5 · Tipografía", diapos: "35 – 39", titulo: "Texto y fuentes",
+    intro: "Ajusta las propiedades de texto que más se notan en una web. Un texto cómodo tiene un interlineado de 1,5 a 1,8 y líneas de unos 45 a 75 caracteres. La familia Nunito se carga desde Google Fonts: si no hay conexión, se usa la alternativa de la pila.",
+    cabeza: '<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">',
+    html: `<article>
+  <h2>La bahía de Benidorm</h2>
+  <p class="entradilla">Un lugar ideal para aprender a navegar.</p>
+  <p>${TEXTO_LARGO}</p>
+  <p>Consulta la <a href="#">predicción marítima</a> antes de cada salida.</p>
+</article>`,
+    base: `h2 { color: #0B3C5D; margin: 0 0 8px; }
+.entradilla { color: #52606D; font-size: 1.15em; }`,
+    alto: 420,
+    controles: [
+      { sel: "article", prop: "font-family", tipo: "select", opciones: [{ t: "system-ui (la del sistema)", v: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' }, { t: "Georgia (serifa)", v: 'Georgia, "Times New Roman", serif' }, { t: "Nunito (Google Fonts)", v: '"Nunito", "Trebuchet MS", sans-serif' }, { t: "Trebuchet MS", v: '"Trebuchet MS", sans-serif' }, { t: "Courier New (monoespaciada)", v: '"Courier New", monospace' }], valor: 'system-ui, -apple-system, "Segoe UI", Roboto, sans-serif' },
+      { k: "tam", sel: "p", prop: "font-size", tipo: "rango", min: 12, max: 24, unidad: "px", valor: 16 },
+      { k: "lh", sel: "p", prop: "line-height", tipo: "rango", min: 1, max: 2.4, paso: 0.05, valor: 1.2, ayuda: "Sin unidad: se multiplica por el tamaño de letra." },
+      { k: "mw", sel: "article", prop: "max-width", tipo: "rango", min: 20, max: 120, unidad: "ch", valor: 110, ayuda: "1ch es el ancho del carácter «0»." },
+      { sel: "p", prop: "text-align", tipo: "select", opciones: ["left", "center", "right", "justify"], valor: "left" },
+      { tipo: "titulo", texto: "Título y enlace" },
+      { sel: "h2", prop: "font-weight", tipo: "select", opciones: ["400", "700", "800"], valor: "700" },
+      { k: "tt", sel: "h2", prop: "text-transform", tipo: "select", opciones: ["none", "uppercase", "capitalize", "lowercase"], valor: "none" },
+      { k: "ls", sel: "h2", prop: "letter-spacing", tipo: "rango", min: -0.05, max: 0.3, paso: 0.01, unidad: "em", valor: 0 },
+      { sel: ".entradilla", prop: "font-style", tipo: "select", opciones: ["normal", "italic"], valor: "normal" },
+      { sel: "a", prop: "text-decoration", tipo: "select", opciones: ["underline", "none", "underline dotted", "underline wavy", "overline"], valor: "underline" },
+      { sel: "a", prop: "color", tipo: "color", valor: "#12695f" },
+    ],
+    info: (c) => {
+      const p = c.qa("p")[1]; if (!p) return ""; const fs = c.num(c.cs(p, "font-size"));
+      const span = c.doc.createElement("span"); span.textContent = "abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz"; span.style.whiteSpace = "nowrap"; p.appendChild(span);
+      const anchoCar = span.getBoundingClientRect().width / span.textContent.length; span.remove();
+      const cpl = Math.round(p.clientWidth / anchoCar), lh = c.num(c.cs(p, "line-height"));
+      const ok = (b) => `<span class="insignia ${b ? "si" : "no"}">${b ? "✓" : "✗"}</span>`;
+      return `<table><tbody><tr><th>Caracteres por línea (aprox.)</th><td class="dato">${cpl}</td><td>${ok(cpl >= 45 && cpl <= 75)} recomendado 45 – 75</td></tr><tr><th>Interlineado calculado</th><td class="dato">${c.redondear(lh, 1)} px</td><td>${ok(c.v.lh >= 1.5 && c.v.lh <= 1.8)} ${c.v.lh} × ${fs} px · recomendado 1,5 – 1,8</td></tr></tbody></table>`;
+    },
+    retos: [
+      { texto: "Deja el texto cómodo de leer: interlineado entre 1,5 y 1,8 y entre 50 y 75 caracteres por línea (controla el ancho con <code>max-width</code> en <code>ch</code>).",
+        comprobar: (c) => { if (c.v.lh < 1.5 || c.v.lh > 1.8) return "Ajusta primero el interlineado (1,5 – 1,8)."; const p = c.qa("p")[1]; const s = c.doc.createElement("span"); s.textContent = "abcdefghijklmnopqrstuvwxyz abcdefghijklmnopqrstuvwxyz"; s.style.whiteSpace = "nowrap"; p.appendChild(s); const cpl = p.clientWidth / (s.getBoundingClientRect().width / s.textContent.length); s.remove(); return (cpl >= 50 && cpl <= 75) || `Ahora caben unos ${Math.round(cpl)} caracteres: cambia max-width.`; } },
+      { texto: "Pon el título en mayúsculas <strong>sin reescribir el texto</strong> y con un espaciado de letras de 0,05em a 0,15em.",
+        comprobar: (c) => c.v.tt !== "uppercase" ? "Busca el valor de text-transform que pasa a mayúsculas." : (c.v.ls >= 0.05 && c.v.ls <= 0.15) || "Ajusta letter-spacing entre 0.05em y 0.15em.", explicacion: "Las mayúsculas se leen mejor con algo de espacio entre letras." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 6 · MODELO DE CAJAS */
+  {
+    id: "cajas", grupo: "6 · Modelo de cajas", diapos: "40 – 44", titulo: "Modelo de cajas y box-sizing",
+    intro: "Toda caja tiene contenido, relleno (<code>padding</code>), borde (<code>border</code>) y margen (<code>margin</code>). En la vista previa, el contenido es blanco y el relleno naranja. Con <code>content-box</code>, <code>width</code> mide solo el contenido; con <code>border-box</code>, incluye relleno y borde.",
+    html: `<div class="zona">
+  <div class="caja">Contenido de la caja</div>
+  <div class="vecina">Caja vecina</div>
+</div>`,
+    base: `.zona { background-color: #E3EEF5; padding: 1px 0; }
+.caja { background: linear-gradient(#fff, #fff) content-box, #F8D3A6; }
+.vecina { background-color: #A5B592; color: #fff; padding: 8px; }`,
+    alto: 330,
+    controles: [
+      { k: "bs", sel: ".caja", prop: "box-sizing", tipo: "select", opciones: ["content-box", "border-box"], valor: "content-box" },
+      { k: "w", sel: ".caja", prop: "width", tipo: "rango", min: 100, max: 500, unidad: "px", valor: 260 },
+      { sel: ".caja", prop: "height", tipo: "select", opciones: ["auto", "60px", "100px", "140px"], valor: "auto" },
+      { k: "p", sel: ".caja", prop: "padding", tipo: "rango", min: 0, max: 60, unidad: "px", valor: 20 },
+      { k: "b", sel: ".caja", prop: "border-width", tipo: "rango", min: 0, max: 30, unidad: "px", valor: 5 },
+      { sel: ".caja", prop: "border-style", tipo: "select", opciones: ["solid", "dashed", "dotted", "double", "none"], valor: "solid" },
+      { sel: ".caja", prop: "border-color", tipo: "color", valor: "#b76e12" },
+      { k: "m", sel: ".caja", prop: "margin", tipo: "rango", min: 0, max: 60, unidad: "px", valor: 16 },
+    ],
+    info: (c) => {
+      const el = c.q(".caja"), g = (p) => c.redondear(c.num(c.cs(el, p)), 1);
+      const cw = el.clientWidth - c.num(c.cs(el, "padding-left")) - c.num(c.cs(el, "padding-right"));
+      const ch = el.clientHeight - c.num(c.cs(el, "padding-top")) - c.num(c.cs(el, "padding-bottom"));
+      return `<div class="cajas-dia"><div class="m"><span class="et">margin</span><span class="ar">${g("margin-top")}</span><span class="ab">${g("margin-bottom")}</span><span class="iz">${g("margin-left")}</span><span class="de">${g("margin-right")}</span>
+<div class="b"><span class="et">border</span><span class="ar">${g("border-top-width")}</span><span class="ab">${g("border-bottom-width")}</span><span class="iz">${g("border-left-width")}</span><span class="de">${g("border-right-width")}</span>
+<div class="p"><span class="et">padding</span><span class="ar">${g("padding-top")}</span><span class="ab">${g("padding-bottom")}</span><span class="iz">${g("padding-left")}</span><span class="de">${g("padding-right")}</span>
+<div class="c">${c.redondear(cw, 1)} × ${c.redondear(ch, 1)}</div></div></div></div></div>
+<p class="nota">Ancho visible (de borde a borde): <span class="dato">${el.offsetWidth} px</span> · espacio horizontal que ocupa con los márgenes: <span class="dato">${el.offsetWidth + 2 * c.num(c.cs(el, "margin-left"))} px</span>.</p>`;
+    },
+    retos: [
+      { texto: "Con <code>border-box</code>, haz que la caja mida <strong>300 px de borde a borde</strong> con 20 px de relleno y 5 px de borde.",
+        comprobar: (c) => c.v.bs !== "border-box" ? "Cambia box-sizing a border-box." : c.v.p !== 20 || c.v.b !== 5 ? "Pon 20 px de padding y 5 px de borde." : c.q(".caja").offsetWidth === 300 || `Ahora mide ${c.q(".caja").offsetWidth} px de borde a borde.` },
+      { texto: "Consigue los mismos 300 px visibles con <code>content-box</code> (20 px de relleno y 5 px de borde). ¿Qué <code>width</code> necesitas?",
+        comprobar: (c) => c.v.bs !== "content-box" ? "Cambia box-sizing a content-box." : c.v.p !== 20 || c.v.b !== 5 ? "Pon 20 px de padding y 5 px de borde." : c.q(".caja").offsetWidth === 300 || `Ahora mide ${c.q(".caja").offsetWidth} px. Pista: 300 − 2 × 20 − 2 × 5.`, explicacion: "Con content-box hay que restar relleno y borde: por eso casi todas las hojas empiezan con * { box-sizing: border-box; }." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 6 · DISPLAY Y MÁRGENES */
+  {
+    id: "display", grupo: "6 · Modelo de cajas", diapos: "45 – 48", titulo: "display y márgenes",
+    intro: "Los elementos en línea (<code>inline</code>) ignoran <code>width</code>, <code>height</code> y los márgenes verticales; los de bloque ocupan toda la fila; <code>inline-block</code> mezcla las dos cosas. Abajo, dos párrafos seguidos: sus márgenes verticales <strong>colapsan</strong> (se queda el mayor, no la suma).",
+    html: `<p>El club tiene <span class="etiqueta">cursos de vela</span> y rutas en kayak para todas las edades. El precio incluye el material.</p>
+<nav class="botones">
+  <a href="#" class="enlace">Vela</a>
+  <a href="#" class="enlace">Kayak</a>
+  <a href="#" class="enlace">Pádel</a>
+</nav>
+<p class="p1">Párrafo 1 con margen inferior</p>
+<p class="p2">Párrafo 2 con margen superior</p>`,
+    base: `.etiqueta { background-color: #FDF0DF; border: 1px solid #F3A447; }
+.enlace { background-color: #0B3C5D; color: #fff; text-decoration: none; border-radius: 6px; }
+.p1, .p2 { background-color: #E3EEF5; padding: 6px; }`,
+    alto: 380,
+    controles: [
+      { k: "ed", sel: ".etiqueta", prop: "display", tipo: "select", opciones: ["inline", "block", "inline-block", "none"], valor: "inline" },
+      { sel: ".etiqueta", prop: "width", tipo: "rango", min: 50, max: 300, unidad: "px", valor: 160, ayuda: "Fíjate en que no hace nada mientras sea inline." },
+      { sel: ".etiqueta", prop: "padding", tipo: "rango", min: 0, max: 20, unidad: "px", valor: 2 },
+      { sel: ".etiqueta", prop: "margin", tipo: "rango", min: 0, max: 30, unidad: "px", valor: 0 },
+      { k: "vis", sel: ".etiqueta", prop: "visibility", tipo: "select", opciones: ["visible", "hidden"], valor: "visible", ayuda: "hidden la oculta pero conserva su hueco; display: none la quita." },
+      { tipo: "titulo", texto: "Enlaces como botones" },
+      { k: "nd", sel: ".enlace", prop: "display", tipo: "select", opciones: ["inline", "inline-block", "block"], valor: "inline" },
+      { sel: ".enlace", prop: "padding", tipo: "select", opciones: ["0", "4px 8px", "8px 16px", "12px 20px"], valor: "4px 8px" },
+      { sel: ".enlace", prop: "min-height", tipo: "rango", min: 0, max: 60, unidad: "px", valor: 0 },
+      { sel: ".enlace", prop: "margin-right", tipo: "rango", min: 0, max: 20, unidad: "px", valor: 4 },
+      { tipo: "titulo", texto: "Colapso de márgenes" },
+      { k: "mb", sel: ".p1", prop: "margin-bottom", tipo: "rango", min: 0, max: 60, unidad: "px", valor: 30 },
+      { k: "mt", sel: ".p2", prop: "margin-top", tipo: "rango", min: 0, max: 60, unidad: "px", valor: 20 },
+    ],
+    info: (c) => {
+      const sep = Math.round(c.rect(".p2").top - c.rect(".p1").bottom);
+      const et = c.q(".etiqueta"), en = c.qa(".enlace");
+      return `<table><tbody><tr><th>Etiqueta</th><td>display <code>${c.cs(et, "display")}</code> · ancho real <span class="dato">${Math.round(et.getBoundingClientRect().width)} px</span></td></tr>
+<tr><th>Enlaces</th><td>alto real <span class="dato">${Math.round(en[0].getBoundingClientRect().height)} px</span> ${en[0].getBoundingClientRect().height >= 44 ? '<span class="insignia si">✓ ≥ 44 px</span>' : '<span class="insignia no">✗ menos de 44 px</span>'}</td></tr>
+<tr><th>Separación entre párrafos</th><td><span class="dato">${sep} px</span> (margin-bottom ${c.v.mb} + margin-top ${c.v.mt} → se queda el mayor)</td></tr></tbody></table>`;
+    },
+    retos: [
+      { texto: "Convierte los enlaces en botones de <strong>al menos 44 px de alto</strong> que sigan uno al lado del otro.",
+        comprobar: (c) => { const en = c.qa(".enlace"), r = en.map((e) => e.getBoundingClientRect()); if (r.some((x) => x.height < 44)) return "Todavía miden menos de 44 px de alto."; return r.every((x) => Math.abs(x.top - r[0].top) < 2) || "Ya son altos, pero no están en la misma fila."; }, explicacion: "inline-block acepta altura y relleno sin romper la línea." },
+      { texto: "Consigue exactamente <strong>50 px</strong> de separación entre los dos párrafos.",
+        comprobar: (c) => Math.round(c.rect(".p2").top - c.rect(".p1").bottom) === 50 || "Recuerda que los márgenes verticales no se suman: se queda el mayor." },
+      { texto: "Oculta la etiqueta <strong>sin que se mueva</strong> el resto del texto.",
+        comprobar: (c) => c.v.vis === "hidden" && c.v.ed !== "none" || "display: none quita el hueco. Busca la propiedad que lo conserva." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 6 · FONDOS */
+  {
+    id: "fondos", grupo: "6 · Modelo de cajas", diapos: "49 – 50", titulo: "Fondos, bordes y sombras",
+    intro: "Decora sin imágenes extra: fondos de color, degradados, imágenes de fondo (se pueden apilar varias, la primera queda encima), esquinas redondeadas y sombras. En el CSS verás la imagen como <code>img/mar.svg</code>.",
+    html: `<section class="banner">
+  <h2>Navega este verano</h2>
+  <p>Plazas limitadas</p>
+</section>
+<div class="tarjeta">Tarjeta con borde y sombra</div>`,
+    base: `.banner { color: #fff; padding: 36px 24px; min-height: 180px; }
+.banner h2 { margin: 0 0 6px; }
+.tarjeta { background-color: #fff; padding: 24px; margin: 24px 8px; max-width: 320px; }`,
+    alto: 420,
+    controles: [
+      { sel: ".banner", prop: "background-color", tipo: "color", valor: "#0b3c5d" },
+      { k: "bimg", sel: ".banner", prop: "background-image", tipo: "select", valor: "none", opciones: [
+        { t: "none", v: "" },
+        { t: "imagen", v: `url("${IMG_MAR}")`, ver: 'url("img/mar.svg")' },
+        { t: "degradado + imagen", v: `linear-gradient(rgb(11 60 93 / 85%), rgb(11 60 93 / 30%)), url("${IMG_MAR}")`, ver: 'linear-gradient(rgb(11 60 93 / 85%), rgb(11 60 93 / 30%)), url("img/mar.svg")' },
+        { t: "degradado lineal", v: "linear-gradient(135deg, #1B998B, #0B3C5D)" },
+        { t: "degradado radial", v: "radial-gradient(circle at top right, #F6C453, #C8472B)" }] },
+      { k: "bsize", sel: ".banner", prop: "background-size", tipo: "select", opciones: ["auto", "cover", "contain", "120px"], valor: "auto" },
+      { sel: ".banner", prop: "background-position", tipo: "select", opciones: ["0% 0%", "center", "center bottom", "right top"], valor: "0% 0%" },
+      { k: "brep", sel: ".banner", prop: "background-repeat", tipo: "select", opciones: ["repeat", "no-repeat", "repeat-x"], valor: "repeat" },
+      { sel: ".banner", prop: "border-radius", tipo: "rango", min: 0, max: 40, unidad: "px", valor: 0 },
+      { tipo: "titulo", texto: "Tarjeta" },
+      { sel: ".tarjeta", prop: "border", tipo: "select", opciones: ["none", "1px solid #DDE3E8", "3px dashed #1B998B", "6px double #0B3C5D"], valor: "1px solid #DDE3E8" },
+      { k: "rad", sel: ".tarjeta", prop: "border-radius", tipo: "rango", min: 0, max: 40, unidad: "px", valor: 0 },
+      { k: "sombra", sel: ".tarjeta", prop: "box-shadow", tipo: "sombra", valor: { x: 0, y: 0, blur: 0, spread: 0, alfa: 20, inset: false } },
+    ],
+    retos: [
+      { texto: "Pon la imagen del mar <strong>cubriendo todo el banner</strong>, sin repetirse y con un degradado oscuro encima para que el texto se lea.",
+        comprobar: (c) => { const bi = c.cs(".banner", "background-image"); if (!/gradient/.test(bi) || !/url\(/.test(bi)) return "Necesitas degradado + imagen en background-image."; return c.v.bsize === "cover" || "La imagen debe cubrir el banner (background-size)."; }, explicacion: "Con cover la imagen no se repite porque siempre cubre la caja; aun así, no-repeat es buena práctica." },
+      { texto: "Haz que la tarjeta «flote»: sombra difuminada (al menos 12 px), desplazada hacia abajo (al menos 4 px) y esquinas de al menos 12 px.",
+        comprobar: (c) => { const s = c.v.sombra; if (s.inset) return "Una sombra interior no hace flotar: quita inset."; if (s.blur < 12 || s.y < 4) return "Aumenta el difuminado (≥ 12) y el desplazamiento y (≥ 4)."; return c.v.rad >= 12 || "Redondea más las esquinas (≥ 12 px)."; } },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 7 · LISTAS Y MENÚS */
+  {
+    id: "listas", grupo: "7 · Listas y posicionamiento", diapos: "51 – 53", titulo: "Listas y menús",
+    intro: "Una lista no ordenada de enlaces es la estructura correcta para un menú: con CSS se le quitan las viñetas y se pone en horizontal. También puedes cambiar el tipo, la posición y el color de las viñetas.",
+    html: `<ul class="lista">
+  <li>Chaleco salvavidas</li>
+  <li>Crema solar</li>
+  <li>Gorra y agua</li>
+</ul>
+<ol class="pasos">
+  <li>Apareja el barco</li>
+  <li>Sal del pantalán</li>
+  <li>Vira por avante</li>
+</ol>
+<nav class="menu">
+  <ul>
+    <li><a href="#">Inicio</a></li>
+    <li><a href="#">Cursos</a></li>
+    <li><a href="#">Horario</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+</nav>`,
+    base: `.menu { background-color: #F6EFE4; padding: 4px; border-radius: 10px; }
+.menu a { color: #0B3C5D; font-weight: 600; }`,
+    alto: 400,
+    controles: [
+      { sel: ".lista", prop: "list-style-type", tipo: "select", opciones: ["disc", "circle", "square", "none", '"⛵ "'], valor: "disc" },
+      { sel: ".lista", prop: "list-style-position", tipo: "select", opciones: ["outside", "inside"], valor: "outside" },
+      { sel: ".lista", prop: "padding-left", tipo: "rango", min: 0, max: 60, unidad: "px", valor: 40 },
+      { sel: ".lista li::marker", prop: "color", tipo: "color", valor: "#000000" },
+      { k: "ol", sel: ".pasos", prop: "list-style-type", tipo: "select", opciones: ["decimal", "decimal-leading-zero", "lower-alpha", "upper-roman"], valor: "decimal" },
+      { tipo: "titulo", texto: "Menú" },
+      { k: "mls", sel: ".menu ul", prop: "list-style", tipo: "select", opciones: ["disc", "none"], valor: "disc" },
+      { sel: ".menu ul", prop: "margin", tipo: "select", opciones: ["16px 0", "0"], valor: "16px 0" },
+      { sel: ".menu ul", prop: "padding-left", tipo: "rango", min: 0, max: 40, unidad: "px", valor: 40 },
+      { k: "lid", sel: ".menu li", prop: "display", tipo: "select", opciones: ["list-item", "inline", "inline-block", "block"], valor: "list-item" },
+      { sel: ".menu a", prop: "display", tipo: "select", opciones: ["inline", "inline-block", "block"], valor: "inline" },
+      { sel: ".menu a", prop: "padding", tipo: "select", opciones: ["0", "6px 12px", "10px 16px"], valor: "0" },
+      { sel: ".menu a", prop: "border-radius", tipo: "rango", min: 0, max: 30, unidad: "px", valor: 0 },
+      { sel: ".menu a", prop: "background-color", tipo: "color", valor: "#f6efe4" },
+      { k: "td", sel: ".menu a", prop: "text-decoration", tipo: "select", opciones: ["underline", "none"], valor: "underline" },
+    ],
+    retos: [
+      { texto: "Convierte el menú en una <strong>barra horizontal</strong> sin viñetas ni subrayado.",
+        comprobar: (c) => { const li = c.qa(".menu li").map((x) => x.getBoundingClientRect().top); if (!li.every((t) => Math.abs(t - li[0]) < 2)) return "Los elementos del menú todavía están uno debajo de otro (display de los li)."; if (c.cs(".menu ul", "list-style-type") !== "none" && c.v.lid === "list-item") return "Quita las viñetas."; return c.v.td === "none" || "Quita el subrayado de los enlaces."; } },
+      { texto: "Numera los pasos con <strong>números romanos en mayúscula</strong>.",
+        comprobar: (c) => c.v.ol === "upper-roman" || "Busca el valor de list-style-type de los números romanos." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 7 · POSITION */
+  {
+    id: "position", grupo: "7 · Listas y posicionamiento", diapos: "54 – 55", titulo: "La propiedad position",
+    intro: "<code>relative</code> desplaza la caja desde su sitio; <code>absolute</code> la saca del flujo y la coloca respecto al antepasado posicionado más cercano; <code>fixed</code>, respecto a la ventana; <code>sticky</code> la deja en su sitio hasta que al hacer scroll llega al borde indicado. Desplaza la vista previa para probar <code>sticky</code> y <code>fixed</code>.",
+    html: `<div class="cabecera">Cabecera</div>
+<div class="tarjeta">
+  <span class="etiqueta">Nuevo</span>
+  <h3>Catamarán</h3>
+  <p>Velocidad y trabajo en equipo en un barco de dos cascos.</p>
+</div>
+<p>${TEXTO_LARGO}</p>
+<p>${TEXTO_LARGO}</p>
+<p>${TEXTO_LARGO}</p>
+<p>${TEXTO_LARGO}</p>`,
+    base: `.cabecera { background-color: #0B3C5D; color: #fff; padding: 10px 14px; font-weight: 700; }
+.tarjeta { border: 2px solid #9C85C0; border-radius: 10px; padding: 12px 16px; margin: 16px 0; width: 280px; background-color: #fff; }
+.tarjeta h3 { margin: 0 0 6px; }
+.etiqueta { background-color: #F6C453; color: #0B3C5D; padding: 2px 10px; border-radius: 999px; font-size: .8rem; font-weight: 800; }`,
+    alto: 380, infoAlDesplazar: true,
+    controles: [
+      { k: "tp", sel: ".tarjeta", prop: "position", tipo: "select", opciones: ["static", "relative"], valor: "static" },
+      { k: "ep", sel: ".etiqueta", prop: "position", tipo: "select", opciones: ["static", "relative", "absolute", "fixed", "sticky"], valor: "static" },
+      { k: "et", sel: ".etiqueta", prop: "top", tipo: "select", opciones: ["auto", "0", "8px", "-10px", "50%"], valor: "auto" },
+      { k: "er", sel: ".etiqueta", prop: "right", tipo: "select", opciones: ["auto", "0", "8px", "-10px"], valor: "auto" },
+      { sel: ".etiqueta", prop: "bottom", tipo: "select", opciones: ["auto", "0", "8px"], valor: "auto" },
+      { sel: ".etiqueta", prop: "left", tipo: "select", opciones: ["auto", "0", "8px", "50%"], valor: "auto" },
+      { sel: ".etiqueta", prop: "z-index", tipo: "select", opciones: ["auto", "1", "10", "-1"], valor: "auto" },
+      { tipo: "titulo", texto: "Cabecera" },
+      { k: "cp", sel: ".cabecera", prop: "position", tipo: "select", opciones: ["static", "relative", "sticky", "fixed"], valor: "static" },
+      { k: "ct", sel: ".cabecera", prop: "top", tipo: "select", opciones: ["auto", "0", "10px"], valor: "auto" },
+      { sel: ".cabecera", prop: "z-index", tipo: "select", opciones: ["auto", "1", "10"], valor: "auto" },
+    ],
+    info: (c) => {
+      const ep = c.v.ep, tp = c.v.tp;
+      const resp = { static: "su sitio en el flujo normal (top/right/bottom/left no hacen nada)", relative: "su propia posición normal (deja su hueco)", absolute: tp === "relative" ? "la tarjeta, que es su antepasado posicionado" : "el bloque inicial (la página), porque ningún antepasado está posicionado", fixed: "la ventana: no se mueve al hacer scroll", sticky: "su contenedor al hacer scroll" }[ep];
+      return `<table><tbody><tr><th>La etiqueta se coloca respecto a…</th><td>${resp}</td></tr><tr><th>La cabecera</th><td>${{ static: "va en el flujo normal", relative: "va en el flujo, desplazable", sticky: c.v.ct === "auto" ? "sticky necesita top para pegarse" : "se queda pegada al llegar arriba", fixed: "sale del flujo: el contenido sube y queda debajo" }[c.v.cp]}</td></tr></tbody></table>`;
+    },
+    retos: [
+      { texto: "Coloca la etiqueta «Nuevo» en la <strong>esquina superior derecha de la tarjeta</strong>.",
+        comprobar: (c) => { if (c.v.ep !== "absolute") return "La etiqueta debe salir del flujo (absolute)."; if (c.v.tp !== "relative") return "Se está colocando respecto a la página: ¿qué necesita la tarjeta?"; const e = c.rect(".etiqueta"), t = c.rect(".tarjeta"); return (Math.abs(e.top - t.top) < 24 && Math.abs(e.right - t.right) < 24) || "Ajusta top y right."; }, explicacion: "Un elemento absolute se coloca respecto a su antepasado posicionado más cercano." },
+      { texto: "Haz que la cabecera se quede pegada arriba al desplazar la vista previa, <strong>sin sacarla del flujo</strong>.",
+        comprobar: (c) => c.v.cp === "fixed" ? "fixed la saca del flujo: el contenido se mete debajo." : c.v.cp !== "sticky" ? "Busca el valor de position que se pega al hacer scroll." : c.v.ct !== "auto" || "Falta decir dónde se pega (top)." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 7 · FLOAT Y OVERFLOW */
+  {
+    id: "float", grupo: "7 · Listas y posicionamiento", diapos: "56 – 57", titulo: "float y overflow",
+    intro: "<code>float</code> saca una imagen hacia un lado y hace que el texto la rodee; su contenedor no la envuelve a menos que uses <code>display: flow-root</code>, y <code>clear</code> obliga a un elemento a empezar debajo. <code>overflow</code> decide qué pasa con el contenido que no cabe en su caja.",
+    html: `<div class="texto">
+  <img class="foto" src="${IMG_MAR}" alt="Velero en la bahía" width="400" height="300">
+  <p>El club nació en 1998 en el puerto de Benidorm. Empezamos con cuatro barcos y un pantalán prestado.</p>
+</div>
+<p class="siguiente">Este párrafo va después del bloque azul.</p>
+<div class="caja">${TEXTO_LARGO}</div>`,
+    base: `.texto { background-color: #E3EEF5; padding: 8px; border-radius: 8px; }
+.texto p { margin: 0; }
+.siguiente { background-color: #FDF0DF; padding: 6px; }
+.caja { border: 2px solid #809EC2; width: 280px; padding: 8px; }`,
+    alto: 470,
+    controles: [
+      { k: "fl", sel: ".foto", prop: "float", tipo: "select", opciones: ["none", "left", "right"], valor: "none" },
+      { sel: ".foto", prop: "width", tipo: "rango", min: 80, max: 300, unidad: "px", valor: 160 },
+      { sel: ".foto", prop: "margin", tipo: "select", opciones: ["0", "0 12px 8px 0", "0 0 8px 12px"], valor: "0" },
+      { k: "td", sel: ".texto", prop: "display", tipo: "select", opciones: ["block", "flow-root"], valor: "block" },
+      { sel: ".siguiente", prop: "clear", tipo: "select", opciones: ["none", "left", "right", "both"], valor: "none" },
+      { tipo: "titulo", texto: "Contenido que no cabe" },
+      { k: "ov", sel: ".caja", prop: "overflow", tipo: "select", opciones: ["visible", "hidden", "scroll", "auto"], valor: "visible" },
+      { sel: ".caja", prop: "height", tipo: "rango", min: 40, max: 220, unidad: "px", valor: 80 },
+    ],
+    retos: [
+      { texto: "Pon la foto a la izquierda con el texto alrededor y haz que el bloque azul la <strong>envuelva entera</strong>.",
+        comprobar: (c) => { if (c.v.fl !== "left") return "La foto debe flotar a la izquierda."; return c.rect(".foto").bottom <= c.rect(".texto").bottom + 1 || "La foto se sale por abajo del bloque azul: el contenedor no envuelve a los flotantes."; }, explicacion: "display: flow-root crea un nuevo contexto de formato y el contenedor envuelve a sus flotantes." },
+      { texto: "Que el texto largo de la caja no se salga, con barra de desplazamiento <strong>solo si hace falta</strong>.",
+        comprobar: (c) => c.v.ov === "auto" || (c.v.ov === "scroll" ? "scroll pone las barras siempre, aunque no hagan falta." : c.v.ov === "hidden" ? "hidden corta el texto: no se puede leer." : "Ahora el texto se sale de la caja.") },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 8 · FLEXBOX CONTENEDOR */
+  {
+    id: "flex", grupo: "8 · Flexbox", diapos: "58 – 62", titulo: "Flexbox: el contenedor",
+    intro: "Con <code>display: flex</code> los hijos se colocan en una fila (eje principal). <code>justify-content</code> reparte el espacio en el eje principal y <code>align-items</code> alinea en el eje cruzado. Todas estas propiedades se escriben en el <strong>padre</strong>. Prueba también el ancho de móvil.",
+    html: `<div class="contenedor">
+  <div class="item">1</div>
+  <div class="item alto">2 más alto</div>
+  <div class="item">3</div>
+  <div class="item">4 con un texto más largo</div>
+  <div class="item">5</div>
+</div>`,
+    base: `.contenedor { background-color: #F2EEE6; border: 2px dashed #B76E12; padding: 8px; }
+.item { background-color: #809EC2; color: #fff; font-weight: 700; padding: 12px 16px; border-radius: 8px; }
+.alto { padding-block: 32px; }`,
+    alto: 400,
+    controles: [
+      { k: "d", sel: ".contenedor", prop: "display", tipo: "select", opciones: ["block", "flex", "inline-flex"], valor: "flex" },
+      { k: "fd", sel: ".contenedor", prop: "flex-direction", tipo: "select", opciones: ["row", "row-reverse", "column", "column-reverse"], valor: "row" },
+      { k: "fw", sel: ".contenedor", prop: "flex-wrap", tipo: "select", opciones: ["nowrap", "wrap", "wrap-reverse"], valor: "nowrap" },
+      { k: "jc", sel: ".contenedor", prop: "justify-content", tipo: "select", opciones: ["flex-start", "center", "flex-end", "space-between", "space-around", "space-evenly"], valor: "flex-start" },
+      { k: "ai", sel: ".contenedor", prop: "align-items", tipo: "select", opciones: ["stretch", "flex-start", "center", "flex-end", "baseline"], valor: "stretch" },
+      { sel: ".contenedor", prop: "align-content", tipo: "select", opciones: ["normal", "flex-start", "center", "space-between", "stretch"], valor: "normal", ayuda: "Solo se nota con varias líneas (wrap) y altura sobrante." },
+      { k: "gap", sel: ".contenedor", prop: "gap", tipo: "rango", min: 0, max: 40, unidad: "px", valor: 0 },
+      { k: "h", sel: ".contenedor", prop: "height", tipo: "select", opciones: ["auto", "250px", "340px"], valor: "auto" },
+    ],
+    retos: [
+      { texto: "Centra los elementos en horizontal <strong>y</strong> en vertical dentro de un contenedor de 250 px de alto.",
+        comprobar: (c) => c.v.d === "block" ? "Primero, display: flex." : c.v.h !== "250px" ? "Pon el contenedor a 250 px de alto." : c.v.fd.startsWith("column") ? "Para este reto, deja la dirección en fila." : (c.v.jc === "center" && c.v.ai === "center") || "Falta centrar en uno de los dos ejes." },
+      { texto: "Reparte los elementos con el mismo espacio <strong>entre</strong> ellos (sin espacio en los extremos) y haz que bajen de línea cuando no quepan.",
+        comprobar: (c) => c.v.jc !== "space-between" ? "Busca el valor de justify-content que no deja espacio en los extremos." : c.v.fw === "wrap" || "Ahora no bajan de línea: flex-wrap." },
+      { texto: "Colócalos en columna, del último al primero, <strong>sin tocar el HTML</strong>.",
+        comprobar: (c) => c.v.fd === "column-reverse" || "Busca el valor de flex-direction." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 8 · FLEXBOX ELEMENTOS */
+  {
+    id: "flex-items", grupo: "8 · Flexbox", diapos: "63 – 64", titulo: "Flexbox: los elementos",
+    intro: "Estas propiedades se escriben en los <strong>hijos</strong>. <code>flex-grow</code> reparte el espacio sobrante, <code>flex-shrink</code> decide quién encoge si falta, <code>flex-basis</code> es el tamaño de partida, <code>order</code> cambia el orden visual y <code>align-self</code> alinea un elemento por separado. El elemento B tiene sus propios controles.",
+    html: `<div class="contenedor">
+  <div class="item">A</div>
+  <div class="item b">B</div>
+  <div class="item">C</div>
+  <div class="item">D</div>
+</div>`,
+    base: `.contenedor { display: flex; gap: 8px; height: 150px; background-color: #F2EEE6; border: 2px dashed #B76E12; padding: 8px; }
+.item { background-color: #809EC2; color: #fff; font-weight: 700; padding: 12px 16px; border-radius: 8px; }
+.b { background-color: #C8472B; }`,
+    alto: 260,
+    controles: [
+      { tipo: "titulo", texto: "Todos los elementos (.item)" },
+      { k: "g", sel: ".item", prop: "flex-grow", tipo: "rango", min: 0, max: 3, valor: 0 },
+      { k: "s", sel: ".item", prop: "flex-shrink", tipo: "rango", min: 0, max: 3, valor: 1 },
+      { sel: ".item", prop: "flex-basis", tipo: "select", opciones: ["auto", "0", "100px", "25%"], valor: "auto" },
+      { tipo: "titulo", texto: "Solo el elemento B (.b)" },
+      { k: "bg", sel: ".b", prop: "flex-grow", tipo: "rango", min: 0, max: 6, valor: 0 },
+      { sel: ".b", prop: "flex-basis", tipo: "select", opciones: ["auto", "0", "200px", "50%"], valor: "auto" },
+      { k: "bo", sel: ".b", prop: "order", tipo: "rango", min: -2, max: 5, valor: 0 },
+      { k: "ba", sel: ".b", prop: "align-self", tipo: "select", opciones: ["auto", "flex-start", "center", "flex-end", "stretch"], valor: "auto" },
+    ],
+    info: (c) => `<p class="nota">Anchos reales: ${c.qa(".item").map((e) => `<span class="dato">${e.textContent} ${Math.round(e.getBoundingClientRect().width)} px</span>`).join(" · ")}</p>`,
+    retos: [
+      { texto: "Haz que todos crezcan hasta llenar la fila y que B crezca el <strong>doble</strong> que los demás (con <code>flex-basis</code> 0 lo verás exacto).",
+        comprobar: (c) => c.v.g <= 0 ? "Los elementos deben crecer (flex-grow > 0)." : c.v.bg === 2 * c.v.g || `B tiene ${c.v.bg} y los demás ${c.v.g}: B debe tener el doble.`, explicacion: "flex-grow reparte el espacio sobrante en proporción a su valor." },
+      { texto: "Pon B el último de la fila <strong>sin tocar el HTML</strong>.",
+        comprobar: (c) => { const b = c.rect(".b").left; return c.qa(".item").every((e) => e.classList.contains("b") || e.getBoundingClientRect().left < b) || "Cambia el orden visual de B (order)."; }, explicacion: "order solo cambia el orden visual: el teclado y los lectores de pantalla siguen el del HTML." },
+      { texto: "Centra en vertical <strong>solo</strong> el elemento B.",
+        comprobar: (c) => c.v.ba === "center" || "Busca la propiedad de un elemento que le cambia la alineación en el eje cruzado." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 9 · GRID */
+  {
+    id: "grid", grupo: "9 · CSS Grid", diapos: "65 – 69", titulo: "CSS Grid: la rejilla",
+    intro: "Grid coloca los hijos en filas <strong>y</strong> columnas a la vez. La unidad <code>fr</code> reparte el espacio libre, <code>repeat()</code> evita repetir y <code>minmax()</code> con <code>auto-fit</code> o <code>auto-fill</code> crea rejillas que se adaptan solas, sin media queries. Prueba los anchos de móvil y tableta.",
+    html: `<div class="rejilla">
+  <div class="item">1</div>
+  <div class="item">2</div>
+  <div class="item">3</div>
+  <div class="item">4</div>
+  <div class="item">5</div>
+  <div class="item">6</div>
+  <div class="item">7</div>
+</div>`,
+    base: `.rejilla { display: grid; background-color: #F2EEE6; border: 2px dashed #B76E12; padding: 8px; }
+.item { background-color: #A5B592; color: #fff; font-weight: 700; padding: 14px; border-radius: 8px; }
+.item:first-child { background-color: #C8472B; }`,
+    alto: 380,
+    controles: [
+      { k: "cols", sel: ".rejilla", prop: "grid-template-columns", tipo: "texto", valor: "1fr 1fr", opciones: ["none", "200px 1fr", "1fr 1fr 1fr", "1fr 2fr 1fr", "repeat(4, 1fr)", "repeat(auto-fit, minmax(150px, 1fr))", "repeat(auto-fill, minmax(150px, 1fr))"] },
+      { sel: ".rejilla", prop: "grid-template-rows", tipo: "texto", valor: "", opciones: ["100px 100px", "auto 1fr"] },
+      { sel: ".rejilla", prop: "grid-auto-rows", tipo: "texto", valor: "", opciones: ["80px", "minmax(60px, auto)"] },
+      { k: "gap", sel: ".rejilla", prop: "gap", tipo: "rango", min: 0, max: 40, unidad: "px", valor: 8 },
+      { sel: ".rejilla", prop: "justify-items", tipo: "select", opciones: ["stretch", "start", "center", "end"], valor: "stretch" },
+      { sel: ".rejilla", prop: "align-items", tipo: "select", opciones: ["stretch", "start", "center", "end"], valor: "stretch" },
+      { tipo: "titulo", texto: "Primer elemento (.item:first-child)" },
+      { k: "gc", sel: ".item:first-child", prop: "grid-column", tipo: "texto", valor: "auto", opciones: ["auto", "span 2", "1 / -1", "2 / 4"] },
+      { sel: ".item:first-child", prop: "grid-row", tipo: "texto", valor: "auto", opciones: ["auto", "span 2", "1 / 3"] },
+    ],
+    info: (c) => { const t = c.cs(".rejilla", "grid-template-columns").split(" ").filter((x) => x && x !== "none"); return `<p class="nota">Columnas calculadas: <span class="dato">${t.length}</span> ${t.length ? "→ " + t.map((x) => `<code>${c.redondear(c.num(x), 1)}px</code>`).join(" ") : ""}. En DevTools puedes activar el inspector de rejilla para ver las líneas numeradas.</p>`; },
+    retos: [
+      { texto: "Crea <strong>tres columnas iguales</strong> con 16 px de separación.",
+        comprobar: (c) => { const t = c.cs(".rejilla", "grid-template-columns").split(" ").map(c.num).filter((x) => x > 0); if (t.length !== 3) return `Ahora hay ${t.length} columnas.`; if (Math.max(...t) - Math.min(...t) > 1) return "Las columnas no son iguales: usa fr."; return c.v.gap === 16 || "Pon 16 px de gap."; } },
+      { texto: "Haz que el primer elemento ocupe <strong>toda la primera fila</strong>, tenga la rejilla las columnas que tenga.",
+        comprobar: (c) => { const r = c.rect(".item"), g = c.q(".rejilla"); const ancho = g.clientWidth - 16; if (Math.abs(r.width - ancho) > 2) return "Todavía no ocupa todo el ancho."; return /-1/.test(c.v.gc) || "Funciona con estas columnas, pero si cambian dejará de hacerlo: usa la última línea (-1)."; }, explicacion: "1 / -1 va de la primera a la última línea de la rejilla." },
+      { texto: "Rejilla que se adapte <strong>sin media queries</strong>: 2 columnas a 375 px y al menos 4 a 768 px.", cambiaAncho: true,
+        comprobar: async (c) => { const n = () => c.cs(".rejilla", "grid-template-columns").split(" ").filter((x) => x && x !== "none").length; await c.ancho(375); const a = n(); await c.ancho(768); const b = n(); return (a === 2 && b >= 4) || `A 375 px hay ${a} columnas y a 768 px, ${b}. Pista: repeat(auto-fit, minmax(…, 1fr)).`; } },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 9 · ÁREAS */
+  {
+    id: "grid-areas", grupo: "9 · CSS Grid", diapos: "70 – 73", titulo: "CSS Grid: áreas con nombre",
+    intro: "Con <code>grid-template-areas</code> se dibuja la maqueta con texto: cada cadena es una fila y cada palabra, una celda. Cada región ya tiene su <code>grid-area</code> (cabecera, menu, principal, lateral, pie). Un punto (<code>.</code>) deja una celda vacía. Las columnas deben cuadrar con el número de palabras de cada fila.",
+    html: `<div class="pagina">
+  <header>Cabecera</header>
+  <nav>Menú</nav>
+  <main>Contenido principal</main>
+  <aside>Lateral</aside>
+  <footer>Pie</footer>
+</div>`,
+    base: `.pagina { display: grid; min-height: 300px; }
+.pagina > * { padding: 14px; border-radius: 8px; color: #fff; font-weight: 700; }
+header { grid-area: cabecera; background-color: #0B3C5D; }
+nav { grid-area: menu; background-color: #1B998B; }
+main { grid-area: principal; background-color: #809EC2; min-height: 120px; }
+aside { grid-area: lateral; background-color: #9C85C0; }
+footer { grid-area: pie; background-color: #444D26; }`,
+    alto: 380,
+    controles: [
+      { k: "areas", sel: ".pagina", prop: "grid-template-areas", tipo: "areas", columnas: "cols", valor: '"cabecera"\n"menu"\n"principal"\n"lateral"\n"pie"', opciones: [
+        { t: "Una columna (móvil)", v: '"cabecera"\n"menu"\n"principal"\n"lateral"\n"pie"', columnas: "1fr" },
+        { t: "Dos columnas", v: '"cabecera cabecera"\n"menu principal"\n"menu lateral"\n"pie pie"', columnas: "200px 1fr" },
+        { t: "Tres columnas", v: '"cabecera cabecera cabecera"\n"menu principal lateral"\n"pie pie pie"', columnas: "1fr 3fr 1fr" },
+        { t: "Con hueco", v: '"cabecera cabecera"\n"principal lateral"\n"pie ."', columnas: "2fr 1fr" }] },
+      { k: "cols", sel: ".pagina", prop: "grid-template-columns", tipo: "texto", valor: "1fr", opciones: ["1fr", "200px 1fr", "1fr 3fr 1fr", "2fr 1fr"] },
+      { sel: ".pagina", prop: "grid-template-rows", tipo: "texto", valor: "", opciones: ["auto 1fr auto", "auto auto 1fr auto"] },
+      { sel: ".pagina", prop: "gap", tipo: "rango", min: 0, max: 30, unidad: "px", valor: 8 },
+    ],
+    info: (c) => { const filas = c.v.areas.split("\n").filter((x) => x.trim()).map((x) => x.replace(/"/g, "").trim().split(/\s+/).length); const cols = c.v.cols.trim().split(/\s+/).length; const ok = filas.every((n) => n === filas[0]); return `<p class="nota">${ok ? `Cada fila tiene ${filas[0]} celda(s); has definido ${cols} columna(s) ${filas[0] === cols ? '<span class="insignia si">✓ cuadran</span>' : '<span class="insignia no">✗ no cuadran</span>'}` : '<span class="insignia no">✗ las filas no tienen el mismo número de celdas: la regla no es válida</span>'}</p>`; },
+    retos: [
+      { texto: "Maqueta en dos columnas: el <strong>menú a la izquierda</strong> de todo el contenido (principal y lateral), con cabecera y pie a lo ancho.",
+        comprobar: (c) => { const r = (s) => c.rect(s), p = r(".pagina"); if (Math.abs(r("header").width - p.width) > 2 || Math.abs(r("footer").width - p.width) > 2) return "Cabecera y pie deben ocupar todo el ancho."; if (!(r("nav").right <= r("main").left && r("nav").right <= r("aside").left)) return "El menú debe quedar a la izquierda del principal y del lateral."; return r("nav").bottom >= r("aside").bottom - 2 || "El menú debe llegar hasta abajo, junto al lateral."; } },
+      { texto: "«Santo grial»: menú a la izquierda, contenido en el centro y lateral a la derecha, con cabecera y pie a lo ancho.",
+        comprobar: (c) => { const r = (s) => c.rect(s); if (!(r("nav").right <= r("main").left && r("main").right <= r("aside").left)) return "Orden en la fila central: menú, principal, lateral."; return Math.abs(r("nav").top - r("aside").top) < 2 || "Los tres deben estar en la misma fila."; } },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 10 · DISEÑO ADAPTABLE */
+  {
+    id: "adaptable", grupo: "10 · Diseño adaptable", diapos: "74 – 80", titulo: "Media queries y mobile first",
+    intro: "Mueve la regla de ancho de la vista previa (o usa los botones) y mira qué media queries están activas. En <strong>mobile first</strong>, el CSS sin media query es el del móvil y se amplía con <code>min-width</code>; en <em>desktop first</em> se parte del escritorio y se reduce con <code>max-width</code>. Los puntos de ruptura en <code>em</code> respetan el tamaño de letra del usuario.",
+    html: `<header class="cab">
+  <strong>Club Mal Pas</strong>
+  <nav><a href="#">Cursos</a> <a href="#">Horario</a> <a href="#">Contacto</a></nav>
+</header>
+<main class="tarjetas">
+  <article>Vela ligera</article>
+  <article>Kayak de mar</article>
+  <article>Pádel surf</article>
+  <article>Catamarán</article>
+</main>`,
+    base: `.cab { display: flex; gap: 8px; background-color: #0B3C5D; color: #fff; padding: 10px 14px; border-radius: 8px; margin-bottom: 12px; }
+.cab a { color: #fff; margin-right: 8px; }
+.tarjetas article { background-color: #F6EFE4; border: 1px solid #E2DCCF; border-radius: 10px; padding: 28px 14px; font-weight: 700; color: #0B3C5D; }`,
+    alto: 360, ancho: 375,
+    controles: [
+      { k: "enfoque", tipo: "select", etiqueta: "Enfoque", opciones: [{ t: "Mobile first (min-width)", v: "mobile" }, { t: "Desktop first (max-width)", v: "desktop" }], valor: "mobile" },
+      { k: "unidad", tipo: "select", etiqueta: "Unidad de los puntos de ruptura", opciones: ["px", "em"], valor: "px" },
+      { k: "c0", tipo: "rango", etiqueta: "Columnas en el móvil", min: 1, max: 2, valor: 1 },
+      { k: "bp1", tipo: "rango", etiqueta: "Primer punto de ruptura (px)", min: 400, max: 1000, paso: 8, valor: 800 },
+      { k: "c1", tipo: "rango", etiqueta: "Columnas desde el primer punto", min: 1, max: 4, valor: 2 },
+      { k: "bp2", tipo: "rango", etiqueta: "Segundo punto de ruptura (px)", min: 700, max: 1400, paso: 8, valor: 1000 },
+      { k: "c2", tipo: "rango", etiqueta: "Columnas desde el segundo punto", min: 1, max: 4, valor: 3 },
+      { k: "fila", tipo: "casilla", etiqueta: "Cabecera", texto: "En columna en el móvil y en fila desde el primer punto", valor: true },
+    ],
+    generar: (v) => {
+      const u = (px, menos) => v.unidad === "em" ? `${String(Math.round((px / 16 - (menos ? 0.01 : 0)) * 1000) / 1000)}em` : `${px - (menos ? 1 : 0)}px`;
+      const tj = (n) => `.tarjetas {\n  display: grid;\n  grid-template-columns: repeat(${n}, 1fr);\n  gap: 12px;\n}`;
+      const sangrar = (s) => s.split("\n").map((l) => "  " + l).join("\n");
+      const cab = (d) => `.cab {\n  flex-direction: ${d};\n}`;
+      if (v.enfoque === "mobile") {
+        return `/* Móvil: sin media query */\n${tj(v.c0)}${v.fila ? "\n\n" + cab("column") : ""}\n\n@media (min-width: ${u(v.bp1)}) {\n${sangrar(`.tarjetas {\n  grid-template-columns: repeat(${v.c1}, 1fr);\n}`)}${v.fila ? "\n\n" + sangrar(cab("row")) : ""}\n}\n\n@media (min-width: ${u(v.bp2)}) {\n${sangrar(`.tarjetas {\n  grid-template-columns: repeat(${v.c2}, 1fr);\n}`)}\n}`;
+      }
+      return `/* Escritorio: sin media query */\n${tj(v.c2)}${v.fila ? "\n\n" + cab("row") : ""}\n\n@media (max-width: ${u(v.bp2, true)}) {\n${sangrar(`.tarjetas {\n  grid-template-columns: repeat(${v.c1}, 1fr);\n}`)}\n}\n\n@media (max-width: ${u(v.bp1, true)}) {\n${sangrar(`.tarjetas {\n  grid-template-columns: repeat(${v.c0}, 1fr);\n}`)}${v.fila ? "\n\n" + sangrar(cab("column")) : ""}\n}`;
+    },
+    info: (c) => {
+      const qs = [...c.css.aplicar.matchAll(/@media ([^{]+)\{/g)].map((m) => m[1].trim());
+      const cols = c.cs(".tarjetas", "grid-template-columns").split(" ").filter(Boolean).length;
+      return `<table><tbody><tr><th>Ancho de la vista previa</th><td class="dato">${c.win.innerWidth} px${c.v.unidad === "em" ? ` = ${c.redondear(c.win.innerWidth / 16, 2)}em` : ""}</td></tr>${qs.map((q) => `<tr><th><code>@media ${c.esc(q)}</code></th><td>${c.win.matchMedia(q).matches ? '<span class="insignia si">activa</span>' : '<span class="insignia no">inactiva</span>'}</td></tr>`).join("")}<tr><th>Columnas ahora</th><td class="dato">${cols}</td></tr></tbody></table>`;
+    },
+    retos: [
+      { texto: "Consigue <strong>1 columna a 375 px, 2 a 768 px y 3 a 1200 px</strong>. El reto prueba los tres anchos.", cambiaAncho: true,
+        comprobar: async (c) => { const n = () => c.cs(".tarjetas", "grid-template-columns").split(" ").filter(Boolean).length; const r = []; for (const w of [375, 768, 1200]) { await c.ancho(w); r.push(n()); } return (r[0] === 1 && r[1] === 2 && r[2] === 3) || `Ahora: ${r[0]} columna(s) a 375 px, ${r[1]} a 768 px y ${r[2]} a 1200 px.`; } },
+      { texto: "Hazlo en <strong>mobile first</strong> y con los puntos de ruptura en <code>em</code>, y explica por qué es la opción recomendada.", cambiaAncho: true,
+        comprobar: async (c) => { if (c.v.enfoque !== "mobile") return "Cambia el enfoque a mobile first."; if (c.v.unidad !== "em") return "Pon los puntos de ruptura en em."; const n = () => c.cs(".tarjetas", "grid-template-columns").split(" ").filter(Boolean).length; const r = []; for (const w of [375, 768, 1200]) { await c.ancho(w); r.push(n()); } return (r[0] === 1 && r[1] === 2 && r[2] === 3) || "Mantén 1, 2 y 3 columnas a 375, 768 y 1200 px."; },
+        explicacion: "El móvil recibe el CSS más sencillo y las pantallas grandes solo añaden; en em, el diseño se adapta también si el usuario agranda la letra." },
+    ],
+  },
+
+  /* ------------------------------------------------------------ 11 · VARIABLES Y TRANSICIONES */
+  {
+    id: "transiciones", grupo: "11 · Variables y transiciones", diapos: "81 – 85", titulo: "Variables y transiciones",
+    intro: "Las variables CSS (<code>--nombre</code>) se declaran en <code>:root</code> y se usan con <code>var()</code>: el ejemplo entero toma su color, su radio y su espaciado de tres variables. Las transiciones animan el cambio entre dos estados, como <code>:hover</code>. Pasa el ratón por la tarjeta o marca «Simular :hover».",
+    html: `<div class="tarjeta">
+  <h3>Catamarán</h3>
+  <p>Pasa el ratón por encima de la tarjeta.</p>
+  <a class="boton" href="#">Reservar</a>
+</div>`,
+    base: `.tarjeta { background-color: #fff; border: 2px solid var(--color-principal); border-radius: var(--radio); padding: var(--espacio); max-width: 300px; margin: 30px auto; }
+.tarjeta h3 { margin-top: 0; color: var(--color-principal); }
+.boton { display: inline-block; background-color: var(--color-principal); color: #fff; border-radius: var(--radio); padding: 0.5em 1em; text-decoration: none; font-weight: 700; }`,
+    alto: 330,
+    controles: [
+      { tipo: "titulo", texto: "Variables en :root" },
+      { k: "color", sel: ":root", prop: "--color-principal", tipo: "color", valor: "#12695f" },
+      { sel: ":root", prop: "--radio", tipo: "rango", min: 0, max: 30, unidad: "px", valor: 8 },
+      { sel: ":root", prop: "--espacio", tipo: "rango", min: 0.5, max: 3, paso: 0.25, unidad: "rem", valor: 1.5 },
+      { tipo: "titulo", texto: "Transición de la tarjeta" },
+      { k: "tp", sel: ".tarjeta", prop: "transition-property", tipo: "select", opciones: ["all", "transform", "box-shadow", "transform, box-shadow", "none"], valor: "all" },
+      { k: "td", sel: ".tarjeta", prop: "transition-duration", tipo: "rango", min: 0, max: 2, paso: 0.05, unidad: "s", valor: 1 },
+      { k: "tf", sel: ".tarjeta", prop: "transition-timing-function", tipo: "select", opciones: ["ease", "linear", "ease-in", "ease-out", "ease-in-out", "cubic-bezier(0.34, 1.56, 0.64, 1)"], valor: "linear" },
+      { sel: ".tarjeta", prop: "transition-delay", tipo: "rango", min: 0, max: 1, paso: 0.05, unidad: "s", valor: 0 },
+      { tipo: "titulo", texto: "Estado :hover" },
+      { sel: ".tarjeta:hover, .tarjeta.forzar-hover", prop: "transform", tipo: "select", opciones: ["none", "translateY(-6px)", "scale(1.05)", "rotate(2deg)", "translateY(-6px) scale(1.02)"], valor: "translateY(-6px)", ocultarSel: true, resaltar: () => ".tarjeta" },
+      { sel: ".tarjeta:hover, .tarjeta.forzar-hover", prop: "box-shadow", tipo: "select", opciones: ["none", "0 12px 24px rgb(0 0 0 / 20%)", "0 0 0 6px rgb(243 164 71 / 50%)"], valor: "0 12px 24px rgb(0 0 0 / 20%)", ocultarSel: true, resaltar: () => ".tarjeta" },
+      { k: "forzar", tipo: "casilla", etiqueta: "Probar", texto: "Simular :hover (para usar con el teclado o en pantallas táctiles)", valor: false, efecto: (doc, val) => { const t = doc.querySelector(".tarjeta"); if (t) t.classList.toggle("forzar-hover", !!val); } },
+    ],
+    retos: [
+      { texto: "Cambia el color de <strong>todo</strong> el ejemplo (borde, título y botón) tocando una sola línea.",
+        comprobar: (c) => { if (c.v.color.toLowerCase() === "#12695f") return "Cambia el valor de la variable."; const col = c.rgbAHex(c.cssARgb(c.cs(".boton", "background-color"))); return (col === c.v.color.toLowerCase() && c.rgbAHex(c.cssARgb(c.cs(".tarjeta h3", "color"))) === col) || "Algo no usa la variable."; }, explicacion: "Por eso las paletas de colores se guardan en variables." },
+      { texto: "Deja una transición profesional: <strong>solo</strong> de <code>transform</code> y <code>box-shadow</code>, entre 0,15 y 0,4 s y con <code>ease-out</code>.",
+        comprobar: (c) => c.v.tp !== "transform, box-shadow" ? "Anima solo transform y box-shadow (evita all)." : (c.v.td < 0.15 || c.v.td > 0.4) ? "La duración debe estar entre 0,15 y 0,4 s." : c.v.tf === "ease-out" || "Usa ease-out: empieza rápido y frena al final.", explicacion: "Y en una web real, añade @media (prefers-reduced-motion: reduce) para quitarla a quien lo pida." },
+    ],
+  },
+];
+
+/* =========================================================
+   Motor del laboratorio CSS · LMSGI · UP3
+   Cada módulo (MODULOS) define un HTML de ejemplo, su CSS de partida, unos controles
+   (selector + propiedad + tipo de entrada) y unos retos. El motor genera el CSS,
+   lo aplica a la vista previa (iframe) y comprueba los retos.
+   ========================================================= */
+(function () {
+  "use strict";
+  const $ = (s) => document.querySelector(s);
+  const marco = $("#marco"), lienzo = $("#lienzo");
+  const ALMACEN = "lmsgi-lab3";
+  let guardado = { mods: {}, retos: {} };
+  try { guardado = Object.assign(guardado, JSON.parse(localStorage.getItem(ALMACEN)) || {}); } catch (e) { /* sin almacenamiento */ }
+  function guardar() { try { localStorage.setItem(ALMACEN, JSON.stringify(guardado)); } catch (e) { /* sin almacenamiento */ } }
+
+  let mod = null, v = {}, anchoElegido = 0, temporizador = null;
+
+  const BASE_MARCO = `*, *::before, *::after { box-sizing: border-box; }
+body { margin: 16px; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; color: #1F2933; line-height: 1.5; font-size: 16px; }
+img { max-width: 100%; height: auto; }`;
+
+  /* ---------- utilidades ---------- */
+  const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  const num = (x) => { const n = parseFloat(x); return isNaN(n) ? 0 : n; };
+  const redondear = (n, d = 2) => String(Math.round(n * 10 ** d) / 10 ** d);
+  const opcionesDe = (c) => (c.opciones || []).map((o) => (typeof o === "string" ? { t: o === "" ? "(sin valor)" : o, v: o } : o));
+  const quitarPseudoelementos = (s) => s.replace(/::?(before|after|first-line|first-letter|marker|placeholder|selection)\b/g, "");
+
+  function partirComas(s) {
+    const r = []; let prof = 0, act = "";
+    for (const ch of s) {
+      if (ch === "(" || ch === "[") prof++;
+      if (ch === ")" || ch === "]") prof--;
+      if (ch === "," && prof === 0) { r.push(act); act = ""; } else act += ch;
+    }
+    r.push(act);
+    return r.map((x) => x.trim()).filter(Boolean);
+  }
+  const comparar = (x, y) => x[0] - y[0] || x[1] - y[1] || x[2] - y[2];
+
+  /* Especificidad (id, clase, tipo) de un selector simple o compuesto */
+  function especificidad(sel) {
+    let s = (sel || "").trim();
+    if (!s) return null;
+    let a = 0, b = 0, c = 0;
+    s = s.replace(/"[^"]*"|'[^']*'/g, '""');
+    s = s.replace(/:where\((?:[^()]|\([^()]*\))*\)/g, "");
+    s = s.replace(/:(is|not|has)\(((?:[^()]|\([^()]*\))*)\)/g, (m, f, args) => {
+      const mejor = partirComas(args).map(especificidad).filter(Boolean).reduce((p, q) => (comparar(q, p) > 0 ? q : p), [0, 0, 0]);
+      a += mejor[0]; b += mejor[1]; c += mejor[2];
+      return " ";
+    });
+    a += (s.match(/#[\w-]+/g) || []).length;
+    b += (s.match(/\.[\w-]+/g) || []).length + (s.match(/\[[^\]]*\]/g) || []).length;
+    s = s.replace(/\[[^\]]*\]/g, " ");
+    const pe = /::[\w-]+|:(before|after|first-line|first-letter)\b/g;
+    c += (s.match(pe) || []).length;
+    s = s.replace(pe, " ");
+    b += (s.match(/:[\w-]+(\([^)]*\))?/g) || []).length;
+    s = s.replace(/:[\w-]+(\([^)]*\))?/g, " ").replace(/#[\w-]+|\.[\w-]+/g, " ");
+    c += (s.match(/(^|[\s>+~])[a-zA-Z][\w-]*/g) || []).length;
+    return [a, b, c];
+  }
+  function especificidadTexto(sel) {
+    const partes = partirComas(sel || "");
+    if (!partes.length) return "—";
+    return partes.map((p) => { const e = especificidad(p); return e ? `(${e.join(", ")})` : "—"; }).join(" · ");
+  }
+
+  /* Colores */
+  function hexARgb(h) {
+    h = h.replace("#", "");
+    if (h.length === 3) h = h.split("").map((x) => x + x).join("");
+    return [0, 2, 4].map((i) => parseInt(h.substr(i, 2), 16));
+  }
+  function cssARgb(s) {
+    if (!s) return [0, 0, 0];
+    if (s[0] === "#") return hexARgb(s);
+    const m = s.match(/[\d.]+/g) || [0, 0, 0];
+    return m.slice(0, 3).map(Number);
+  }
+  function rgbAHex(r) { return "#" + r.map((x) => Math.round(x).toString(16).padStart(2, "0")).join(""); }
+  function rgbAHsl([r, g, b]) {
+    r /= 255; g /= 255; b /= 255;
+    const max = Math.max(r, g, b), min = Math.min(r, g, b), l = (max + min) / 2;
+    let h = 0, s = 0;
+    if (max !== min) {
+      const d = max - min;
+      s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+      h = max === r ? (g - b) / d + (g < b ? 6 : 0) : max === g ? (b - r) / d + 2 : (r - g) / d + 4;
+      h *= 60;
+    }
+    return [Math.round(h), Math.round(s * 100), Math.round(l * 100)];
+  }
+  function formatoColor(hex, f) {
+    const rgb = hexARgb(hex);
+    if (f === "rgb") return `rgb(${rgb.join(" ")})`;
+    if (f === "hsl") { const [h, s, l] = rgbAHsl(rgb); return `hsl(${h} ${s}% ${l}%)`; }
+    return hex.toUpperCase();
+  }
+  function luminancia(rgb) {
+    const c = rgb.map((x) => { x /= 255; return x <= 0.03928 ? x / 12.92 : ((x + 0.055) / 1.055) ** 2.4; });
+    return 0.2126 * c[0] + 0.7152 * c[1] + 0.0722 * c[2];
+  }
+  function contraste(c1, c2) {
+    const l1 = luminancia(cssARgb(c1)), l2 = luminancia(cssARgb(c2));
+    return (Math.max(l1, l2) + 0.05) / (Math.min(l1, l2) + 0.05);
+  }
+  function insigniasContraste(r) {
+    const ins = (ok, t) => `<span class="insignia ${ok ? "si" : "no"}">${ok ? "✓" : "✗"} ${t}</span>`;
+    return ins(r >= 4.5, "AA texto") + ins(r >= 3, "AA grande") + ins(r >= 7, "AAA");
+  }
+
+  /* ---------- valores de los controles ---------- */
+  function iniciales(m) {
+    const o = {};
+    m.controles.forEach((c) => { if (c.k) o[c.k] = JSON.parse(JSON.stringify(c.valor)); });
+    return o;
+  }
+  function valorCSS(c, val, modo) {
+    switch (c.tipo) {
+      case "select": {
+        const o = opcionesDe(c).find((x) => x.v === val) || { t: val, v: val };
+        if (o.v === "") return null;
+        return modo === "ver" ? (o.ver || o.v) : o.v;
+      }
+      case "rango": return `${redondear(num(val), 3)}${c.unidad || ""}`;
+      case "medida": return `${redondear(num(val.n), 3)}${val.u}`;
+      case "color": return modo === "ver" && v.fmt ? formatoColor(val, v.fmt) : val;
+      case "texto": return (val || "").trim() || null;
+      case "areas": {
+        const lineas = (val || "").split("\n").map((x) => x.trim()).filter(Boolean);
+        if (!lineas.length) return null;
+        return modo === "ver" && lineas.length > 1 ? "\n    " + lineas.join("\n    ") : lineas.join(" ");
+      }
+      case "sombra": {
+        const x = val;
+        return `${x.inset ? "inset " : ""}${x.x}px ${x.y}px ${x.blur}px ${x.spread}px rgb(0 0 0 / ${x.alfa}%)`;
+      }
+      case "casilla": return val ? (c.si != null ? c.si : null) : (c.no != null ? c.no : null);
+      default: return null;
+    }
+  }
+  function generarPorDefecto(m, vals, modo) {
+    const grupos = new Map();
+    m.controles.forEach((c) => {
+      if (!c.sel || !c.prop) return;
+      const x = valorCSS(c, vals[c.k], modo);
+      if (x == null) return;
+      if (!grupos.has(c.sel)) grupos.set(c.sel, []);
+      grupos.get(c.sel).push([c.prop, x]);
+    });
+    return [...grupos].map(([s, ds]) => `${s} {\n${ds.map(([p, x]) => `  ${p}: ${x};`).join("\n")}\n}`).join("\n\n");
+  }
+  function generar(modo) {
+    return (mod.generar ? mod.generar(v, modo, { valorCSS, formatoColor }) : generarPorDefecto(mod, v, modo));
+  }
+
+  /* ---------- pintar el código con colores ---------- */
+  function colorearCSS(css) {
+    return css.split("\n").map((linea) => {
+      const e = esc(linea);
+      if (/^\s*\/\*.*\*\/\s*$/.test(linea)) return `<span class="c">${e}</span>`;
+      if (/^\s*@/.test(linea)) return e.replace(/^(\s*)(@[\w-]+)(.*)$/, '$1<span class="a">$2</span><span class="s">$3</span>');
+      if (/\{\s*$/.test(linea)) return `<span class="s">${e}</span>`;
+      const m = e.match(/^(\s*)([\w-]+)(\s*:\s*)(.*)$/);
+      if (m) return `${m[1]}<span class="p">${m[2]}</span>${m[3]}<span class="v">${m[4]}</span>`;
+      if (/^\s+"/.test(linea)) return `<span class="v">${e}</span>`;
+      return e;
+    }).join("\n");
+  }
+
+  /* ---------- vista previa ---------- */
+  let cargado = "";
+  function documento() { return cargado === (mod && mod.id) ? marco.contentDocument : null; }
+  function ventana() { return marco.contentWindow; }
+  function ctx() {
+    const doc = documento(), win = ventana();
+    const q = (s) => doc.querySelector(s), qa = (s) => [...doc.querySelectorAll(s)];
+    return {
+      doc, win, v, q, qa,
+      cs: (s, p) => { const el = typeof s === "string" ? q(s) : s; return el ? win.getComputedStyle(el).getPropertyValue(p) : ""; },
+      rect: (s) => { const el = typeof s === "string" ? q(s) : s; return el ? el.getBoundingClientRect() : null; },
+      ancho: anchoTemporal, esc, num, redondear, contraste, insigniasContraste, especificidad, especificidadTexto,
+      formatoColor, rgbAHex, cssARgb, rgbAHsl, hexARgb, quitarPseudoelementos, partirComas,
+      css: { ver: generar("ver"), aplicar: generar("aplicar") },
+    };
+  }
+  function aplicar() {
+    const doc = documento();
+    if (!doc || !doc.getElementById("gen")) return;
+    doc.getElementById("gen").textContent = generar("aplicar");
+    doc.getElementById("usr").textContent = $("#usr").value;
+    mod.controles.forEach((c) => { if (c.efecto) c.efecto(doc, v[c.k]); });
+  }
+  function pintarInfo() {
+    if (!mod.info || !documento() || !documento().getElementById("gen")) { $("#info").innerHTML = ""; return; }
+    try { $("#info").innerHTML = mod.info(ctx()); } catch (e) { $("#info").innerHTML = ""; console.error(e); }
+  }
+  function actualizar() {
+    $("#css-gen code").innerHTML = colorearCSS(generar("ver") || "/* sin declaraciones */");
+    aplicar();
+    mod.controles.forEach((c) => { if (c._salida) c._salida(); });
+    requestAnimationFrame(() => requestAnimationFrame(pintarInfo));
+    clearTimeout(temporizador);
+    temporizador = setTimeout(() => { guardado.mods[mod.id] = { v, usr: $("#usr").value }; guardar(); }, 300);
+  }
+
+  /* Resaltado de los elementos afectados por un control */
+  let resalteActivo = null;
+  function resaltar(c) {
+    const doc = documento();
+    if (!doc || !doc.getElementById("hl")) return;
+    let sel = c.resaltar ? c.resaltar(v) : c.sel;
+    if (!sel || sel === ":root" || sel === "html") { doc.getElementById("hl").textContent = ""; return; }
+    sel = partirComas(sel).map(quitarPseudoelementos).filter((s) => { try { doc.querySelector(s); return true; } catch (e) { return false; } }).join(", ");
+    doc.getElementById("hl").textContent = sel ? `${sel} { outline: 3px dashed #F3A447 !important; outline-offset: 2px !important; }` : "";
+    resalteActivo = c;
+  }
+  function quitarResalte(c) {
+    if (resalteActivo !== c) return;
+    const doc = documento();
+    if (doc && doc.getElementById("hl")) doc.getElementById("hl").textContent = "";
+    resalteActivo = null;
+  }
+
+  /* ---------- ancho de la vista previa ---------- */
+  function ponerAncho(px) {
+    anchoElegido = px;
+    lienzo.style.width = px ? px + 2 + "px" : "100%";
+    document.querySelectorAll(".anchos button").forEach((b) => b.setAttribute("aria-pressed", String(Number(b.dataset.ancho) === px)));
+    requestAnimationFrame(salidaAncho);
+  }
+  function salidaAncho() {
+    const w = marco.clientWidth;
+    $("#r-ancho").value = w;
+    $("#o-ancho").textContent = w + " px";
+  }
+  async function anchoTemporal(px) {
+    lienzo.style.transition = "none";
+    lienzo.style.width = px + 2 + "px";
+    await new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(() => setTimeout(r, 60))));
+  }
+  function restaurarAncho() { lienzo.style.width = anchoElegido ? anchoElegido + 2 + "px" : "100%"; lienzo.style.transition = ""; requestAnimationFrame(() => { salidaAncho(); pintarInfo(); }); }
+
+  /* ---------- controles ---------- */
+  function crearControl(c, i) {
+    if (c.tipo === "titulo") {
+      const h = document.createElement("p");
+      h.className = "ctrl-titulo"; h.textContent = c.texto;
+      return h;
+    }
+    const div = document.createElement("div");
+    div.className = "ctrl";
+    const id = `c-${mod.id}-${i}`;
+    const rotulo = c.etiqueta || `<code>${esc(c.prop)}</code>`;
+    const selTxt = c.sel && !c.ocultarSel ? `<span class="sel">${esc(c.sel)}</span>` : "";
+    const ayuda = c.ayuda ? `<p class="ayuda">${c.ayuda}</p>` : "";
+    const cambiar = (x) => { v[c.k] = x; actualizar(); };
+    let html = "";
+    switch (c.tipo) {
+      case "select":
+        html = `<label for="${id}">${rotulo} ${selTxt}</label><div class="campo"><select id="${id}">${opcionesDe(c).map((o) => `<option value="${esc(o.v)}">${esc(o.t)}</option>`).join("")}</select></div>`;
+        break;
+      case "rango":
+        html = `<label for="${id}">${rotulo} ${selTxt}</label><div class="campo"><input type="range" id="${id}" min="${c.min}" max="${c.max}" step="${c.paso || 1}"><output for="${id}"></output></div>`;
+        break;
+      case "medida":
+        html = `<label for="${id}">${rotulo} ${selTxt}</label><div class="campo"><input type="number" id="${id}" step="${c.paso || 0.25}" min="${c.min != null ? c.min : 0}"><select aria-label="Unidad de ${esc(c.prop || "")}">${c.unidades.map((u) => `<option>${u}</option>`).join("")}</select></div>`;
+        break;
+      case "color":
+        html = `<label for="${id}">${rotulo} ${selTxt}</label><div class="campo"><input type="color" id="${id}"><output for="${id}"></output></div>`;
+        break;
+      case "texto":
+        html = `<label for="${id}">${rotulo} ${selTxt}</label><div class="campo"><input type="text" id="${id}" autocomplete="off" spellcheck="false"></div>` +
+          (c.opciones ? `<div class="chips">${c.opciones.map((o) => `<button type="button" data-v="${esc(o)}">${esc(o)}</button>`).join("")}</div>` : "");
+        break;
+      case "areas":
+        html = `<label for="${id}">${rotulo} ${selTxt}</label><div class="campo"><textarea id="${id}" rows="4" spellcheck="false"></textarea></div>` +
+          `<div class="chips">${c.opciones.map((o, j) => `<button type="button" data-j="${j}">${esc(o.t)}</button>`).join("")}</div>`;
+        break;
+      case "sombra":
+        html = `<div class="rotulo">${rotulo} ${selTxt}</div><div class="partes">` +
+          [["x", "x", -30, 30], ["y", "y", -30, 30], ["blur", "difuminado", 0, 60], ["spread", "extensión", -20, 30], ["alfa", "opacidad %", 0, 100]]
+            .map(([k, t, mi, ma]) => `<label for="${id}-${k}">${t}</label><input type="range" id="${id}-${k}" data-p="${k}" min="${mi}" max="${ma}"><output for="${id}-${k}"></output>`).join("") +
+          `</div><label class="casilla"><input type="checkbox" data-p="inset"> inset (sombra interior)</label>`;
+        break;
+      case "casilla":
+        html = `<div class="rotulo">${rotulo} ${selTxt}</div><label class="casilla"><input type="checkbox" id="${id}"> ${c.texto || "Activar"}</label>`;
+        break;
+    }
+    div.innerHTML = html + ayuda;
+    const entrada = div.querySelector("#" + CSS.escape(id));
+    const salida = div.querySelector("output");
+
+    if (c.tipo === "select") { entrada.value = v[c.k]; entrada.addEventListener("change", () => cambiar(entrada.value)); }
+    if (c.tipo === "rango") {
+      entrada.value = v[c.k];
+      entrada.addEventListener("input", () => cambiar(Number(entrada.value)));
+      c._salida = () => { salida.textContent = valorCSS(c, v[c.k], "ver"); };
+    }
+    if (c.tipo === "medida") {
+      const u = div.querySelector("select");
+      entrada.value = v[c.k].n; u.value = v[c.k].u;
+      const f = () => cambiar({ n: entrada.value === "" ? 0 : Number(entrada.value), u: u.value });
+      entrada.addEventListener("input", f); u.addEventListener("change", f);
+    }
+    if (c.tipo === "color") {
+      entrada.value = v[c.k];
+      entrada.addEventListener("input", () => cambiar(entrada.value));
+      c._salida = () => { salida.textContent = valorCSS(c, v[c.k], "ver"); };
+    }
+    if (c.tipo === "texto") {
+      entrada.value = v[c.k];
+      entrada.addEventListener("input", () => cambiar(entrada.value));
+      div.querySelectorAll(".chips button").forEach((b) => b.addEventListener("click", () => { entrada.value = b.dataset.v; cambiar(b.dataset.v); }));
+    }
+    if (c.tipo === "areas") {
+      entrada.value = v[c.k];
+      entrada.addEventListener("input", () => cambiar(entrada.value));
+      div.querySelectorAll(".chips button").forEach((b) => b.addEventListener("click", () => {
+        const o = c.opciones[Number(b.dataset.j)];
+        entrada.value = o.v;
+        if (o.columnas && c.columnas) { v[c.columnas] = o.columnas; const otro = document.querySelector(`[data-k="${c.columnas}"] input[type="text"]`); if (otro) otro.value = o.columnas; }
+        cambiar(o.v);
+      }));
+    }
+    if (c.tipo === "sombra") {
+      div.querySelectorAll("[data-p]").forEach((inp) => {
+        const p = inp.dataset.p;
+        if (inp.type === "checkbox") inp.checked = !!v[c.k][p]; else inp.value = v[c.k][p];
+        inp.addEventListener("input", () => { v[c.k] = Object.assign({}, v[c.k], { [p]: inp.type === "checkbox" ? inp.checked : Number(inp.value) }); actualizar(); });
+      });
+      c._salida = () => div.querySelectorAll("input[type=range]").forEach((inp) => { inp.nextElementSibling.textContent = v[c.k][inp.dataset.p] + (inp.dataset.p === "alfa" ? "%" : "px"); });
+    }
+    if (c.tipo === "casilla") { entrada.checked = !!v[c.k]; entrada.addEventListener("change", () => cambiar(entrada.checked)); }
+
+    div.dataset.k = c.k;
+    div.addEventListener("pointerenter", () => resaltar(c));
+    div.addEventListener("pointerleave", () => quitarResalte(c));
+    div.addEventListener("focusin", () => resaltar(c));
+    div.addEventListener("focusout", () => quitarResalte(c));
+    return div;
+  }
+
+  /* ---------- retos ---------- */
+  function pintarRetos() {
+    const ol = $("#lista-retos");
+    ol.innerHTML = "";
+    (mod.retos || []).forEach((r, i) => {
+      const clave = `${mod.id}:${i}`;
+      const li = document.createElement("li");
+      li.className = guardado.retos[clave] ? "hecho" : "";
+      li.innerHTML = `<p>${r.texto}</p><button type="button" class="btn-pri">Comprobar</button><span class="resultado" role="status"></span>`;
+      const res = li.querySelector(".resultado");
+      if (guardado.retos[clave]) { res.className = "resultado si"; res.textContent = "Reto superado."; }
+      li.querySelector("button").addEventListener("click", async () => {
+        res.className = "resultado"; res.textContent = "Comprobando…";
+        let r2;
+        try { r2 = await r.comprobar(ctx()); } catch (e) { r2 = "No se ha podido comprobar: revisa tu CSS."; console.error(e); }
+        if (r.cambiaAncho) restaurarAncho();
+        if (r2 === true) {
+          guardado.retos[clave] = true; guardar();
+          li.className = "hecho"; res.className = "resultado si"; res.textContent = "¡Conseguido! " + (r.explicacion || "");
+          pintarIndice();
+        } else {
+          res.className = "resultado no"; res.textContent = typeof r2 === "string" ? r2 : "Todavía no. Revisa los valores.";
+        }
+      });
+      ol.appendChild(li);
+    });
+  }
+
+  /* ---------- índice ---------- */
+  function pintarIndice() {
+    const grupos = [];
+    MODULOS.forEach((m) => { let g = grupos.find((x) => x.t === m.grupo); if (!g) grupos.push(g = { t: m.grupo, ms: [] }); g.ms.push(m); });
+    let total = 0, hechos = 0;
+    const marca = (m) => {
+      const n = (m.retos || []).length, h = (m.retos || []).filter((r, i) => guardado.retos[`${m.id}:${i}`]).length;
+      total += n; hechos += h;
+      return `<span class="marca${h === n && n ? " hecho" : ""}">${h === n && n ? "✓ " : ""}${h}/${n}</span>`;
+    };
+    $("#lista-modulos").innerHTML = grupos.map((g) => `<h2>${esc(g.t)}</h2><ul>${g.ms.map((m) => `<li><a href="#${m.id}"${mod && m.id === mod.id ? ' aria-current="page"' : ""}><span>${esc(m.titulo)}</span>${marca(m)}</a></li>`).join("")}</ul>`).join("");
+    $("#progreso").textContent = `Retos superados: ${hechos} de ${total}`;
+    const sel = $("#saltar-modulo");
+    sel.innerHTML = grupos.map((g) => `<optgroup label="${esc(g.t)}">${g.ms.map((m) => `<option value="${m.id}">${esc(m.titulo)}</option>`).join("")}</optgroup>`).join("");
+    if (mod) sel.value = mod.id;
+  }
+
+  /* ---------- cargar un módulo ---------- */
+  function cargar(id, foco) {
+    mod = MODULOS.find((m) => m.id === id) || MODULOS[0];
+    MODULOS.forEach((m) => m.controles.forEach((c, i) => { if (!c.k && c.tipo !== "titulo") c.k = "c" + i; }));
+    const previo = guardado.mods[mod.id];
+    v = Object.assign(iniciales(mod), previo ? previo.v : {});
+    $("#usr").value = previo ? previo.usr || "" : "";
+    $("#m-grupo").textContent = `${mod.grupo} · diapositivas ${mod.diapos}`;
+    $("#m-titulo").textContent = mod.titulo;
+    $("#m-intro").innerHTML = mod.intro;
+    const cont = $("#controles");
+    cont.innerHTML = "";
+    mod.controles.forEach((c, i) => cont.appendChild(crearControl(c, i)));
+    $("#html-ej code").textContent = mod.html.trim();
+    $("#css-base code").innerHTML = colorearCSS(mod.base.trim());
+    pintarRetos();
+    pintarIndice();
+    document.title = `${mod.titulo} · Laboratorio CSS · UP3 · LMSGI`;
+    marco.style.height = (mod.alto || 400) + "px";
+    cargado = "";
+    marco.onload = () => {
+      cargado = mod.id;
+      const doc = documento();
+      doc.addEventListener("click", (e) => { if (e.target.closest("a")) e.preventDefault(); });
+      doc.addEventListener("submit", (e) => e.preventDefault());
+      ventana().addEventListener("resize", () => { salidaAncho(); pintarInfo(); });
+      ventana().addEventListener("scroll", () => { if (mod.infoAlDesplazar) pintarInfo(); });
+      actualizar();
+    };
+    marco.srcdoc = `<!DOCTYPE html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Vista previa</title>${mod.cabeza || ""}<style>${BASE_MARCO}</style><style id="base">${mod.base}</style><style id="gen"></style><style id="usr"></style><style id="hl"></style></head><body>${mod.html}</body></html>`;
+    ponerAncho(mod.ancho || 0);
+    if (foco) $("#modulo").focus({ preventScroll: true });
+  }
+
+  /* ---------- eventos generales ---------- */
+  document.querySelectorAll(".anchos button").forEach((b) => b.addEventListener("click", () => ponerAncho(Number(b.dataset.ancho))));
+  $("#r-ancho").addEventListener("input", (e) => { anchoElegido = Number(e.target.value); lienzo.style.width = anchoElegido + 2 + "px"; document.querySelectorAll(".anchos button").forEach((x) => x.setAttribute("aria-pressed", "false")); $("#o-ancho").textContent = anchoElegido + " px"; });
+  window.addEventListener("resize", () => requestAnimationFrame(salidaAncho));
+  $("#usr").addEventListener("input", actualizar);
+  $("#b-reset").addEventListener("click", () => { delete guardado.mods[mod.id]; guardar(); cargar(mod.id); });
+  $("#b-borrar-retos").addEventListener("click", () => { (mod.retos || []).forEach((r, i) => delete guardado.retos[`${mod.id}:${i}`]); guardar(); pintarRetos(); pintarIndice(); });
+  $("#b-copiar").addEventListener("click", async () => {
+    const texto = generar("ver") + ($("#usr").value.trim() ? "\n\n/* Mis reglas */\n" + $("#usr").value.trim() : "") + "\n";
+    try { await navigator.clipboard.writeText(texto); $("#b-copiar").textContent = "Copiado"; }
+    catch (e) { const t = document.createElement("textarea"); t.value = texto; document.body.appendChild(t); t.select(); document.execCommand("copy"); t.remove(); $("#b-copiar").textContent = "Copiado"; }
+    setTimeout(() => { $("#b-copiar").textContent = "Copiar"; }, 1500);
+  });
+  $("#saltar-modulo").addEventListener("change", (e) => { location.hash = e.target.value; });
+  window.addEventListener("hashchange", () => cargar(location.hash.slice(1), true));
+
+  cargar(location.hash.slice(1));
+})();
+
+  </script>
+</body>
+</html>
