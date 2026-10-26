@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Proyecto 3 de LMSGI (1.º ASIR): Sitio web adaptable de un negocio de Benidorm">
+  <title>Proyecto 3 · Sitio web adaptable de un negocio de Benidorm · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/enunciado.css">
+  <link rel="icon" href="../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Proyecto 3 · Proyecto en grupo</span>
+      <h1>Proyecto 3 — Sitio web adaptable de un negocio de Benidorm</h1>
+      <p>En grupos de 3 o 4 personas, diseñáis y construís el sitio web adaptable de un negocio real o verosímil de Benidorm, desde el boceto hasta su publicación. Este sitio os acompañará el resto del curso.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2f, 2g, 2h</dd></div><div><dt>Duración</dt><dd>4 sesiones + trabajo autónomo</dd></div><div><dt>Agrupamiento</dt><dd>Grupos de 3-4</dd></div><div><dt>Entrega</dt><dd>Aules (por hitos) + URL pública</dd></div><div><dt>Tipo</dt><dd>Consolidación · proyecto (IE5)</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Planificar un sitio web: mapa del sitio, bocetos y guía de estilo (CE 2g).</li><li>Construir un sitio HTML5 semántico con una hoja de estilos externa, maquetado con Flexbox y Grid y adaptable (CE 2h).</li><li>Usar herramientas profesionales: Git en equipo, DevTools, validadores, Lighthouse y GitHub Pages (CE 2f).</li><li>Trabajar en equipo y presentar un producto a un cliente.</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li><a href="recursos/briefing.md" download>briefing.md</a>: encargo del cliente y requisitos.</li><li><a href="recursos/guia-estilo-plantilla.md" download>guia-estilo-plantilla.md</a>: plantilla de la guía de estilo.</li><li><a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a> del grupo.</li><li>Todas las prácticas de la UP3 y los ejemplos guiados EG 3.1 – 3.3.</li></ul>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Elegid el negocio y formad el equipo</a></li><li><a href="#paso2">Hito 1 · Planificación (sesión 16)</a></li><li><a href="#paso3">Hito 2 · Estructura y estilos base (sesión 17)</a></li><li><a href="#paso4">Hito 3 · Maquetación adaptable (sesión 18)</a></li><li><a href="#paso5">Control de calidad</a></li><li><a href="#paso6">Hito 4 · Publicación y presentación (sesión 19)</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Elegid el negocio y formad el equipo</h2><p>El profesor forma los grupos a partir de la evaluación inicial. Elegid un negocio de Benidorm de hostelería: <strong>restaurante, arrocería, chiringuito, heladería o bar de tapas</strong>, real o inventado. Debe tener <strong>carta</strong> y <strong>novedades</strong>: en la UP4 cargaréis la carta desde un fichero JSON y en la UP7 publicaréis las novedades en un canal RSS.</p><p>Repartid roles que rotarán en cada hito: coordinación (tablero de tareas), maquetación, contenidos y accesibilidad, y control de calidad (validación y Git). Todos escriben código.</p></section>
+<section class="paso" id="paso2"><h2><span class="num">2</span>Hito 1 · Planificación (sesión 16)</h2><p>Entregad en Aules:</p><ul><li>Repositorio común en GitHub con todos los integrantes como colaboradores, un <code>LEEME.md</code> y un tablero (Issues o Projects) con las tareas repartidas.</li><li>Mapa del sitio con al menos estas páginas: <strong>inicio</strong>, <strong>carta</strong>, <strong>novedades</strong>, <strong>reservas</strong> (formulario) y <strong>contacto</strong> (mapa y horario), más <strong>aviso legal / privacidad</strong>.</li><li>Bocetos de la portada en móvil y escritorio (papel, Excalidraw o Penpot).</li><li><code>guia-estilo.md</code>: paleta con contrastes comprobados, tipografías, escala de espaciado y componentes (botón, tarjeta, menú). Explicad cómo os ayuda la hoja de estilos única a mantener la coherencia (CE 2g).</li></ul></section>
+<section class="paso" id="paso3"><h2><span class="num">3</span>Hito 2 · Estructura y estilos base (sesión 17)</h2><p>Todas las páginas en HTML5 semántico y válido, con la misma cabecera, menú y pie. Una única hoja <code>css/estilos.css</code> con las variables de la guía de estilo, el reinicio, la tipografía y los componentes. Requisitos de contenido:</p><ul><li><strong>carta.html</strong>: platos agrupados por categorías (<code>section</code> con <code>h2</code>), cada plato con nombre, descripción, precio y alérgenos. Dejad el contenedor de la carta con <code>id="carta"</code>: en la UP4 se rellenará desde JSON.</li><li><strong>novedades.html</strong>: al menos tres <code>article</code> con título, fecha (<code>time</code>) y resumen.</li><li><strong>reservas.html</strong>: formulario con validación HTML5 y casilla de privacidad.</li></ul><pre data-fichero="Estructura"><code>proyecto3-nombre-grupo/
+├── index.html
+├── carta.html
+├── novedades.html
+├── reservas.html
+├── contacto.html
+├── privacidad.html
+├── css/estilos.css
+├── img/
+├── guia-estilo.md
+└── LEEME.md</code></pre></section>
+<section class="paso" id="paso4"><h2><span class="num">4</span>Hito 3 · Maquetación adaptable (sesión 18)</h2><p>Maquetad con <strong>Grid</strong> la estructura de las páginas y con <strong>Flexbox</strong> los componentes, con estrategia mobile first y al menos dos puntos de ruptura. Requisitos mínimos: menú usable en el móvil, carta legible en 360 px, imágenes adaptables, foco visible, cabecera <code>sticky</code> y una hoja o bloque <code>@media print</code> para imprimir la carta. Ampliación: transiciones y animaciones con <code>prefers-reduced-motion</code>, modo oscuro con variables.</p></section>
+<section class="paso" id="paso5"><h2><span class="num">5</span>Control de calidad</h2><p>Antes de la presentación, la persona de calidad comprueba con el grupo: validadores HTML y CSS con 0 errores, Lighthouse móvil (accesibilidad ≥ 90) en todas las páginas, recorrido completo con teclado, contraste y pruebas a 360, 768 y 1280 px. Registrad los resultados en el <code>LEEME.md</code> y abrid una issue por cada problema encontrado hasta cerrarlas todas.</p></section>
+<section class="paso" id="paso6"><h2><span class="num">6</span>Hito 4 · Publicación y presentación (sesión 19)</h2><p>Publicad el sitio en GitHub Pages. Presentad el proyecto al «cliente» (la clase) en <strong>5 minutos</strong>: el negocio, la guía de estilo, el sitio en móvil y escritorio en directo, y una decisión técnica de cada integrante (por ejemplo, por qué Grid y no Flexbox en la carta). Después, el profesor puede preguntar a cualquier integrante por cualquier parte del código (IE6).</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Refuerzo: las seis páginas con la plantilla común y la portada y la carta maquetadas y adaptables.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los hitos y requisitos, con 0 errores en los validadores y Lighthouse accesibilidad ≥ 90.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Ampliación: modo oscuro con variables, animaciones accesibles, microdatos schema.org <code>Restaurant</code> y <code>Menu</code>, y una página de error 404 personalizada en GitHub Pages.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>El repositorio tiene commits de todos los integrantes y un tablero de tareas.</li><li>Las seis páginas comparten cabecera, menú, pie y una única hoja externa.</li><li>La carta tiene el contenedor <code>id="carta"</code> y las novedades son <code>article</code> con <code>time</code>.</li><li>El sitio se ve bien a 360, 768 y 1280 px.</li><li>Validadores HTML y CSS: 0 errores · Lighthouse accesibilidad ≥ 90.</li><li><code>guia-estilo.md</code> y <code>LEEME.md</code> completos, con la URL pública.</li><li>Cada integrante ha declarado su uso de IA en el <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Cada hito se entrega en su tarea de Aules (una entrega por grupo, el ZIP del repositorio o la URL del commit). En el hito 4, la URL pública del sitio y la presentación.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Proyecto <strong>calificable</strong> (instrumento IE5) que evalúa los criterios 2f, 2g y 2h del RA2. Dentro de cada CE, los proyectos y prácticas (IE3, IE5, IE6) pesan el 40 % (PD, 6.4). La presentación del hito 4 y las preguntas individuales sirven de defensa (IE6).</p>
+
+<table>
+  <caption>Rúbrica del Proyecto 3 (instrumento IE5; criterios del anexo III adaptados al trabajo en grupo)</caption>
+  <thead><tr><th>Criterio</th><th>Peso</th><th>Excelente (10)</th><th>Adecuado (5-7)</th><th>Insuficiente (0-4)</th></tr></thead>
+  <tbody>
+    <tr><td>Funcionalidad y diseño adaptable</td><td>30 %</td><td>Todas las páginas pedidas, coherentes y adaptadas a móvil, tableta y escritorio</td><td>Faltan detalles o algún ancho se ve mal</td><td>Faltan páginas o no es adaptable</td></tr>
+    <tr><td>Corrección y validación (HTML y CSS)</td><td>20 %</td><td>0 errores en los dos validadores</td><td>Errores menores</td><td>Errores graves o no se ha validado</td></tr>
+    <tr><td>Semántica, accesibilidad y buenas prácticas</td><td>20 %</td><td>Semántico, contraste correcto, teclado, Lighthouse ≥ 90</td><td>Mejorable en semántica o accesibilidad</td><td>Sin estructura semántica o inaccesible</td></tr>
+    <tr><td>Organización del código, Git y trabajo en equipo</td><td>15 %</td><td>Hoja ordenada con variables, commits de todos los integrantes, tareas repartidas</td><td>Organización aceptable; reparto desigual</td><td>Desordenado o trabajo de una sola persona</td></tr>
+    <tr><td>Hitos, presentación y documentación</td><td>15 %</td><td>Hitos en plazo, presentación clara, guía de estilo y LEEME completos</td><td>Algún hito tarde o presentación mejorable</td><td>Hitos sin entregar o sin presentación</td></tr>
+  </tbody>
+</table>
+<p>La nota del proyecto es común al grupo; cada integrante puede subir o bajar hasta un punto según su defensa individual (IE6) y el registro de commits. El uso de IA no declarado supone un 0 para quien lo haya usado.</p>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica progresiva 3.3 de LMSGI (1.º ASIR): Listas, menú, posicionamiento, float y overflow">
+  <title>Práctica progresiva 3.3 · Listas, menú, posicionamiento, float y overflow · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/enunciado.css">
+  <link rel="icon" href="../../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Serie progresiva · 3 de 6 · Listas, menú y posicionamiento</span>
+      <h1>Práctica progresiva 3.3 — Listas, menú, posicionamiento, float y overflow</h1>
+      <p>Tercera capa: la lista de enlaces se convierte en un menú, la cabecera se queda fija al hacer scroll, aparecen la etiqueta «Nuevo», el botón para volver arriba y la foto que el texto rodea.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <nav class="ruta" aria-label="Serie progresiva"><ol><li><a href="../base/index.html">Base sin estilos</a></li><li><a href="../PP3.1/index.html">PP 3.1</a></li><li><a href="../PP3.2/index.html">PP 3.2</a></li><li aria-current="step"><span>PP 3.3</span></li><li><a href="../PP3.4/index.html">PP 3.4</a></li><li><a href="../PP3.5/index.html">PP 3.5</a></li><li><a href="../PP3.6/index.html">PP 3.6</a></li></ol></nav>
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · formativa</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Convertir una lista de enlaces en una barra de navegación accesible.</li><li>Elegir el valor de <code>position</code> adecuado (<code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code>) y explicar respecto a qué se coloca la caja.</li><li>Personalizar viñetas con <code>list-style</code>, <code>::marker</code> y <code>::before</code>.</li><li>Hacer que el texto rodee una imagen con <code>float</code> y contener el flotante.</li><li>Evitar que una tabla ancha rompa la página con <code>overflow</code>.</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Punto de partida: tu PP 3.2. La serie entera trabaja sobre <strong>un único fichero HTML</strong>, la <a href="../base/index.html">web del Club Náutico Mal Pas</a> (<a href="../base-club-nautico-mal-pas.zip" download>descargar en ZIP</a>), que no se modifica: cada práctica añade una capa a la misma hoja <code>css/estilos.css</code>.</li><li>Teoría de la UP3, sección 7 (diapositivas 51 – 57).</li><li>Laboratorio CSS: <a href="../../../LAB3_laboratorio-css.html#listas">listas y menús</a>, <a href="../../../LAB3_laboratorio-css.html#position">position</a> y <a href="../../../LAB3_laboratorio-css.html#float">float y overflow</a>.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <h2>Resultado esperado</h2>
+    <p>Así debe quedar la página al terminar esta práctica. Desplaza las capturas para verla entera.</p>
+    <div class="resultado">
+      <figure><div class="captura"><img src="recursos/resultado-escritorio.jpg" alt="Captura de la web del club al terminar la PP3.3, en escritorio a 1280 píxeles" width="960" loading="lazy"></div><figcaption>Escritorio · 1280 px</figcaption></figure>
+      <figure><div class="captura"><img src="recursos/resultado-movil.jpg" alt="Captura de la web del club al terminar la PP3.3, en un móvil de 375 píxeles" width="375" loading="lazy"></div><figcaption>Móvil · 375 px</figcaption></figure>
+    </div>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Continúa tu web</a></li><li><a href="#paso2">El menú</a></li><li><a href="#paso3">Cabecera fija al hacer scroll</a></li><li><a href="#paso4">Saltar al contenido</a></li><li><a href="#paso5">La etiqueta «Nuevo»</a></li><li><a href="#paso6">Viñetas personalizadas</a></li><li><a href="#paso7">La foto que el texto rodea</a></li><li><a href="#paso8">La tabla que no rompe la página</a></li><li><a href="#paso9">Pie de foto y botón «volver arriba»</a></li><li><a href="#paso10">Prueba con teclado y valida</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Continúa tu web</h2><p>Copia la carpeta de tu práctica anterior como <code>lmsgi/UP3/PP3.3/</code> en tu repositorio y sigue trabajando sobre <strong>la misma hoja</strong> <code>css/estilos.css</code>. No cambies el HTML. Si la práctica anterior no te funciona, pide al profesor su hoja de estilos para no quedarte atrás.</p></section>
+    <section class="paso" id="paso2"><h2><span class="num">2</span>El menú</h2><p>Quita las viñetas y los márgenes de <code>.menu ul</code>, coloca los <code>li</code> en línea con <code>display: inline-block</code> (en la PP 3.4 lo cambiarás por Flexbox) y convierte cada enlace en una «píldora»: <code>display: block</code>, relleno, <code>border-radius: 999px</code>, color marino, seminegrita y sin subrayado. Al pasar el ratón, fondo arena.</p>
+<p>Prueba las combinaciones en el <a href="../../../LAB3_laboratorio-css.html#listas">laboratorio de listas y menús</a>.</p></section>
+    <section class="paso" id="paso3"><h2><span class="num">3</span>Cabecera fija al hacer scroll</h2><p>Haz que <code>.cabecera</code> se quede pegada arriba con <code>position: sticky</code>, <code>top: 0</code>, un <code>z-index</code> para que pase por encima del contenido y una sombra suave. Después pulsa un enlace del menú: el título de la sección queda tapado por la cabecera. Arréglalo así:</p>
+<pre data-fichero="css/estilos.css"><code>section[id],
+footer[id] {
+  scroll-margin-top: 7.5rem;
+}</code></pre></section>
+    <section class="paso" id="paso4"><h2><span class="num">4</span>Saltar al contenido</h2><p>La página empieza con un enlace <code>.saltar</code> para quien navega con teclado. Escóndelo fuera de la pantalla con <code>position: absolute</code> y <code>top: -100px</code>, y haz que aparezca arriba a la izquierda cuando recibe el foco (<code>.saltar:focus</code>). Compruébalo recargando la página y pulsando <kbd>Tab</kbd>.</p></section>
+    <section class="paso" id="paso5"><h2><span class="num">5</span>La etiqueta «Nuevo»</h2><p>La tarjeta del catamarán tiene un <code>span.etiqueta</code>. Colócala en la esquina superior derecha de su tarjeta con <code>position: absolute</code>, <code>top</code> y <code>right</code>, fondo <code>--sol</code>, texto marino, mayúsculas pequeñas y forma de píldora.</p>
+<p>Para que se coloque respecto a la tarjeta y no respecto a la página, la tarjeta necesita <code>position: relative</code>. Quítaselo un momento, mira dónde va la etiqueta y explícalo en el <code>LEEME.md</code>. Lo puedes ver en directo en el <a href="../../../LAB3_laboratorio-css.html#position">laboratorio de position</a>.</p></section>
+    <section class="paso" id="paso6"><h2><span class="num">6</span>Viñetas personalizadas</h2><ul>
+<li>Lista de cada tarjeta: sin viñeta (<code>list-style: none</code>, <code>padding: 0</code>) y con una marca «✓» turquesa creada con <code>li::before</code>.</li>
+<li>Lista del aviso de seguridad: viñeta cuadrada (<code>list-style-type: square</code>) en coral con <code>li::marker</code>.</li>
+<li>Lista <code>.redes</code> del pie y cifras <code>.datos</code>: sin viñetas. Las tres cifras, de momento, en línea con <code>inline-block</code> y un margen a la derecha.</li>
+</ul></section>
+    <section class="paso" id="paso7"><h2><span class="num">7</span>La foto que el texto rodea</h2><p>Haz que <code>.nosotros__foto</code> flote a la derecha con <code>float: right</code>, un 40 % de ancho y margen a la izquierda y abajo para que el texto no se pegue. Borra la regla de la PP 3.2 que la ponía en bloque.</p>
+<p>Si la foto es más alta que el texto, se sale de su sección. Haz que el contenedor la envuelva con <code>display: flow-root</code> y que las cifras empiecen siempre debajo con <code>clear: both</code>:</p>
+<pre data-fichero="css/estilos.css"><code>#nosotros .contenedor {
+  display: flow-root;
+}</code></pre></section>
+    <section class="paso" id="paso8"><h2><span class="num">8</span>La tabla que no rompe la página</h2><p>Reduce la ventana a 360 px: la tabla del horario provoca scroll horizontal en <em>toda</em> la página. Su envoltorio <code>.tabla-desplazable</code> debe desplazarse por dentro con <code>overflow-x: auto</code>; dale además borde y esquinas redondeadas. Compara los valores de <code>overflow</code> en el <a href="../../../LAB3_laboratorio-css.html#float">laboratorio de float y overflow</a>.</p></section>
+    <section class="paso" id="paso9"><h2><span class="num">9</span>Pie de foto y botón «volver arriba»</h2><ul>
+<li>Coloca el <code>figcaption</code> de la galería <strong>encima de la foto</strong>, abajo a la izquierda, como una píldora marino semitransparente (<code>rgb(11 60 93 / 85%)</code>). Sustituye la regla de la PP 3.2. ¿Qué elemento necesita <code>position: relative</code>?</li>
+<li>El enlace <code>.subir</code> queda fijo en la esquina inferior derecha de la ventana (<code>position: fixed</code>), como un círculo marino de 3rem con la flecha centrada (<code>line-height: 3rem</code>, <code>text-align: center</code>) y coral al pasar el ratón.</li>
+</ul></section>
+    <section class="paso" id="paso10"><h2><span class="num">10</span>Prueba con teclado y valida</h2><p>Recorre toda la página con <kbd>Tab</kbd>: se ve el foco en cada enlace, el enlace «Saltar al contenido» aparece y la cabecera fija no tapa nada. 0 errores en los validadores. Commit: <code>PP3.3: menú y posicionamiento</code>.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1 – 3, 5, 7 y 10.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos, con las respuestas del <code>LEEME.md</code>.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Haz que la fila de cabecera de la tabla se quede fija al desplazarla en vertical (<code>position: sticky</code> en <code>thead th</code>, dando una altura máxima al envoltorio) y explica qué hace <code>z-index</code> y por qué la cabecera de la página necesita uno.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>El menú es una lista sin viñetas con enlaces en forma de píldora y estado <code>:hover</code>.</li><li>La cabecera se queda arriba al hacer scroll y no tapa los títulos al saltar a una sección.</li><li>El enlace «Saltar al contenido» solo aparece con el foco.</li><li>La etiqueta «Nuevo» está en la esquina de su tarjeta.</li><li>La foto de «Quiénes somos» flota a la derecha y no se sale de su sección.</li><li>A 360 px la página no tiene scroll horizontal: solo se desplaza la tabla.</li><li>El botón «volver arriba» está siempre visible en la esquina.</li><li>Validadores CSS y HTML: 0 errores.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PP3.3</code> (con <code>index.html</code>, <code>css/</code>, <code>img/</code> y <code>LEEME.md</code>) como <code>PP3.3_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de tu repositorio.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>formativa</strong> de la serie progresiva de la UP3: no tiene nota propia, se revisa en clase con la lista de comprobación y prepara las prácticas calificables (PR 3.1 – 3.5) y el Proyecto 3. Trabaja el criterio 2h del RA2. El profesor puede pedirte que expliques cualquier regla de tu hoja (IE6).</p>
+    <div class="aviso ok"><p><strong>Siguiente:</strong> <a href="../PP3.4/index.html">Práctica progresiva 3.4 · Maquetación con Flexbox</a>.</p></div>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

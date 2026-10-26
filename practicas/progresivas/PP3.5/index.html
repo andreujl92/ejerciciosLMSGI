@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica progresiva 3.5 de LMSGI (1.º ASIR): Maquetación con CSS Grid">
+  <title>Práctica progresiva 3.5 · Maquetación con CSS Grid · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/enunciado.css">
+  <link rel="icon" href="../../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Serie progresiva · 5 de 6 · Grid: maquetar en dos dimensiones</span>
+      <h1>Práctica progresiva 3.5 — Maquetación con CSS Grid</h1>
+      <p>Quinta capa: CSS Grid para lo que tiene filas y columnas. Tarjetas alineadas en rejilla, galería con una foto destacada, inscripción con áreas con nombre y datos personales en dos columnas.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <nav class="ruta" aria-label="Serie progresiva"><ol><li><a href="../base/index.html">Base sin estilos</a></li><li><a href="../PP3.1/index.html">PP 3.1</a></li><li><a href="../PP3.2/index.html">PP 3.2</a></li><li><a href="../PP3.3/index.html">PP 3.3</a></li><li><a href="../PP3.4/index.html">PP 3.4</a></li><li aria-current="step"><span>PP 3.5</span></li><li><a href="../PP3.6/index.html">PP 3.6</a></li></ol></nav>
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2f, 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · formativa</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Definir una rejilla con <code>grid-template-columns</code>, <code>fr</code>, <code>repeat()</code> y <code>minmax()</code>.</li><li>Hacer rejillas adaptables sin media queries con <code>auto-fit</code> y <code>auto-fill</code>.</li><li>Colocar elementos con <code>span</code>, líneas y áreas con nombre.</li><li>Decidir cuándo usar Flexbox y cuándo Grid.</li><li>Usar el inspector de rejillas de DevTools (CE 2f).</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Punto de partida: tu PP 3.4. La serie entera trabaja sobre <strong>un único fichero HTML</strong>, la <a href="../base/index.html">web del Club Náutico Mal Pas</a> (<a href="../base-club-nautico-mal-pas.zip" download>descargar en ZIP</a>), que no se modifica: cada práctica añade una capa a la misma hoja <code>css/estilos.css</code>.</li><li>Teoría de la UP3, sección 9 (diapositivas 65 – 73).</li><li><a href="https://cssgridgarden.com/#es">Grid Garden</a> (en español).</li><li>Laboratorio CSS: <a href="../../../LAB3_laboratorio-css.html#grid">rejilla</a> y <a href="../../../LAB3_laboratorio-css.html#grid-areas">áreas con nombre</a>.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <h2>Resultado esperado</h2>
+    <p>Así debe quedar la página al terminar esta práctica. Desplaza las capturas para verla entera.</p>
+    <div class="resultado">
+      <figure><div class="captura"><img src="recursos/resultado-escritorio.jpg" alt="Captura de la web del club al terminar la PP3.5, en escritorio a 1280 píxeles" width="960" loading="lazy"></div><figcaption>Escritorio · 1280 px</figcaption></figure>
+      <figure><div class="captura"><img src="recursos/resultado-movil.jpg" alt="Captura de la web del club al terminar la PP3.5, en un móvil de 375 píxeles" width="375" loading="lazy"></div><figcaption>Móvil · 375 px · la galería se desborda: lo resuelves en la PP 3.6</figcaption></figure>
+    </div>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Calentamiento y copia</a></li><li><a href="#paso2">Tarjetas en rejilla</a></li><li><a href="#paso3">Galería con foto destacada</a></li><li><a href="#paso4">Inscripción con áreas con nombre</a></li><li><a href="#paso5">Datos personales en dos columnas</a></li><li><a href="#paso6">Inspector de rejillas</a></li><li><a href="#paso7">Observa el móvil</a></li><li><a href="#paso8">Valida y entrega</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Calentamiento y copia</h2><p>Copia la carpeta de tu práctica anterior como <code>lmsgi/UP3/PP3.5/</code> en tu repositorio y sigue trabajando sobre <strong>la misma hoja</strong> <code>css/estilos.css</code>. No cambies el HTML. Si la práctica anterior no te funciona, pide al profesor su hoja de estilos para no quedarte atrás.</p><p>Antes de empezar, completa los 28 niveles de <a href="https://cssgridgarden.com/#es">Grid Garden</a> y guarda una captura del último en el <code>LEEME.md</code>.</p></section>
+    <section class="paso" id="paso2"><h2><span class="num">2</span>Tarjetas en rejilla</h2><p>Cambia el contenedor <code>.tarjetas</code> de flex a grid y borra el <code>flex: 1 1 15rem</code> de las tarjetas (ya no son elementos flex). Una sola línea hace la rejilla adaptable:</p>
+<pre data-fichero="css/estilos.css"><code>.tarjetas {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: 1.5rem;
+}</code></pre>
+<p>Vuelve a estrechar la ventana a 900 px y compara con la PP 3.4: ¿qué pasa ahora con la última tarjeta? Las tarjetas siguen siendo flex <em>por dentro</em>: Grid y Flexbox se combinan.</p></section>
+    <section class="paso" id="paso3"><h2><span class="num">3</span>Galería con foto destacada</h2><p>Convierte <code>.galeria</code> en una rejilla de columnas de al menos 18rem (<code>repeat(auto-fill, minmax(18rem, 1fr))</code>), filas de 13rem (<code>grid-auto-rows</code>) y <code>gap: 1rem</code>. Borra el <code>inline-block</code> de <code>.galeria__item</code> y haz que las fotos llenen su celda sin deformarse (<code>height: 100%</code> y <code>object-fit: cover</code>).</p>
+<p>La primera foto (<code>.galeria__item--grande</code>) ocupa dos columnas y dos filas con <code>span</code>. Explica en el <code>LEEME.md</code> la diferencia entre <code>auto-fill</code> y <code>auto-fit</code>; puedes verla en el <a href="../../../LAB3_laboratorio-css.html#grid">laboratorio de Grid</a>.</p></section>
+    <section class="paso" id="paso4"><h2><span class="num">4</span>Inscripción con áreas con nombre</h2><p>Maqueta <code>.inscripcion</code> con dos áreas: el formulario a la izquierda (dos partes del ancho) y el aviso de seguridad a la derecha (una parte):</p>
+<pre data-fichero="css/estilos.css"><code>.inscripcion {
+  display: grid;
+  grid-template-areas: "formulario meteo";
+  grid-template-columns: 2fr 1fr;
+  align-items: start;
+  gap: 2.5rem;
+}
+
+.inscripcion__formulario {
+  grid-area: formulario;
+}</code></pre>
+<p>Asigna el área <code>meteo</code> al <code>.aviso-meteo</code>, quítale el <code>margin-top</code> de la PP 3.2 y haz que se quede visible al bajar por el formulario con <code>position: sticky</code> y <code>top: 6rem</code>. ¿Por qué <code>sticky</code> no funcionaría sin <code>align-items: start</code>? Pruébalo en el <a href="../../../LAB3_laboratorio-css.html#grid-areas">laboratorio de áreas</a>.</p></section>
+    <section class="paso" id="paso5"><h2><span class="num">5</span>Datos personales en dos columnas</h2><p>El primer <code>fieldset</code> del formulario pasa a ser una rejilla de dos columnas iguales con <code>gap: 0 1rem</code>, y el campo del nombre (<code>.campo--ancho</code>) ocupa la fila entera con <code>grid-column: 1 / -1</code>.</p>
+<p>Cuidado con el selector: prueba primero <code>.formulario fieldset:first-of-type</code> y mira qué le pasa al <code>fieldset</code> de los radios del turno. Después usa el combinador de hijo <code>&gt;</code> y explica la diferencia en el <code>LEEME.md</code>.</p></section>
+    <section class="paso" id="paso6"><h2><span class="num">6</span>Inspector de rejillas</h2><p>Abre DevTools &gt; Elementos, pulsa la etiqueta <code>grid</code> junto a <code>.galeria</code> y <code>.inscripcion</code> y activa los números de línea y los nombres de área. Guarda una captura en el <code>LEEME.md</code>.</p></section>
+    <section class="paso" id="paso7"><h2><span class="num">7</span>Observa el móvil</h2><p>Reduce la ventana a 375 px y fíjate en la galería: la foto destacada provoca scroll horizontal. Explica en el <code>LEEME.md</code> por qué ocurre (¿cuántas columnas caben y cuántas pide <code>span 2</code>?). <strong>No lo arregles todavía</strong>: es el punto de partida de la PP 3.6.</p></section>
+    <section class="paso" id="paso8"><h2><span class="num">8</span>Valida y entrega</h2><p>0 errores en los validadores. Commit: <code>PP3.5: maquetación con Grid</code>.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1 – 4 y 8.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos, con las explicaciones y capturas del <code>LEEME.md</code>.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Añade <code>grid-auto-flow: dense</code> a la galería y haz destacada también la quinta foto: explica qué cambia en el orden. Reescribe el pie con <code>grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr))</code> y compáralo con tu versión flex.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>Las tarjetas forman una rejilla y la última fila no se estira.</li><li>La galería tiene una foto de 2 × 2 celdas y ninguna imagen está deformada.</li><li>Formulario y aviso van en dos columnas con <code>grid-template-areas</code> y el aviso acompaña al bajar.</li><li>Los datos personales van en dos columnas y el nombre ocupa la fila entera; los radios no se han roto.</li><li>El <code>LEEME.md</code> explica <code>auto-fill</code>/<code>auto-fit</code>, el combinador <code>&gt;</code> y el problema del móvil.</li><li>Validadores CSS y HTML: 0 errores.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PP3.5</code> (con <code>index.html</code>, <code>css/</code>, <code>img/</code> y <code>LEEME.md</code>) como <code>PP3.5_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de tu repositorio.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>formativa</strong> de la serie progresiva de la UP3: no tiene nota propia, se revisa en clase con la lista de comprobación y prepara las prácticas calificables (PR 3.1 – 3.5) y el Proyecto 3. Trabaja el criterio 2f, 2h del RA2. El profesor puede pedirte que expliques cualquier regla de tu hoja (IE6).</p>
+    <div class="aviso ok"><p><strong>Siguiente:</strong> <a href="../PP3.6/index.html">Práctica progresiva 3.6 · Diseño adaptable, transiciones y validación</a>.</p></div>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

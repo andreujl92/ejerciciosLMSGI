@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica progresiva 3.2 de LMSGI (1.º ASIR): Modelo de cajas, fondos, bordes y sombras">
+  <title>Práctica progresiva 3.2 · Modelo de cajas, fondos, bordes y sombras · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/enunciado.css">
+  <link rel="icon" href="../../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Serie progresiva · 2 de 6 · Cajas, márgenes, fondos y sombras</span>
+      <h1>Práctica progresiva 3.2 — Modelo de cajas, fondos, bordes y sombras</h1>
+      <p>Segunda capa: con el modelo de cajas das aire y forma a la página. Contenedor centrado, portada con imagen de fondo, botones, tarjetas, tabla y formulario.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <nav class="ruta" aria-label="Serie progresiva"><ol><li><a href="../base/index.html">Base sin estilos</a></li><li><a href="../PP3.1/index.html">PP 3.1</a></li><li aria-current="step"><span>PP 3.2</span></li><li><a href="../PP3.3/index.html">PP 3.3</a></li><li><a href="../PP3.4/index.html">PP 3.4</a></li><li><a href="../PP3.5/index.html">PP 3.5</a></li><li><a href="../PP3.6/index.html">PP 3.6</a></li></ol></nav>
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2f, 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · formativa</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Aplicar <code>box-sizing: border-box</code> y explicar qué mide <code>width</code>.</li><li>Controlar el espacio con márgenes y rellenos sin que los márgenes colapsen de forma inesperada.</li><li>Convertir enlaces en botones con <code>display: inline-block</code> y estados accesibles.</li><li>Decorar con fondos múltiples, bordes, esquinas redondeadas y sombras (CE 2h).</li><li>Inspeccionar el modelo de cajas con DevTools (CE 2f).</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Punto de partida: tu PP 3.1. La serie entera trabaja sobre <strong>un único fichero HTML</strong>, la <a href="../base/index.html">web del Club Náutico Mal Pas</a> (<a href="../base-club-nautico-mal-pas.zip" download>descargar en ZIP</a>), que no se modifica: cada práctica añade una capa a la misma hoja <code>css/estilos.css</code>.</li><li>Teoría de la UP3, sección 6 (diapositivas 40 – 50).</li><li>Ejemplo guiado <a href="../../../EG3.2_tarjetas-de-habitaciones.html">EG 3.2 · Tarjetas de habitaciones</a> (pasos 1 – 5).</li><li>Laboratorio CSS: <a href="../../../LAB3_laboratorio-css.html#cajas">modelo de cajas</a>, <a href="../../../LAB3_laboratorio-css.html#display">display</a> y <a href="../../../LAB3_laboratorio-css.html#fondos">fondos, bordes y sombras</a>.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <h2>Resultado esperado</h2>
+    <p>Así debe quedar la página al terminar esta práctica. Desplaza las capturas para verla entera.</p>
+    <div class="resultado">
+      <figure><div class="captura"><img src="recursos/resultado-escritorio.jpg" alt="Captura de la web del club al terminar la PP3.2, en escritorio a 1280 píxeles" width="960" loading="lazy"></div><figcaption>Escritorio · 1280 px</figcaption></figure>
+      <figure><div class="captura"><img src="recursos/resultado-movil.jpg" alt="Captura de la web del club al terminar la PP3.2, en un móvil de 375 píxeles" width="375" loading="lazy"></div><figcaption>Móvil · 375 px · la tabla aún desborda la página: lo resuelves en la PP 3.3</figcaption></figure>
+    </div>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Continúa tu web</a></li><li><a href="#paso2">Reinicio y ritmo vertical</a></li><li><a href="#paso3">Contenedor y secciones</a></li><li><a href="#paso4">Portada con imagen de fondo</a></li><li><a href="#paso5">Botones</a></li><li><a href="#paso6">Tarjetas y galería</a></li><li><a href="#paso7">Tabla, formulario y bloques</a></li><li><a href="#paso8">Mide en DevTools</a></li><li><a href="#paso9">Valida y entrega</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Continúa tu web</h2><p>Copia la carpeta de tu práctica anterior como <code>lmsgi/UP3/PP3.2/</code> en tu repositorio y sigue trabajando sobre <strong>la misma hoja</strong> <code>css/estilos.css</code>. No cambies el HTML. Si la práctica anterior no te funciona, pide al profesor su hoja de estilos para no quedarte atrás.</p></section>
+    <section class="paso" id="paso2"><h2><span class="num">2</span>Reinicio y ritmo vertical</h2><p>Al principio del bloque de esta práctica, haz que todos los elementos (y sus <code>::before</code> y <code>::after</code>) usen <code>border-box</code>, quita el margen de <code>body</code> y evita que las imágenes se salgan de su caja:</p>
+<pre data-fichero="css/estilos.css"><code>*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}</code></pre>
+<p>Para que los márgenes no colapsen de forma inesperada, deja los de títulos, párrafos y listas <strong>solo hacia abajo</strong>: <code>margin-top: 0</code> y <code>margin-bottom: 1rem</code>. Prueba la diferencia entre <code>content-box</code> y <code>border-box</code> en el <a href="../../../LAB3_laboratorio-css.html#cajas">laboratorio del modelo de cajas</a>.</p></section>
+    <section class="paso" id="paso3"><h2><span class="num">3</span>Contenedor y secciones</h2><p>El HTML ya envuelve el contenido de cada bloque en <code>.contenedor</code>. Centra ese contenedor con un ancho máximo de 1100 px y 1rem de margen a cada lado en pantallas pequeñas:</p>
+<pre data-fichero="css/estilos.css"><code>.contenedor {
+  width: min(100% - 2rem, 1100px);
+  margin-inline: auto;
+}</code></pre>
+<p>Da a <code>.seccion</code> 4rem de relleno arriba y abajo (<code>padding-block</code>), el fondo arena a <code>.seccion--alterna</code> y limita el ancho de <code>.seccion__intro</code> a <code>60ch</code> para que las líneas no sean demasiado largas.</p></section>
+    <section class="paso" id="paso4"><h2><span class="num">4</span>Portada con imagen de fondo</h2><p>Pon la imagen <code>img/portada.svg</code> como fondo de <code>.portada</code> con un degradado oscuro <em>encima</em> para que el texto blanco cumpla el contraste. Añade siempre un color de respaldo:</p>
+<pre data-fichero="css/estilos.css"><code>.portada {
+  padding-block: 6rem;
+  background-color: var(--marino);
+  background-image: linear-gradient(rgb(11 60 93 / 88%), rgb(11 60 93 / 55%)), url("../img/portada.svg");
+  background-position: center;
+  background-size: cover;
+  color: var(--blanco);
+}</code></pre>
+<p>La ruta de <code>url()</code> es relativa <strong>al fichero CSS</strong>, no al HTML: por eso empieza por <code>../</code>. Después pon el <code>h1</code> en blanco con un ancho máximo de <code>16ch</code>, el antetítulo en <code>--sol</code> y el texto en <code>--marino-claro</code>. ¿Qué especificidad necesitas para ganar a la regla <code>.portada__antetitulo</code> de la PP 3.1?</p></section>
+    <section class="paso" id="paso5"><h2><span class="num">5</span>Botones</h2><p>Crea la clase <code>.boton</code> (enlaces «Reserva tu plaza», «Inscribirme» y el botón del formulario): <code>display: inline-block</code>, al menos 44 px de alto, relleno en <code>em</code>, borde de 2 px, <code>border-radius: 999px</code>, fondo coral, texto blanco sin subrayado y <code>cursor: pointer</code>. El <code>button</code> no hereda la fuente: dásela con <code>font: 700 1rem/1.5 var(--fuente-titulos)</code>.</p>
+<p>Añade los estados <code>:hover</code> (coral oscuro), <code>:focus-visible</code> (contorno <code>--sol</code> con <code>outline-offset</code>) y <code>:active</code>, y la variante <code>.boton--secundario</code>: fondo transparente y borde blanco, que al pasar el ratón se rellena de blanco con texto marino. <strong>No quites el contorno del foco</strong>. Compara <code>inline</code>, <code>block</code> e <code>inline-block</code> en el <a href="../../../LAB3_laboratorio-css.html#display">laboratorio de display</a>.</p></section>
+    <section class="paso" id="paso6"><h2><span class="num">6</span>Tarjetas y galería</h2><p>Convierte cada <code>.tarjeta</code> en una tarjeta: fondo blanco, borde de 1 px, <code>border-radius: 16px</code> y una sombra suave con <code>box-shadow</code>. Su imagen ocupa todo el ancho (<code>display: block</code>, <code>width: 100%</code>) con las esquinas superiores redondeadas, y el texto va en <code>.tarjeta__cuerpo</code> con relleno.</p>
+<p>De momento, coloca dos tarjetas por fila con la técnica clásica (en la PP 3.4 la cambiarás por Flexbox):</p>
+<pre data-fichero="css/estilos.css"><code>.tarjeta {
+  display: inline-block;
+  width: 47%;
+  margin: 0 1.5% 1.5rem 0;
+  vertical-align: top;
+}</code></pre>
+<p>Haz lo mismo con <code>.galeria__item</code>, tres por fila (<code>width: 31%</code>), con las fotos redondeadas y el pie de foto en negrita. Pregunta para el <code>LEEME.md</code>: ¿por qué con <code>width: 50%</code> y sin margen no caben dos tarjetas por fila?</p></section>
+    <section class="paso" id="paso7"><h2><span class="num">7</span>Tabla, formulario y bloques</h2><ul>
+<li><strong>Tabla:</strong> <code>width: 100%</code>, <code>border-collapse: collapse</code>, relleno en las celdas, línea inferior y cabecera con fondo marino y texto blanco. La regla nueva de <code>.horario thead th</code> tiene la misma especificidad que la de la PP 3.1: ¿cuál gana y por qué?</li>
+<li><strong>Formulario:</strong> cada <code>fieldset</code> con margen, relleno, borde y esquinas redondeadas; las etiquetas de <code>.campo</code> en bloque; los campos con <code>width: 100%</code>, relleno, borde, <code>font: inherit</code> y un contorno visible en <code>:focus</code>. La casilla de privacidad y los radios no deben ocupar todo el ancho.</li>
+<li>El <code>fieldset.opciones</code> de los radios no lleva borde. Comprueba que <code>.opciones { border: 0; }</code> <strong>no funciona</strong> y explica por qué necesitas <code>.formulario .opciones</code>.</li>
+<li><strong>Bloques:</strong> opiniones con borde izquierdo turquesa de 5 px; aviso de seguridad con borde discontinuo (<code>dashed</code>) y fondo marino claro; cifras del club con fondo marino claro; cabecera con línea inferior; pie con fondo marino y texto claro; el enlace <code>.marca</code> sin subrayado.</li>
+</ul></section>
+    <section class="paso" id="paso8"><h2><span class="num">8</span>Mide en DevTools</h2><p>Inspecciona una tarjeta y un botón y abre el diagrama del modelo de cajas (DevTools &gt; Calculado). Anota en el <code>LEEME.md</code> contenido, relleno, borde y margen de cada uno y el ancho total que ocupan. Después cambia temporalmente el botón a <code>box-sizing: content-box</code> y explica qué cambia.</p></section>
+    <section class="paso" id="paso9"><h2><span class="num">9</span>Valida y entrega</h2><p>0 errores en los validadores CSS y HTML. Commit con un mensaje claro, por ejemplo <code>PP3.2: modelo de cajas</code>.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1 – 3, 5, 6 y 9.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos, con las medidas del paso 8 explicadas.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Destaca la tarjeta «Catamarán» con <code>outline</code> y <code>outline-offset</code> usando <code>.tarjeta:last-child</code>, y explica en el <code>LEEME.md</code> por qué <code>outline</code> y <code>box-shadow</code> no cambian el tamaño de la caja y <code>border</code> sí.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>Todos los elementos usan <code>border-box</code> y la página no tiene scroll horizontal a 1280 px.</li><li>El contenido está centrado con un ancho máximo de 1100 px.</li><li>La portada tiene imagen de fondo con degradado y el texto blanco se lee bien.</li><li>Los botones miden al menos 44 px de alto y tienen <code>:hover</code>, <code>:focus-visible</code> y <code>:active</code>.</li><li>Tarjetas, opiniones, aviso y formulario tienen relleno, borde, radio o sombra.</li><li>Los campos del formulario ocupan el ancho y se ve el foco.</li><li>Validadores CSS y HTML: 0 errores.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PP3.2</code> (con <code>index.html</code>, <code>css/</code>, <code>img/</code> y <code>LEEME.md</code>) como <code>PP3.2_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de tu repositorio.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>formativa</strong> de la serie progresiva de la UP3: no tiene nota propia, se revisa en clase con la lista de comprobación y prepara las prácticas calificables (PR 3.1 – 3.5) y el Proyecto 3. Trabaja el criterio 2f, 2h del RA2. El profesor puede pedirte que expliques cualquier regla de tu hoja (IE6).</p>
+    <div class="aviso ok"><p><strong>Siguiente:</strong> <a href="../PP3.3/index.html">Práctica progresiva 3.3 · Listas, menú, posicionamiento, float y overflow</a>.</p></div>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

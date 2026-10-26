@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica 3.4 de LMSGI (1.º ASIR): Maquetación con Flexbox">
+  <title>Práctica 3.4 · Maquetación con Flexbox · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/enunciado.css">
+  <link rel="icon" href="../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Práctica 3.4 · Flexbox</span>
+      <h1>Práctica 3.4 — Maquetación con Flexbox</h1>
+      <p>Maqueta con Flexbox los componentes de la web del hotel: la cabecera, los servicios, las tarjetas de habitaciones y el pie. Antes, calienta con el reto Flexbox Froggy.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · calificable</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Distinguir el contenedor flex de sus elementos y los ejes principal y transversal.</li><li>Usar <code>justify-content</code>, <code>align-items</code>, <code>flex-wrap</code> y <code>gap</code> en el contenedor.</li><li>Usar <code>flex-grow</code>, <code>flex-shrink</code> y <code>flex-basis</code> en los elementos (CE 2h).</li><li>Construir componentes que se adaptan sin media queries.</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Reto gamificado <a href="https://flexboxfroggy.com/#es">Flexbox Froggy</a> (en español, 24 niveles).</li><li>Tu PR 3.3. Si tu PR 2.5 está incompleta, parte de la <a href="../base-hotel-levante/index.html">web base del Hotel Levante</a> (carpeta <code>practicas/base-hotel-levante/</code>, sin CSS).</li><li>Ejemplo guiado <a href="../../EG3.2_tarjetas-de-habitaciones.html">EG 3.2 · Tarjetas de habitaciones</a> (pasos 6-8) y teoría, sección 8.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Reto Flexbox Froggy</a></li><li><a href="#paso2">La cabecera</a></li><li><a href="#paso3">Servicios en fila</a></li><li><a href="#paso4">Tarjetas de habitaciones</a></li><li><a href="#paso5">El pie en tres bloques</a></li><li><a href="#paso6">Formulario de reservas</a></li><li><a href="#paso7">Comprueba y publica</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Reto Flexbox Froggy</h2><p>Completa los 24 niveles de <a href="https://flexboxfroggy.com/#es">Flexbox Froggy</a> y guarda una captura del último nivel. Apunta en el <code>LEEME.md</code> el nivel que más te costó y por qué (pista: suelen ser los de <code>flex-direction: column</code>, donde se intercambian los ejes).</p></section>
+<section class="paso" id="paso2"><h2><span class="num">2</span>La cabecera</h2><p>Trabaja sobre una copia de tu sitio de la PR 2.5 en la carpeta <code>lmsgi/UP3/PR3.4/</code> de tu repositorio. Cada práctica de la UP3 continúa la hoja de estilos de la anterior: copia la carpeta de la práctica anterior y sigue desde ahí.</p><p>Convierte la cabecera en un contenedor flex: logotipo a la izquierda, menú y botón «Reservar» a la derecha, centrados en vertical, con <code>flex-wrap: wrap</code> para que en el móvil el menú baje de línea. El menú (la lista) también es un contenedor flex con <code>gap</code>.</p></section>
+<section class="paso" id="paso3"><h2><span class="num">3</span>Servicios en fila</h2><p>La lista de servicios de la portada se muestra como una fila de «píldoras» o tarjetas que se reparten el ancho y bajan de línea cuando no caben: <code>flex: 1 1 10rem</code>. Centra el texto de cada servicio en las dos direcciones.</p></section>
+<section class="paso" id="paso4"><h2><span class="num">4</span>Tarjetas de habitaciones</h2><p>Coloca las tarjetas en fila con <code>flex-wrap</code> y una base de unos 260 px. Haz que cada tarjeta sea a su vez un contenedor flex en columna para que los botones «Reservar» queden alineados abajo aunque los textos midan distinto (<code>margin-top: auto</code>).</p></section>
+<section class="paso" id="paso5"><h2><span class="num">5</span>El pie en tres bloques</h2><p>Divide el pie en tres bloques (dirección, contacto y enlaces legales) que se muestran en fila en pantallas anchas y uno debajo de otro en el móvil, sin media queries (<code>flex: 1 1 15rem</code>).</p></section>
+<section class="paso" id="paso6"><h2><span class="num">6</span>Formulario de reservas</h2><p>Usa Flexbox en el formulario: cada pareja <code>label</code> + campo en una fila que se apila en el móvil, y los botones al final alineados a la derecha con <code>justify-content: flex-end</code>.</p></section>
+<section class="paso" id="paso7"><h2><span class="num">7</span>Comprueba y publica</h2><p>Prueba el sitio a 360, 768 y 1280 px en el modo dispositivo de DevTools y guarda tres capturas de la portada. Usa el distintivo «flex» de DevTools para comprobar los ejes. 0 errores en los validadores, commits y GitHub Pages.</p><div class="aviso"><p>No cambies el orden visual con <code>order</code> si eso hace que el orden de tabulación no coincida con lo que se ve.</p></div></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1 a 4 y 7.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos en todas las páginas, con las tres capturas.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Añade una galería «carrusel» horizontal con <code>display: flex</code>, <code>overflow-x: auto</code> y <code>scroll-snap-type</code>, accesible con el teclado.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>Captura del nivel 24 de Flexbox Froggy en <code>LEEME.md</code>.</li><li>Cabecera, servicios, tarjetas, pie y formulario maquetados con Flexbox.</li><li>Los botones de las tarjetas quedan alineados abajo.</li><li>A 360 px nada se desborda y todo se puede leer; capturas a 360, 768 y 1280 px.</li><li>No se usa <code>float</code> para maquetar.</li><li>Validadores CSS y HTML: 0 errores.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PR3.4</code> como <code>PR3.4_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de GitHub Pages.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>calificable</strong> (instrumento IE3) de la UP3. Evalúa los criterios 2h del RA2 con la rúbrica de prácticas web del anexo III de la PD; la validación se comprueba en el validador HTML y en el <strong>validador CSS</strong> del W3C. El reto Flexbox Froggy es la actividad de refuerzo gamificada de la PD y forma parte del paso 1. Puede requerirse su defensa oral (IE6).</p>
+
+<table>
+  <caption>Rúbrica de prácticas web (anexo III de la PD)</caption>
+  <thead><tr><th>Criterio</th><th>Peso</th><th>Excelente (10)</th><th>Adecuado (5-7)</th><th>Insuficiente (0-4)</th></tr></thead>
+  <tbody>
+    <tr><td>Funcionalidad y cumplimiento del enunciado</td><td>30 %</td><td>Cumple todos los pasos y requisitos</td><td>Cumple los requisitos principales</td><td>Faltan requisitos esenciales</td></tr>
+    <tr><td>Corrección y validación (W3C)</td><td>25 %</td><td>Sin errores de validación</td><td>Errores menores</td><td>Errores graves o no valida</td></tr>
+    <tr><td>Semántica, accesibilidad y buenas prácticas</td><td>20 %</td><td>Semántico, accesible y bien estructurado</td><td>Mejorable en semántica o accesibilidad</td><td>Sin estructura semántica</td></tr>
+    <tr><td>Organización del código y documentación</td><td>15 %</td><td>Indentado, comentado, nombres claros, Git</td><td>Organización aceptable</td><td>Desordenado, sin comentarios</td></tr>
+    <tr><td>Entrega en plazo y forma</td><td>10 %</td><td>En plazo y en el formato pedido</td><td>Pequeños defectos de forma</td><td>Fuera de plazo o formato incorrecto</td></tr>
+  </tbody>
+</table>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PR 3.2 · Calcula las cajas</title>
+  <style>
+    body { margin: 0; padding: 20px; font-family: Arial, sans-serif; background: #F7F5F0; }
+    .caja { background: #FDF0DF; border-style: solid; border-color: #2F6690; }
+    .c1 { width: 200px; padding: 10px; border-width: 2px; margin: 20px; }
+    .c2 { width: 200px; padding: 10px; border-width: 2px; margin: 20px; box-sizing: border-box; }
+    .c3 { width: 50%; padding: 5%; border-width: 4px; }              /* el body mide 800px de contenido */
+    .c4 { padding: 1em; border-width: 1px; font-size: 20px; width: 10em; }
+    .c5 { display: inline; width: 300px; padding: 10px 20px; margin: 30px; border-width: 3px; }
+    .c6 { margin-top: 40px; margin-bottom: 25px; height: 50px; border-width: 0; }
+    .c7 { margin-top: 30px; height: 50px; border-width: 0; }
+  </style>
+</head>
+<body style="width: 800px;">
+  <h1>Calcula antes de inspeccionar</h1>
+  <p>Para cada caja: ancho visible, alto visible (si se puede calcular) y espacio horizontal ocupado con los márgenes.</p>
+  <div class="caja c1">Caja 1</div>
+  <div class="caja c2">Caja 2</div>
+  <div class="caja c3">Caja 3</div>
+  <div class="caja c4">Caja 4</div>
+  <p>Texto con una <span class="caja c5">caja 5 en línea</span> en mitad del párrafo.</p>
+  <div class="caja c6">Caja 6</div>
+  <div class="caja c7">Caja 7: ¿cuánto espacio hay entre la caja 6 y la 7?</div>
+</body>
+</html>

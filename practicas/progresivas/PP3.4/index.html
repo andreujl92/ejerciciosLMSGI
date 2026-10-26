@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica progresiva 3.4 de LMSGI (1.º ASIR): Maquetación con Flexbox">
+  <title>Práctica progresiva 3.4 · Maquetación con Flexbox · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/enunciado.css">
+  <link rel="icon" href="../../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Serie progresiva · 4 de 6 · Flexbox: maquetar en una dirección</span>
+      <h1>Práctica progresiva 3.4 — Maquetación con Flexbox</h1>
+      <p>Cuarta capa: Flexbox sustituye a los inline-block provisionales. Cabecera con logotipo y menú en la misma fila, tarjetas que crecen y se reparten, botones alineados al fondo y pie en columnas.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <nav class="ruta" aria-label="Serie progresiva"><ol><li><a href="../base/index.html">Base sin estilos</a></li><li><a href="../PP3.1/index.html">PP 3.1</a></li><li><a href="../PP3.2/index.html">PP 3.2</a></li><li><a href="../PP3.3/index.html">PP 3.3</a></li><li aria-current="step"><span>PP 3.4</span></li><li><a href="../PP3.5/index.html">PP 3.5</a></li><li><a href="../PP3.6/index.html">PP 3.6</a></li></ol></nav>
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · formativa</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Distinguir las propiedades del contenedor flex y las de sus elementos.</li><li>Alinear y repartir el espacio con <code>justify-content</code>, <code>align-items</code> y <code>gap</code>.</li><li>Hacer filas que bajan de línea con <code>flex-wrap</code> y elementos que crecen con <code>flex</code>.</li><li>Anidar contenedores flex para alinear el contenido de una tarjeta.</li><li>Sustituir técnicas antiguas (<code>inline-block</code>, <code>line-height</code>) por Flexbox.</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Punto de partida: tu PP 3.3. La serie entera trabaja sobre <strong>un único fichero HTML</strong>, la <a href="../base/index.html">web del Club Náutico Mal Pas</a> (<a href="../base-club-nautico-mal-pas.zip" download>descargar en ZIP</a>), que no se modifica: cada práctica añade una capa a la misma hoja <code>css/estilos.css</code>.</li><li>Teoría de la UP3, sección 8 (diapositivas 58 – 64).</li><li>Ejemplo guiado <a href="../../../EG3.2_tarjetas-de-habitaciones.html">EG 3.2 · Tarjetas de habitaciones</a> (pasos 6 – 10) y <a href="https://flexboxfroggy.com/#es">Flexbox Froggy</a> (en español).</li><li>Laboratorio CSS: <a href="../../../LAB3_laboratorio-css.html#flex">contenedor flex</a> y <a href="../../../LAB3_laboratorio-css.html#flex-items">elementos flex</a>.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <h2>Resultado esperado</h2>
+    <p>Así debe quedar la página al terminar esta práctica. Desplaza las capturas para verla entera.</p>
+    <div class="resultado">
+      <figure><div class="captura"><img src="recursos/resultado-escritorio.jpg" alt="Captura de la web del club al terminar la PP3.4, en escritorio a 1280 píxeles" width="960" loading="lazy"></div><figcaption>Escritorio · 1280 px</figcaption></figure>
+      <figure><div class="captura"><img src="recursos/resultado-movil.jpg" alt="Captura de la web del club al terminar la PP3.4, en un móvil de 375 píxeles" width="375" loading="lazy"></div><figcaption>Móvil · 375 px</figcaption></figure>
+    </div>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Calentamiento y copia</a></li><li><a href="#paso2">Cabecera en una fila</a></li><li><a href="#paso3">Menú y botones de la portada</a></li><li><a href="#paso4">Tarjetas en fila</a></li><li><a href="#paso5">Cifras, opiniones y pie</a></li><li><a href="#paso6">Formulario</a></li><li><a href="#paso7">Centrado perfecto</a></li><li><a href="#paso8">Valida y entrega</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Calentamiento y copia</h2><p>Copia la carpeta de tu práctica anterior como <code>lmsgi/UP3/PP3.4/</code> en tu repositorio y sigue trabajando sobre <strong>la misma hoja</strong> <code>css/estilos.css</code>. No cambies el HTML. Si la práctica anterior no te funciona, pide al profesor su hoja de estilos para no quedarte atrás.</p><p>Antes de empezar, completa los 24 niveles de <a href="https://flexboxfroggy.com/#es">Flexbox Froggy</a> y guarda una captura del último en el <code>LEEME.md</code>.</p></section>
+    <section class="paso" id="paso2"><h2><span class="num">2</span>Cabecera en una fila</h2><p>Convierte <code>.cabecera__fila</code> en un contenedor flex: logotipo a la izquierda y menú a la derecha (<code>justify-content: space-between</code>), centrados en vertical, con <code>gap</code> y <code>flex-wrap: wrap</code> para que el menú baje si no cabe. La <code>.marca</code> será un <code>inline-flex</code> que alinea el logotipo con el nombre.</p>
+<pre data-fichero="css/estilos.css"><code>.cabecera__fila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  /* … */
+}</code></pre></section>
+    <section class="paso" id="paso3"><h2><span class="num">3</span>Menú y botones de la portada</h2><p>Haz flex el <code>ul</code> del menú, con <code>flex-wrap</code> y un <code>gap</code> pequeño, y <strong>borra</strong> la regla <code>.menu li { display: inline-block; }</code> de la PP 3.3: ya no hace falta. Haz lo mismo con <code>.portada__acciones</code> para separar los dos botones con <code>gap: 1rem</code>.</p></section>
+    <section class="paso" id="paso4"><h2><span class="num">4</span>Tarjetas en fila</h2><p>Borra el <code>inline-block</code>, el ancho y el margen provisionales de <code>.tarjeta</code> (PP 3.2) y haz flex el contenedor <code>.tarjetas</code>, con <code>flex-wrap: wrap</code> y <code>gap: 1.5rem</code>. Cada tarjeta parte de 15rem y puede crecer y encoger: <code>flex: 1 1 15rem</code>.</p>
+<p>Ahora alinea los botones «Inscribirme» al fondo aunque los textos tengan distinta longitud. La tarjeta y su cuerpo son, a su vez, contenedores flex en columna:</p>
+<pre data-fichero="css/estilos.css"><code>.tarjeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.tarjeta__cuerpo {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.tarjeta .boton {
+  align-self: flex-start;
+  margin-top: auto; /* empuja el botón al fondo */
+}</code></pre>
+<p>Estrecha la ventana hasta unos 900 px: ¿qué le pasa a la última tarjeta cuando se queda sola en su fila? Anótalo en el <code>LEEME.md</code>: lo resolverás con Grid en la PP 3.5. Experimenta con <code>flex-grow</code>, <code>flex-basis</code> y <code>order</code> en el <a href="../../../LAB3_laboratorio-css.html#flex-items">laboratorio de elementos flex</a>.</p></section>
+    <section class="paso" id="paso5"><h2><span class="num">5</span>Cifras, opiniones y pie</h2><ul>
+<li><code>.datos</code>: flex con <code>flex-wrap</code>, <code>justify-content: space-around</code>, <code>gap</code> y texto centrado; cada <code>li</code> con <code>flex: 1 1 10rem</code> y la cifra (<code>strong</code>) en bloque, encima de su texto. Borra el <code>inline-block</code> de la PP 3.3.</li>
+<li><code>.opiniones</code>: flex con <code>flex-wrap</code> y <code>gap: 1.5rem</code>; cada <code>.opinion</code> con <code>flex: 1 1 18rem</code> y sin margen.</li>
+<li><code>.pie__columnas</code>: flex con <code>flex-wrap</code> y <code>gap: 2rem</code>; cada <code>.pie__bloque</code> con <code>flex: 1 1 14rem</code>.</li>
+</ul></section>
+    <section class="paso" id="paso6"><h2><span class="num">6</span>Formulario</h2><p>Pon los radios del turno en fila con <code>.formulario .opciones</code> flex, <code>flex-wrap</code> y <code>gap</code> (borra el <code>margin-right</code> de las etiquetas de la PP 3.2). La casilla de privacidad (<code>.campo--casilla</code>) también es flex, con <code>align-items: flex-start</code>, para que el texto largo no se meta debajo de la casilla.</p></section>
+    <section class="paso" id="paso7"><h2><span class="num">7</span>Centrado perfecto</h2><p>Centra la flecha del botón <code>.subir</code> con <code>display: flex</code>, <code>align-items: center</code> y <code>justify-content: center</code>. Explica en el <code>LEEME.md</code> por qué este centrado funciona aunque cambie el tamaño de la letra y el de <code>line-height</code> no.</p></section>
+    <section class="paso" id="paso8"><h2><span class="num">8</span>Valida y entrega</h2><p>0 errores en los validadores. Comprueba la página a 1280, 1024 y 768 px. Commit: <code>PP3.4: maquetación con Flexbox</code>.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1 – 4 y 8.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos, con la observación de la última tarjeta y el centrado explicados.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Sin tocar el HTML, haz que la tarjeta «Nuevo» aparezca la primera con <code>order</code> y explica por qué no conviene abusar de esta propiedad (orden visual frente a orden del teclado y del lector de pantalla).</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>Logotipo y menú están en la misma fila en escritorio y el menú baja de línea si no cabe.</li><li>No queda ningún <code>inline-block</code> de maquetación de las prácticas anteriores en menú, tarjetas ni cifras.</li><li>Las cuatro tarjetas tienen la misma altura y los botones «Inscribirme» están alineados al fondo.</li><li>Opiniones y pie se reparten en columnas y bajan de línea en pantallas estrechas.</li><li>Los radios del turno están en fila y la casilla de privacidad alineada con su texto.</li><li>Validadores CSS y HTML: 0 errores.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PP3.4</code> (con <code>index.html</code>, <code>css/</code>, <code>img/</code> y <code>LEEME.md</code>) como <code>PP3.4_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de tu repositorio.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>formativa</strong> de la serie progresiva de la UP3: no tiene nota propia, se revisa en clase con la lista de comprobación y prepara las prácticas calificables (PR 3.1 – 3.5) y el Proyecto 3. Trabaja el criterio 2h del RA2. El profesor puede pedirte que expliques cualquier regla de tu hoja (IE6).</p>
+    <div class="aviso ok"><p><strong>Siguiente:</strong> <a href="../PP3.5/index.html">Práctica progresiva 3.5 · Maquetación con CSS Grid</a>.</p></div>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

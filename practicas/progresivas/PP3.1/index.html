@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica progresiva 3.1 de LMSGI (1.º ASIR): Hoja externa, selectores, color y tipografía">
+  <title>Práctica progresiva 3.1 · Hoja externa, selectores, color y tipografía · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/enunciado.css">
+  <link rel="icon" href="../../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Serie progresiva · 1 de 6 · Selectores, cascada, color y fuentes</span>
+      <h1>Práctica progresiva 3.1 — Hoja externa, selectores, color y tipografía</h1>
+      <p>Primera capa del diseño: enlazas una hoja externa a la web sin estilos del club y le das la paleta de colores, la tipografía y los estilos de texto usando todos los tipos de selector de la unidad.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <nav class="ruta" aria-label="Serie progresiva"><ol><li><a href="../base/index.html">Base sin estilos</a></li><li aria-current="step"><span>PP 3.1</span></li><li><a href="../PP3.2/index.html">PP 3.2</a></li><li><a href="../PP3.3/index.html">PP 3.3</a></li><li><a href="../PP3.4/index.html">PP 3.4</a></li><li><a href="../PP3.5/index.html">PP 3.5</a></li><li><a href="../PP3.6/index.html">PP 3.6</a></li></ol></nav>
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2g, 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · formativa</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Explicar qué ventajas tiene separar el contenido (HTML) de la presentación (CSS) (CE 2g).</li><li>Enlazar una hoja de estilos externa y una fuente web.</li><li>Usar selectores de tipo, clase, id, descendiente, atributo, pseudoclases y pseudoelementos (CE 2h).</li><li>Guardar la paleta en variables y comprobar el contraste del texto (WCAG 2.2, 1.4.3).</li><li>Calcular la especificidad de un selector y predecir qué regla gana.</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Punto de partida: la web base sin estilos. La serie entera trabaja sobre <strong>un único fichero HTML</strong>, la <a href="../base/index.html">web del Club Náutico Mal Pas</a> (<a href="../base-club-nautico-mal-pas.zip" download>descargar en ZIP</a>), que no se modifica: cada práctica añade una capa a la misma hoja <code>css/estilos.css</code>.</li><li>Teoría de la UP3, secciones 1 – 5 (diapositivas 5 – 39).</li><li>Ejemplo guiado <a href="../../../EG3.1_mismo-html-distinto-css.html">EG 3.1 · Mismo HTML, distinto CSS</a>.</li><li>Laboratorio CSS: <a href="../../../LAB3_laboratorio-css.html#selectores">selectores y especificidad</a>, <a href="../../../LAB3_laboratorio-css.html#colores">colores</a>, <a href="../../../LAB3_laboratorio-css.html#unidades">unidades</a> y <a href="../../../LAB3_laboratorio-css.html#tipografia">tipografía</a>.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <h2>Resultado esperado</h2>
+    <p>Así debe quedar la página al terminar esta práctica. Desplaza las capturas para verla entera.</p>
+    <div class="resultado">
+      <figure><div class="captura"><img src="recursos/resultado-escritorio.jpg" alt="Captura de la web del club al terminar la PP3.1, en escritorio a 1280 píxeles" width="960" loading="lazy"></div><figcaption>Escritorio · 1280 px</figcaption></figure>
+      <figure><div class="captura"><img src="recursos/resultado-movil.jpg" alt="Captura de la web del club al terminar la PP3.1, en un móvil de 375 píxeles" width="375" loading="lazy"></div><figcaption>Móvil · 375 px · todavía se desborda: lo resuelves en las PP 3.2 y 3.3</figcaption></figure>
+    </div>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Prepara el proyecto</a></li><li><a href="#paso2">La paleta en variables</a></li><li><a href="#paso3">Estilos generales con selectores de tipo</a></li><li><a href="#paso4">Fuente web</a></li><li><a href="#paso5">Selectores de clase y descendientes</a></li><li><a href="#paso6">Pseudoclases y pseudoelementos</a></li><li><a href="#paso7">Selectores de atributo</a></li><li><a href="#paso8">Cascada y especificidad</a></li><li><a href="#paso9">Valida y entrega</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Prepara el proyecto</h2><p>Descarga la <a href="../base/index.html">web base del Club Náutico Mal Pas</a> (carpeta <code>practicas/progresivas/base/</code>) y cópiala como <code>lmsgi/UP3/PP3.1/</code> en tu repositorio. Ábrela en VS Code con Live Server: verás una página <strong>completa y válida, pero sin estilos</strong>. Recórrela y fíjate en las clases que ya trae el HTML (<code>.portada</code>, <code>.tarjeta</code>, <code>.boton</code>…): son los «ganchos» que usarás en toda la serie.</p>
+<p>Crea el fichero <code>css/estilos.css</code> y enlázalo en el <code>&lt;head&gt;</code>, en el lugar que indica el comentario. Comprueba que funciona con una regla de prueba (por ejemplo, <code>body { background-color: yellow; }</code>) y bórrala.</p>
+<div class="aviso info"><p>Durante toda la serie <strong>no se modifica el HTML</strong>: todo el diseño sale de la hoja de estilos. Es justo la ventaja del CSS externo (CE 2g): explica en el <code>LEEME.md</code> qué pasaría si el club tuviera 40 páginas y los estilos estuvieran en atributos <code>style</code>.</p></div></section>
+    <section class="paso" id="paso2"><h2><span class="num">2</span>La paleta en variables</h2><p>Escribe al principio de la hoja un bloque <code>:root</code> con la paleta del club. Las variables CSS se ven a fondo en la sección 11, pero usarlas desde el principio te ahorrará trabajo: si un color cambia, se cambia en un solo sitio.</p>
+<table><thead><tr><th>Variable</th><th>Valor</th><th>Uso</th></tr></thead><tbody>
+<tr><td><code>--marino</code></td><td><code>#0B3C5D</code></td><td>Títulos, cabecera de la tabla, pie</td></tr>
+<tr><td><code>--marino-claro</code></td><td><code>#E3EEF5</code></td><td>Fondos suaves y texto sobre marino</td></tr>
+<tr><td><code>--turquesa</code> / <code>--turquesa-oscuro</code></td><td><code>#1B998B</code> / <code>#12695F</code></td><td>Detalles / enlaces y cifras</td></tr>
+<tr><td><code>--arena</code></td><td><code>#F6EFE4</code></td><td>Secciones alternas, filas pares</td></tr>
+<tr><td><code>--sol</code></td><td><code>#F6C453</code></td><td>Etiquetas y foco sobre fondo oscuro</td></tr>
+<tr><td><code>--coral</code> / <code>--coral-oscuro</code></td><td><code>#C8472B</code> / <code>#A33A22</code></td><td>Botones y precios / botón al pasar el ratón</td></tr>
+<tr><td><code>--texto</code> / <code>--texto-suave</code></td><td><code>#1F2933</code> / <code>#52606D</code></td><td>Texto normal / secundario</td></tr>
+<tr><td><code>--blanco</code>, <code>--borde</code></td><td><code>#FFFFFF</code>, <code>#DDE3E8</code></td><td>Fondo y líneas</td></tr>
+</tbody></table>
+<p>Añade también <code>--fuente-titulos</code> y <code>--fuente-texto</code> (paso 4). Con el selector de color de DevTools o el comprobador de WebAIM, anota en el <code>LEEME.md</code> el contraste de <code>--texto-suave</code>, <code>--turquesa-oscuro</code> y <code>--coral</code> sobre blanco. ¿Por qué <code>--turquesa</code> no sirve para texto y <code>--turquesa-oscuro</code> sí? Puedes probarlo antes en el <a href="../../../LAB3_laboratorio-css.html#colores">laboratorio de colores</a>.</p></section>
+    <section class="paso" id="paso3"><h2><span class="num">3</span>Estilos generales con selectores de tipo</h2><p>Da a <code>body</code> la fuente del texto, <code>font-size: 1rem</code>, <code>line-height: 1.6</code>, el color <code>--texto</code> y el fondo blanco. Agrupa <code>h1, h2, h3</code> en una sola regla con la fuente de los títulos, interlineado 1.2 y color marino, y después da a cada uno su tamaño en <code>rem</code>: 2.75, 2 y 1.375.</p>
+<pre data-fichero="css/estilos.css"><code>body {
+  font-family: var(--fuente-texto);
+  font-size: 1rem;
+  line-height: 1.6;
+  /* … */
+}
+
+h1,
+h2,
+h3 {
+  /* lo común a los tres títulos */
+}</code></pre>
+<p>Inspecciona un párrafo en DevTools &gt; Calculado: el color le llega <strong>heredado</strong> de <code>body</code>. ¿Por qué los enlaces no heredan ese color? Respóndelo en el <code>LEEME.md</code>.</p></section>
+    <section class="paso" id="paso4"><h2><span class="num">4</span>Fuente web</h2><p>Enlaza la fuente <strong>Nunito</strong> (pesos 600, 700 y 800) de Google Fonts en el <code>&lt;head&gt;</code>, <em>antes</em> de tu hoja, y define la pila de fuentes con alternativas por si no carga:</p>
+<pre data-fichero="index.html (dentro de head)"><code>&lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+&lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+&lt;link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800&amp;display=swap" rel="stylesheet"&gt;
+&lt;link rel="stylesheet" href="css/estilos.css"&gt;</code></pre>
+<pre data-fichero="css/estilos.css (dentro de :root)"><code>--fuente-titulos: "Nunito", "Trebuchet MS", sans-serif;
+--fuente-texto: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;</code></pre>
+<p>En el validador HTML el <code>&amp;</code> de la URL debe escribirse <code>&amp;amp;</code>. Prueba combinaciones de tamaño, peso e interlineado en el <a href="../../../LAB3_laboratorio-css.html#tipografia">laboratorio de tipografía</a> antes de decidir.</p></section>
+    <section class="paso" id="paso5"><h2><span class="num">5</span>Selectores de clase y descendientes</h2><p>Usa las clases del HTML para dar estilo a los textos destacados:</p>
+<ul>
+<li><code>.portada__antetitulo</code>: 0.875rem, negrita, mayúsculas con <code>text-transform</code>, <code>letter-spacing: 0.15em</code> y color turquesa oscuro.</li>
+<li><code>.portada__texto</code> y <code>.seccion__intro</code> (en una sola regla): 1.125rem y texto suave.</li>
+<li><code>.tarjeta__nivel</code> en cursiva y texto suave; <code>.tarjeta__precio</code> con la fuente de títulos, 1.5rem, peso 800 y coral.</li>
+<li>Las cifras del club: selector descendiente <code>.datos strong</code>, 2rem, fuente de títulos y turquesa oscuro.</li>
+</ul></section>
+    <section class="paso" id="paso6"><h2><span class="num">6</span>Pseudoclases y pseudoelementos</h2><ul>
+<li>Enlaces: <code>a</code>, <code>a:hover</code> (coral) y <code>a:focus-visible</code> con un <code>outline</code> de 3 px. Pruébalo con la tecla <kbd>Tab</kbd>: el foco siempre debe verse.</li>
+<li>Primera línea del primer párrafo de «Quiénes somos» en seminegrita: <code>#nosotros p:first-of-type::first-line</code>.</li>
+<li>Tabla de horario: título (<code>caption</code>) en negrita alineado a la izquierda, cabecera en marino y filas pares con fondo arena con <code>:nth-child(even)</code>.</li>
+<li>Opiniones: el texto en cursiva y el autor (<code>cite</code>) en normal, negrita y marino. Las leyendas (<code>legend</code>) del formulario con la fuente de títulos.</li>
+</ul></section>
+    <section class="paso" id="paso7"><h2><span class="num">7</span>Selectores de atributo</h2><p>Añade un icono delante o detrás de cada enlace según su tipo, sin tocar el HTML:</p>
+<pre data-fichero="css/estilos.css"><code>a[href^="tel:"]::before {
+  content: "☎ ";
+}
+
+/* Haz lo mismo con los enlaces mailto: (✉) y con los externos, rel="external" (↗ detrás) */</code></pre></section>
+    <section class="paso" id="paso8"><h2><span class="num">8</span>Cascada y especificidad</h2><p>Calcula en el <code>LEEME.md</code> la especificidad (id, clase, tipo) de estos selectores de tu hoja y ordénalos de más a menos fuerte: <code>#nosotros p:first-of-type::first-line</code>, <code>.horario tbody tr:nth-child(even)</code>, <code>a[rel="external"]::after</code>, <code>.datos strong</code> y <code>legend</code>.</p>
+<p>Después haz este experimento y explica el resultado: añade al <strong>final</strong> de la hoja <code>p { color: red; }</code>. ¿Por qué se vuelven rojos casi todos los párrafos, pero no el nivel de las tarjetas (<code>.tarjeta__nivel</code>)? Borra la regla al terminar. Puedes comprobar tus cálculos en el <a href="../../../LAB3_laboratorio-css.html#selectores">laboratorio de selectores</a>.</p></section>
+    <section class="paso" id="paso9"><h2><span class="num">9</span>Valida y entrega</h2><p>Pasa la hoja por el <a href="https://jigsaw.w3.org/css-validator/">validador CSS del W3C</a> y el HTML por el <a href="https://validator.w3.org/">validador HTML</a>: 0 errores. Haz un commit con un mensaje claro, por ejemplo <code>PP3.1: paleta, tipografía y selectores</code>.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1 – 5 y 9.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos, con el <code>LEEME.md</code> completo (contraste y especificidad).</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Cambia el color de la selección de texto con <code>::selection</code>, y sustituye el enlace de Google Fonts por una fuente alojada en tu carpeta <code>fonts/</code> declarada con <code>@font-face</code>. Explica qué ganas y qué pierdes.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>La hoja es externa y está enlazada; el HTML no tiene atributos <code>style</code>.</li><li>La paleta está en variables y todos los colores de la hoja usan <code>var()</code>.</li><li>Los títulos usan Nunito y hay una fuente alternativa.</li><li>Hay al menos un selector de cada tipo: tipo, clase, id, descendiente, atributo, pseudoclase y pseudoelemento.</li><li>El foco de los enlaces se ve al navegar con <kbd>Tab</kbd>.</li><li>El <code>LEEME.md</code> recoge los contrastes, la especificidad y el experimento de la cascada.</li><li>Validadores CSS y HTML: 0 errores.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PP3.1</code> (con <code>index.html</code>, <code>css/</code>, <code>img/</code> y <code>LEEME.md</code>) como <code>PP3.1_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de tu repositorio.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>formativa</strong> de la serie progresiva de la UP3: no tiene nota propia, se revisa en clase con la lista de comprobación y prepara las prácticas calificables (PR 3.1 – 3.5) y el Proyecto 3. Trabaja el criterio 2g, 2h del RA2. El profesor puede pedirte que expliques cualquier regla de tu hoja (IE6).</p>
+    <div class="aviso ok"><p><strong>Siguiente:</strong> <a href="../PP3.2/index.html">Práctica progresiva 3.2 · Modelo de cajas, fondos, bordes y sombras</a>.</p></div>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

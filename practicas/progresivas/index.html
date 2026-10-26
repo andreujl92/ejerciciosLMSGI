@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Serie de prácticas progresivas de CSS de la UP3 de LMSGI (1.º ASIR): de una web sin estilos a un diseño adaptable completo">
+  <title>Serie progresiva de la UP3 · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/enunciado.css">
+  <link rel="icon" href="../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">UP3 · Serie progresiva · 6 prácticas</span>
+      <h1>De HTML sin estilos a web adaptable</h1>
+      <p>Seis prácticas encadenadas sobre un único fichero HTML, la web del Club Náutico Mal Pas. Cada una aplica una parte del diseño con los contenidos de una sección de la teoría, hasta dejarlo terminado en la última.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <h2>Cómo funciona</h2>
+    <ul>
+      <li>Todo el alumnado parte de la misma <a href="base/index.html">web base</a> (<a href="base-club-nautico-mal-pas.zip" download>ZIP</a>): una página completa, válida y semántica, con las clases ya puestas y <strong>sin ningún estilo</strong>.</li>
+      <li>El HTML no se toca en toda la serie (solo se enlazan la hoja y la fuente en la PP 3.1). Todo sale de <code>css/estilos.css</code>, que crece práctica a práctica: es la mejor demostración de las ventajas de las hojas de estilo (CE 2g).</li>
+      <li>Algunas soluciones son provisionales a propósito (por ejemplo, tarjetas con <code>inline-block</code> en la PP 3.2) y se sustituyen después por Flexbox y Grid, para que se vea qué problema resuelve cada técnica.</li>
+      <li>Cada enunciado trae capturas del resultado esperado en escritorio y en móvil, enlaces al <a href="../../LAB3_laboratorio-css.html">laboratorio CSS</a> para probar las propiedades antes de escribirlas y una lista de comprobación.</li>
+    </ul>
+
+    <h2>Las prácticas</h2>
+    <table>
+      <thead><tr><th>Práctica</th><th>Teoría</th><th>Duración</th></tr></thead>
+      <tbody><tr><td><a href="PP3.1/index.html">PP 3.1 · Hoja externa, selectores, color y tipografía</a></td><td>Secciones 1 – 5 (diapositivas 5 – 39)</td><td>2 sesiones</td></tr><tr><td><a href="PP3.2/index.html">PP 3.2 · Modelo de cajas, fondos, bordes y sombras</a></td><td>Sección 6 (diapositivas 40 – 50)</td><td>2 sesiones</td></tr><tr><td><a href="PP3.3/index.html">PP 3.3 · Listas, menú, posicionamiento, float y overflow</a></td><td>Sección 7 (diapositivas 51 – 57)</td><td>2 sesiones</td></tr><tr><td><a href="PP3.4/index.html">PP 3.4 · Maquetación con Flexbox</a></td><td>Sección 8 (diapositivas 58 – 64)</td><td>2 sesiones</td></tr><tr><td><a href="PP3.5/index.html">PP 3.5 · Maquetación con CSS Grid</a></td><td>Sección 9 (diapositivas 65 – 73)</td><td>2 sesiones</td></tr><tr><td><a href="PP3.6/index.html">PP 3.6 · Diseño adaptable, transiciones y validación</a></td><td>Secciones 10 y 11 (diapositivas 74 – 87)</td><td>3 sesiones</td></tr></tbody>
+    </table>
+
+    <h2>La evolución del diseño</h2>
+    <div class="serie"><figure><img src="vistas/base.jpg" alt="Web del club sin estilos" width="480" height="300" loading="lazy"><figcaption><a href="base/index.html">Base sin estilos</a></figcaption></figure><figure><img src="vistas/PP3.1.jpg" alt="Web del club al terminar la PP3.1" width="480" height="300" loading="lazy"><figcaption><a href="PP3.1/index.html">PP 3.1 · Selectores, cascada, color y fuentes</a></figcaption></figure><figure><img src="vistas/PP3.2.jpg" alt="Web del club al terminar la PP3.2" width="480" height="300" loading="lazy"><figcaption><a href="PP3.2/index.html">PP 3.2 · Cajas, márgenes, fondos y sombras</a></figcaption></figure><figure><img src="vistas/PP3.3.jpg" alt="Web del club al terminar la PP3.3" width="480" height="300" loading="lazy"><figcaption><a href="PP3.3/index.html">PP 3.3 · Listas, menú y posicionamiento</a></figcaption></figure><figure><img src="vistas/PP3.4.jpg" alt="Web del club al terminar la PP3.4" width="480" height="300" loading="lazy"><figcaption><a href="PP3.4/index.html">PP 3.4 · Flexbox: maquetar en una dirección</a></figcaption></figure><figure><img src="vistas/PP3.5.jpg" alt="Web del club al terminar la PP3.5" width="480" height="300" loading="lazy"><figcaption><a href="PP3.5/index.html">PP 3.5 · Grid: maquetar en dos dimensiones</a></figcaption></figure><figure><img src="vistas/PP3.6.jpg" alt="Web del club al terminar la PP3.6" width="480" height="300" loading="lazy"><figcaption><a href="PP3.6/index.html">PP 3.6 · Mobile first, transiciones y validación</a></figcaption></figure></div>
+
+    <div class="aviso info"><p>Prácticas <strong>formativas</strong>: sirven de entrenamiento guiado para las prácticas calificables de la UP3 (PR 3.1 – 3.5) y el Proyecto 3, como refuerzo para quien necesita más pasos o como trabajo en casa. Si alguien se queda atrás, puede continuar desde la hoja de la práctica anterior que facilita el profesor.</p></div>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica 3.5 de LMSGI (1.º ASIR): Maquetación con Grid y diseño adaptable">
+  <title>Práctica 3.5 · Maquetación con Grid y diseño adaptable · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/enunciado.css">
+  <link rel="icon" href="../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Práctica 3.5 · CSS Grid</span>
+      <h1>Práctica 3.5 — Maquetación con Grid y diseño adaptable</h1>
+      <p>Maqueta la portada del Hotel Levante con CSS Grid siguiendo su boceto, crea una galería y un formulario en rejilla, y haz que todo el sitio se adapte al móvil, la tableta y el escritorio con mobile first.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2f, 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · calificable</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Definir rejillas con <code>grid-template-columns</code>, <code>fr</code>, <code>repeat()</code> y <code>minmax()</code>.</li><li>Maquetar una página con <code>grid-template-areas</code>.</li><li>Aplicar la estrategia mobile first con media queries (CE 2h).</li><li>Comprobar el resultado con las herramientas del navegador y Lighthouse (CE 2f).</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Reto gamificado <a href="https://cssgridgarden.com/#es">Grid Garden</a> (en español, 28 niveles).</li><li>Tu PR 3.4. Si tu PR 2.5 está incompleta, parte de la <a href="../base-hotel-levante/index.html">web base del Hotel Levante</a> (carpeta <code>practicas/base-hotel-levante/</code>, sin CSS).</li><li><a href="recursos/boceto-adaptable.svg">boceto-adaptable.svg</a>: la portada en móvil, tableta y escritorio.</li><li>Ejemplo guiado <a href="../../EG3.3_portada-adaptable.html">EG 3.3 · Portada adaptable</a> y teoría, secciones 9 y 10.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Reto Grid Garden</a></li><li><a href="#paso2">La portada en áreas</a></li><li><a href="#paso3">Tableta y escritorio</a></li><li><a href="#paso4">Galería y tarjetas con auto-fit</a></li><li><a href="#paso5">Formulario en rejilla</a></li><li><a href="#paso6">Imágenes adaptables y comprobación</a></li><li><a href="#paso7">Valida y publica</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Reto Grid Garden</h2><p>Completa los 28 niveles de <a href="https://cssgridgarden.com/#es">Grid Garden</a> y guarda una captura del último. Explica en el <code>LEEME.md</code> la diferencia entre <code>grid-column: 2 / 4</code> y <code>grid-column: 2 / span 2</code>.</p></section>
+<section class="paso" id="paso2"><h2><span class="num">2</span>La portada en áreas</h2><p>Trabaja sobre una copia de tu sitio de la PR 2.5 en la carpeta <code>lmsgi/UP3/PR3.5/</code> de tu repositorio. Cada práctica de la UP3 continúa la hoja de estilos de la anterior: copia la carpeta de la práctica anterior y sigue desde ahí.</p><p>Estudia el <a href="recursos/boceto-adaptable.svg">boceto</a> y escribe la maqueta de la portada con <code>grid-template-areas</code>: <strong>primero la versión móvil</strong> (una columna), sin media queries. Cada región semántica (<code>header</code>, <code>main</code>, <code>aside</code>, <code>footer</code>) va en su área.</p></section>
+<section class="paso" id="paso3"><h2><span class="num">3</span>Tableta y escritorio</h2><p>Añade al final de la hoja dos media queries con <code>min-width</code> (por ejemplo, 600 px y 1000 px) que redefinan las áreas: en tableta las opiniones van en dos columnas; en escritorio aparece la columna lateral con la oferta. Elige los puntos de ruptura donde <em>tu</em> diseño se rompe y justifícalos.</p><pre data-fichero="css/estilos.css (final de la hoja)"><code>/* ===== Tableta ===== */
+@media (min-width: 600px) {
+  …
+}
+/* ===== Escritorio ===== */
+@media (min-width: 1000px) {
+  .portada {
+    grid-template-columns: 1fr 1fr 1fr 300px;
+    grid-template-areas:
+      &quot;bienvenida bienvenida bienvenida oferta&quot;
+      …;
+  }
+}</code></pre></section>
+<section class="paso" id="paso4"><h2><span class="num">4</span>Galería y tarjetas con auto-fit</h2><p>Añade a la portada o a <code>habitaciones.html</code> una galería de al menos seis imágenes con <code>repeat(auto-fit, minmax(min(200px, 100%), 1fr))</code>. Las imágenes mantienen la proporción con <code>aspect-ratio</code> y <code>object-fit: cover</code>. Haz que la primera ocupe dos columnas en escritorio.</p></section>
+<section class="paso" id="paso5"><h2><span class="num">5</span>Formulario en rejilla</h2><p>Maqueta el formulario de reservas con Grid: en escritorio, las etiquetas en una columna y los campos en otra (<code>grid-template-columns: max-content 1fr</code>), y en el móvil una sola columna. Compara en el <code>LEEME.md</code> esta solución con la de Flexbox de la PR 3.4.</p></section>
+<section class="paso" id="paso6"><h2><span class="num">6</span>Imágenes adaptables y comprobación</h2><p>Todas las imágenes con <code>max-width: 100%</code>, <code>width</code> y <code>height</code> en el HTML y <code>loading="lazy"</code> las que quedan fuera de la primera pantalla. Comprueba el sitio a 360, 768 y 1280 px y ejecuta Lighthouse en modo móvil: anota Rendimiento, Accesibilidad y Buenas prácticas.</p></section>
+<section class="paso" id="paso7"><h2><span class="num">7</span>Valida y publica</h2><p>0 errores en los validadores CSS y HTML, commits y GitHub Pages. El sitio del hotel queda terminado: inclúyelo en tu portafolio del módulo.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1, 2, 3 y 7 (portada adaptable con áreas).</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos, con Lighthouse accesibilidad ≥ 90.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Ampliación de la PD: añade transiciones y una animación con <code>@keyframes</code> respetando <code>prefers-reduced-motion</code>, y usa <code>subgrid</code> para alinear los títulos y precios de las tarjetas.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>Captura del último nivel de Grid Garden en <code>LEEME.md</code>.</li><li>La portada usa <code>grid-template-areas</code> y es mobile first (media queries con <code>min-width</code> al final de la hoja).</li><li>A 360, 768 y 1280 px no hay desbordamientos y el contenido mantiene un orden lógico.</li><li>La galería usa <code>auto-fit</code> + <code>minmax()</code>.</li><li>Lighthouse móvil: accesibilidad ≥ 90 (resultados en <code>LEEME.md</code>).</li><li>Validadores CSS y HTML: 0 errores.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PR3.5</code> como <code>PR3.5_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de GitHub Pages.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>calificable</strong> (instrumento IE3) de la UP3. Evalúa los criterios 2f y 2h del RA2 con la rúbrica de prácticas web del anexo III de la PD; la validación se comprueba en el validador HTML y en el <strong>validador CSS</strong> del W3C. El reto Grid Garden es la actividad de refuerzo gamificada de la PD. Puede requerirse su defensa oral (IE6).</p>
+
+<table>
+  <caption>Rúbrica de prácticas web (anexo III de la PD)</caption>
+  <thead><tr><th>Criterio</th><th>Peso</th><th>Excelente (10)</th><th>Adecuado (5-7)</th><th>Insuficiente (0-4)</th></tr></thead>
+  <tbody>
+    <tr><td>Funcionalidad y cumplimiento del enunciado</td><td>30 %</td><td>Cumple todos los pasos y requisitos</td><td>Cumple los requisitos principales</td><td>Faltan requisitos esenciales</td></tr>
+    <tr><td>Corrección y validación (W3C)</td><td>25 %</td><td>Sin errores de validación</td><td>Errores menores</td><td>Errores graves o no valida</td></tr>
+    <tr><td>Semántica, accesibilidad y buenas prácticas</td><td>20 %</td><td>Semántico, accesible y bien estructurado</td><td>Mejorable en semántica o accesibilidad</td><td>Sin estructura semántica</td></tr>
+    <tr><td>Organización del código y documentación</td><td>15 %</td><td>Indentado, comentado, nombres claros, Git</td><td>Organización aceptable</td><td>Desordenado, sin comentarios</td></tr>
+    <tr><td>Entrega en plazo y forma</td><td>10 %</td><td>En plazo y en el formato pedido</td><td>Pequeños defectos de forma</td><td>Fuera de plazo o formato incorrecto</td></tr>
+  </tbody>
+</table>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

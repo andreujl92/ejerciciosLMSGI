@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica progresiva 3.6 de LMSGI (1.º ASIR): Diseño adaptable, transiciones y validación">
+  <title>Práctica progresiva 3.6 · Diseño adaptable, transiciones y validación · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../css/enunciado.css">
+  <link rel="icon" href="../../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Serie progresiva · 6 de 6 · Mobile first, transiciones y validación</span>
+      <h1>Práctica progresiva 3.6 — Diseño adaptable, transiciones y validación</h1>
+      <p>Última capa: reorganizas la hoja en mobile first con media queries, añades transiciones que respetan las preferencias del usuario y validas y auditas la web. Al terminar, el diseño del club está completo.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <nav class="ruta" aria-label="Serie progresiva"><ol><li><a href="../base/index.html">Base sin estilos</a></li><li><a href="../PP3.1/index.html">PP 3.1</a></li><li><a href="../PP3.2/index.html">PP 3.2</a></li><li><a href="../PP3.3/index.html">PP 3.3</a></li><li><a href="../PP3.4/index.html">PP 3.4</a></li><li><a href="../PP3.5/index.html">PP 3.5</a></li><li aria-current="step"><span>PP 3.6</span></li></ol></nav>
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2f, 2h</dd></div><div><dt>Duración</dt><dd>3 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · formativa</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Explicar la función de la etiqueta <code>meta viewport</code>.</li><li>Reorganizar una hoja de escritorio en mobile first con media queries <code>min-width</code> en <code>em</code>.</li><li>Elegir los puntos de ruptura donde se rompe el diseño, no por dispositivos concretos.</li><li>Cambiar valores con variables dentro de una media query.</li><li>Añadir transiciones moderadas y respetar <code>prefers-reduced-motion</code>.</li><li>Validar y auditar la web con el validador del W3C y Lighthouse (CE 2f).</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Punto de partida: tu PP 3.5. La serie entera trabaja sobre <strong>un único fichero HTML</strong>, la <a href="../base/index.html">web del Club Náutico Mal Pas</a> (<a href="../base-club-nautico-mal-pas.zip" download>descargar en ZIP</a>), que no se modifica: cada práctica añade una capa a la misma hoja <code>css/estilos.css</code>.</li><li>Teoría de la UP3, secciones 10 y 11 (diapositivas 74 – 87).</li><li>Ejemplo guiado <a href="../../../EG3.3_portada-adaptable.html">EG 3.3 · Portada adaptable</a>.</li><li>Laboratorio CSS: <a href="../../../LAB3_laboratorio-css.html#adaptable">diseño adaptable</a> y <a href="../../../LAB3_laboratorio-css.html#transiciones">variables y transiciones</a>.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <h2>Resultado esperado</h2>
+    <p>Así debe quedar la página al terminar esta práctica (diseño completo). Desplaza las capturas para verla entera.</p>
+    <div class="resultado">
+      <figure><div class="captura"><img src="recursos/resultado-escritorio.jpg" alt="Captura de la web del club al terminar la PP3.6, en escritorio a 1280 píxeles" width="960" loading="lazy"></div><figcaption>Escritorio · 1280 px</figcaption></figure>
+      <figure><div class="captura"><img src="recursos/resultado-movil.jpg" alt="Captura de la web del club al terminar la PP3.6, en un móvil de 375 píxeles" width="375" loading="lazy"></div><figcaption>Móvil · 375 px</figcaption></figure>
+    </div>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Continúa tu web</a></li><li><a href="#paso2">Diagnóstico a 375 px</a></li><li><a href="#paso3">Primero el móvil</a></li><li><a href="#paso4">Media queries</a></li><li><a href="#paso5">Transiciones</a></li><li><a href="#paso6">Prueba en todos los anchos</a></li><li><a href="#paso7">Valida y audita</a></li><li><a href="#paso8">Publica</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Continúa tu web</h2><p>Copia la carpeta de tu práctica anterior como <code>lmsgi/UP3/PP3.6/</code> en tu repositorio y sigue trabajando sobre <strong>la misma hoja</strong> <code>css/estilos.css</code>. No cambies el HTML. Si la práctica anterior no te funciona, pide al profesor su hoja de estilos para no quedarte atrás.</p><p>Comprueba que el <code>&lt;head&gt;</code> tiene <code>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</code> y explica en el <code>LEEME.md</code> qué pasaría en un móvil sin ella.</p></section>
+    <section class="paso" id="paso2"><h2><span class="num">2</span>Diagnóstico a 375 px</h2><p>Activa el modo dispositivo de DevTools (<kbd>Ctrl</kbd> + <kbd>Mayús</kbd> + <kbd>M</kbd>) a 375 px y apunta en el <code>LEEME.md</code> todo lo que no funciona. Deberías encontrar, como mínimo: la galería que se desborda (PP 3.5), la cabecera fija que ocupa media pantalla, la foto flotante que deja una columna de texto estrechísima, el formulario y el aviso en dos columnas y títulos demasiado grandes.</p>
+<p>Puedes ver cómo responde una maqueta a distintos anchos en el <a href="../../../LAB3_laboratorio-css.html#adaptable">laboratorio de diseño adaptable</a>.</p></section>
+    <section class="paso" id="paso3"><h2><span class="num">3</span>Primero el móvil</h2><p>En mobile first, las reglas <strong>sin</strong> media query son las del móvil. Cambia en su sitio de la hoja:</p>
+<ul>
+<li><code>h1</code> a 2.125rem y <code>h2</code> a 1.625rem; <code>.portada</code> con <code>padding-block: 3.5rem</code>.</li>
+<li>El relleno de las secciones pasa a una variable que cambiará en la media query:</li>
+</ul>
+<pre data-fichero="css/estilos.css"><code>:root {
+  --espacio-seccion: 2.5rem;
+}
+
+.seccion {
+  padding-block: var(--espacio-seccion);
+}</code></pre>
+<ul>
+<li>La cabecera deja de ser <code>sticky</code> en el móvil, y logotipo y menú se centran (<code>justify-content: center</code> en <code>.cabecera__fila</code> y en <code>.menu ul</code>).</li>
+<li>La foto de «Quiénes somos» deja de flotar: vuelve a ser un bloque de todo el ancho.</li>
+<li>La galería no aplica el <code>span 2</code> y el primer <code>fieldset</code> no es una rejilla.</li>
+<li>La inscripción es una sola columna y el aviso de seguridad va <strong>antes</strong> del formulario, solo con áreas: <code>grid-template-areas: "meteo" "formulario";</code>. El aviso no es <code>sticky</code>.</li>
+</ul></section>
+    <section class="paso" id="paso4"><h2><span class="num">4</span>Media queries</h2><p>Al <strong>final</strong> de la hoja, de menor a mayor, añade las media queries que recuperan el diseño de escritorio. Pon en cada una solo lo que cambia:</p>
+<pre data-fichero="css/estilos.css (final de la hoja)"><code>/* Tableta pequeña: 640 px */
+@media (min-width: 40em) {
+  /* foto flotante al 40 %, foto destacada 2 × 2, datos personales en dos columnas */
+}
+
+/* Tableta y portátil: 768 px */
+@media (min-width: 48em) {
+  :root {
+    --espacio-seccion: 4rem;
+  }
+  /* tamaños de h1 y h2, relleno de la portada, cabecera sticky y space-between */
+}
+
+/* Escritorio: 896 px */
+@media (min-width: 56em) {
+  /* inscripción en dos áreas (2fr 1fr) y aviso sticky */
+}</code></pre>
+<p>Los puntos de ruptura se eligen donde <em>tu</em> diseño se rompe: arrastra el borde de la ventana y justifica los tuyos en el <code>LEEME.md</code>. Usa <code>em</code> para que respeten el tamaño de letra que haya elegido el usuario.</p></section>
+    <section class="paso" id="paso5"><h2><span class="num">5</span>Transiciones</h2><p>Añade movimiento suave y corto, solo a propiedades que el navegador anima sin esfuerzo (<code>transform</code>, <code>opacity</code>, colores):</p>
+<ul>
+<li><code>.boton</code> y <code>.menu a</code>: <code>transition</code> del fondo, el color y <code>transform</code> en 0.2s; el botón sube 2 px al pasar el ratón (<code>translateY(-2px)</code>).</li>
+<li><code>.tarjeta</code>: sube 4 px y aumenta la sombra al pasar el ratón (0.25s).</li>
+<li>Galería: la foto se amplía un 5 % (<code>scale(1.05)</code>) dentro de su celda; el <code>.galeria__item</code> necesita <code>overflow: hidden</code>.</li>
+<li><code>html { scroll-behavior: smooth; }</code> para que los saltos del menú sean suaves.</li>
+</ul>
+<p>Y respeta a quien ha pedido menos movimiento en su sistema:</p>
+<pre data-fichero="css/estilos.css (final de la hoja)"><code>@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+  }
+}</code></pre>
+<p>Ajusta duraciones y curvas en el <a href="../../../LAB3_laboratorio-css.html#transiciones">laboratorio de transiciones</a>.</p></section>
+    <section class="paso" id="paso6"><h2><span class="num">6</span>Prueba en todos los anchos</h2><p>Comprueba la web a 320, 375, 768, 1024 y 1440 px. En ningún ancho debe haber scroll horizontal (salvo dentro de la tabla), ningún texto cortado ni ningún elemento solapado. Prueba también el zoom del navegador al 200 %.</p></section>
+    <section class="paso" id="paso7"><h2><span class="num">7</span>Valida y audita</h2><p>Valida la hoja con el <a href="https://jigsaw.w3.org/css-validator/">validador CSS del W3C</a> y el HTML con el <a href="https://validator.w3.org/">validador HTML</a>: 0 errores. Las advertencias sobre variables CSS son normales; explica en el <code>LEEME.md</code> por qué aparecen.</p>
+<p>Ejecuta Lighthouse en modo móvil y anota Rendimiento, Accesibilidad y Buenas prácticas. Objetivo: Accesibilidad ≥ 90.</p></section>
+    <section class="paso" id="paso8"><h2><span class="num">8</span>Publica</h2><p>Commit (<code>PP3.6: diseño adaptable y transiciones</code>) y publicación en GitHub Pages. El diseño del club está terminado: compara la primera captura de la serie (sin estilos) con la final y escribe tres conclusiones sobre lo que aporta cada capa.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1 – 4, 7 y 8.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos, con Lighthouse accesibilidad ≥ 90 y los puntos de ruptura justificados.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Modo oscuro con <code>@media (prefers-color-scheme: dark)</code>: crea variables con nombres de función (<code>--fondo</code>, <code>--superficie</code>, <code>--texto</code>…) en lugar de nombres de color y redefínelas en la media query. Añade una hoja de impresión con <code>@media print</code> que oculte el menú, el formulario y el botón «volver arriba».</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>La hoja es mobile first: las reglas sin media query son las del móvil y las media queries usan <code>min-width</code> en <code>em</code>.</li><li>A 375 px no hay scroll horizontal, la cabecera no es fija y el aviso de seguridad va antes del formulario.</li><li>A partir de 768 px la cabecera es fija y el diseño coincide con el de la PP 3.5.</li><li>El espacio entre secciones cambia con una variable redefinida en una media query.</li><li>Botones, tarjetas y fotos tienen transiciones suaves que desaparecen con <code>prefers-reduced-motion</code>.</li><li>Validadores CSS y HTML: 0 errores. Lighthouse accesibilidad ≥ 90.</li><li>La web está publicada en GitHub Pages.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PP3.6</code> (con <code>index.html</code>, <code>css/</code>, <code>img/</code> y <code>LEEME.md</code>) como <code>PP3.6_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de tu repositorio.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>formativa</strong> de la serie progresiva de la UP3: no tiene nota propia, se revisa en clase con la lista de comprobación y prepara las prácticas calificables (PR 3.1 – 3.5) y el Proyecto 3. Trabaja el criterio 2f, 2h del RA2. El profesor puede pedirte que expliques cualquier regla de tu hoja (IE6).</p>
+    
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

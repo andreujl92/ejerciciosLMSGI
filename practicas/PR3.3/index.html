@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica 3.3 de LMSGI (1.º ASIR): Listas, menús y posicionamiento">
+  <title>Práctica 3.3 · Listas, menús y posicionamiento · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/enunciado.css">
+  <link rel="icon" href="../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Práctica 3.3 · Navegación y posicionamiento</span>
+      <h1>Práctica 3.3 — Listas, menús y posicionamiento</h1>
+      <p>Convierte las listas del sitio en un menú de navegación accesible y usa el posicionamiento para la cabecera fija, el sello de oferta, el botón de contacto y las tablas anchas.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · calificable</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Dar formato a listas con <code>list-style</code> y contenido generado.</li><li>Crear un menú horizontal accesible a partir de una lista de enlaces, con la página actual marcada.</li><li>Usar <code>position</code> (<code>relative</code>, <code>absolute</code>, <code>fixed</code>, <code>sticky</code>) y <code>z-index</code> (CE 2h).</li><li>Controlar el desbordamiento con <code>overflow</code>.</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Tu PR 3.2. Si tu PR 2.5 está incompleta, parte de la <a href="../base-hotel-levante/index.html">web base del Hotel Levante</a> (carpeta <code>practicas/base-hotel-levante/</code>, sin CSS).</li><li>Teoría, sección 7, y EG 3.2 (paso 9: el sello).</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">El menú principal</a></li><li><a href="#paso2">Enlace para saltar al contenido</a></li><li><a href="#paso3">Listas con estilo</a></li><li><a href="#paso4">Cabecera pegada y sello de oferta</a></li><li><a href="#paso5">Botón fijo de contacto</a></li><li><a href="#paso6">Tabla de tarifas en el móvil</a></li><li><a href="#paso7">Comprueba y publica</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>El menú principal</h2><p>Trabaja sobre una copia de tu sitio de la PR 2.5 en la carpeta <code>lmsgi/UP3/PR3.3/</code> de tu repositorio. Cada práctica de la UP3 continúa la hoja de estilos de la anterior: copia la carpeta de la práctica anterior y sigue desde ahí.</p><p>Convierte la lista del <code>nav</code> en una barra horizontal: sin viñetas ni márgenes de la lista, enlaces con <code>display: block</code> y relleno (toda la caja es clicable), y estados <code>:hover</code> y <code>:focus-visible</code>. Marca en cada página su enlace con <code>aria-current="page"</code> y dale estilo con el selector de atributo.</p><pre data-fichero="index.html (fragmento)"><code>&lt;nav aria-label=&quot;Menú principal&quot;&gt;
+  &lt;ul class=&quot;menu&quot;&gt;
+    &lt;li&gt;&lt;a href=&quot;index.html&quot; aria-current=&quot;page&quot;&gt;Inicio&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href=&quot;habitaciones.html&quot;&gt;Habitaciones&lt;/a&gt;&lt;/li&gt;
+    …
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre></section>
+<section class="paso" id="paso2"><h2><span class="num">2</span>Enlace para saltar al contenido</h2><p>Añade como primer elemento del <code>body</code> un enlace <code>&lt;a class="saltar" href="#contenido"&gt;Saltar al contenido&lt;/a&gt;</code> (y el <code>id="contenido"</code> en <code>main</code>). Ocúltalo fuera de la pantalla con <code>position: absolute</code> y hazlo visible con <code>:focus</code>. Pruébalo pulsando <kbd>Tab</kbd> al cargar la página (WCAG 2.4.1).</p></section>
+<section class="paso" id="paso3"><h2><span class="num">3</span>Listas con estilo</h2><p>Da formato a la lista de servicios con una marca propia (<code>::before</code> con <code>content</code> o <code>list-style-type</code> con un carácter) y a la lista ordenada de la paella de la carta (si la tienes) o a otra lista ordenada con <code>list-style-type</code> o contadores CSS (<code>counter-reset</code>, <code>counter-increment</code>).</p></section>
+<section class="paso" id="paso4"><h2><span class="num">4</span>Cabecera pegada y sello de oferta</h2><p>Haz que la cabecera quede pegada arriba al hacer scroll (<code>position: sticky</code>). En la tarjeta de la suite añade un sello «Oferta» con <code>position: absolute</code> en una esquina: recuerda que la tarjeta debe ser su referencia (<code>position: relative</code>). Ajusta el <code>z-index</code> para que el sello no tape la cabecera al hacer scroll.</p></section>
+<section class="paso" id="paso5"><h2><span class="num">5</span>Botón fijo de contacto</h2><p>Añade a todas las páginas un enlace «Llamar» (<code>tel:</code>) fijo en la esquina inferior derecha (<code>position: fixed</code>), con texto visible o un <code>aria-label</code> si solo es un icono. Comprueba que no tapa el pie: añade al <code>body</code> un margen inferior suficiente.</p></section>
+<section class="paso" id="paso6"><h2><span class="num">6</span>Tabla de tarifas en el móvil</h2><p>Envuelve la tabla de tarifas en un <code>div class="tabla-scroll"</code> con <code>overflow-x: auto</code> para que en un móvil de 360 px se desplace dentro de su caja sin ensanchar la página. Da formato a la tabla: <code>border-collapse</code>, rellenos, cabeceras destacadas y filas alternas con <code>:nth-child(even)</code>.</p></section>
+<section class="paso" id="paso7"><h2><span class="num">7</span>Comprueba y publica</h2><p>Recorre todo el sitio con el teclado. En DevTools, modo dispositivo a 360 px: no debe aparecer scroll horizontal en la página. 0 errores en los validadores, commits y GitHub Pages. Explica en el <code>LEEME.md</code> qué valor de <code>position</code> usaste en cada caso y por qué.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1, 3, 4 y 7.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos en todas las páginas.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Añade un submenú desplegable en «Habitaciones» (Individual, Doble, Suite) que se abra con <code>:hover</code> y con <code>:focus-within</code>, posicionado con <code>absolute</code>.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>El menú es una lista de enlaces dentro de <code>nav</code>, con la página actual marcada con <code>aria-current</code>.</li><li>El enlace «Saltar al contenido» aparece al pulsar <kbd>Tab</kbd> y funciona.</li><li>La cabecera es <code>sticky</code> y el sello <code>absolute</code> respecto a su tarjeta.</li><li>El botón fijo no tapa contenido y tiene un nombre accesible.</li><li>A 360 px no hay scroll horizontal; la tabla se desplaza en su caja.</li><li>Validadores CSS y HTML: 0 errores.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PR3.3</code> como <code>PR3.3_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de GitHub Pages.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>calificable</strong> (instrumento IE3) de la UP3. Evalúa los criterios 2h del RA2 con la rúbrica de prácticas web del anexo III de la PD; la validación se comprueba en el validador HTML y en el <strong>validador CSS</strong> del W3C. Puede requerirse su defensa oral (IE6).</p>
+
+<table>
+  <caption>Rúbrica de prácticas web (anexo III de la PD)</caption>
+  <thead><tr><th>Criterio</th><th>Peso</th><th>Excelente (10)</th><th>Adecuado (5-7)</th><th>Insuficiente (0-4)</th></tr></thead>
+  <tbody>
+    <tr><td>Funcionalidad y cumplimiento del enunciado</td><td>30 %</td><td>Cumple todos los pasos y requisitos</td><td>Cumple los requisitos principales</td><td>Faltan requisitos esenciales</td></tr>
+    <tr><td>Corrección y validación (W3C)</td><td>25 %</td><td>Sin errores de validación</td><td>Errores menores</td><td>Errores graves o no valida</td></tr>
+    <tr><td>Semántica, accesibilidad y buenas prácticas</td><td>20 %</td><td>Semántico, accesible y bien estructurado</td><td>Mejorable en semántica o accesibilidad</td><td>Sin estructura semántica</td></tr>
+    <tr><td>Organización del código y documentación</td><td>15 %</td><td>Indentado, comentado, nombres claros, Git</td><td>Organización aceptable</td><td>Desordenado, sin comentarios</td></tr>
+    <tr><td>Entrega en plazo y forma</td><td>10 %</td><td>En plazo y en el formato pedido</td><td>Pequeños defectos de forma</td><td>Fuera de plazo o formato incorrecto</td></tr>
+  </tbody>
+</table>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica 3.1 de LMSGI (1.º ASIR): Selectores, colores y tipografía">
+  <title>Práctica 3.1 · Selectores, colores y tipografía · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/enunciado.css">
+  <link rel="icon" href="../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Práctica 3.1 · Primera hoja de estilos</span>
+      <h1>Práctica 3.1 — Selectores, colores y tipografía</h1>
+      <p>Da a la web del Hotel Levante su primera hoja de estilos externa: paleta corporativa, tipografía, selectores de todo tipo y una comparación que demuestre por qué conviene separar contenido y presentación.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2g, 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · calificable</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Identificar las ventajas de las hojas de estilo comparando estilos en línea y hoja externa (CE 2g).</li><li>Aplicar una hoja externa con selectores de tipo, clase, descendiente, atributo, pseudoclase y pseudoelemento (CE 2h).</li><li>Definir una paleta con variables CSS que cumpla el contraste WCAG 4,5:1.</li><li>Validar la hoja con el validador CSS del W3C (CE 2f).</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li>Tu sitio de la PR 2.5. Si tu PR 2.5 está incompleta, parte de la <a href="../base-hotel-levante/index.html">web base del Hotel Levante</a> (carpeta <code>practicas/base-hotel-levante/</code>, sin CSS).</li><li><a href="recursos/en-linea.html" download>en-linea.html</a>: una página con estilos en línea para el paso 1.</li><li>Ejemplo guiado <a href="../../EG3.1_mismo-html-distinto-css.html">EG 3.1 · Mismo HTML, distinto CSS</a> y teoría, secciones 1 a 5.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">¿Por qué hojas de estilo?</a></li><li><a href="#paso2">Enlaza la hoja externa</a></li><li><a href="#paso3">Paleta y contraste</a></li><li><a href="#paso4">Tipografía</a></li><li><a href="#paso5">Selectores</a></li><li><a href="#paso6">Cascada y herencia</a></li><li><a href="#paso7">Valida y publica</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>¿Por qué hojas de estilo?</h2><p>Abre <a href="recursos/en-linea.html">en-linea.html</a>: tiene todos sus estilos escritos con el atributo <code>style</code>. Cuenta cuántas veces se repite el color azul y responde en <code>LEEME.md</code>: si el hotel cambia su color corporativo, ¿cuántas ediciones harían falta en un sitio de 30 páginas? Pasa sus estilos a una hoja externa <code>en-linea.css</code> con clases y compara el número de líneas. Enumera al menos <strong>cuatro ventajas</strong> de las hojas de estilo con un ejemplo de este caso (CE 2g).</p></section>
+<section class="paso" id="paso2"><h2><span class="num">2</span>Enlaza la hoja externa</h2><p>Trabaja sobre una copia de tu sitio de la PR 2.5 en la carpeta <code>lmsgi/UP3/PR3.1/</code> de tu repositorio. Cada práctica de la UP3 continúa la hoja de estilos de la anterior: copia la carpeta de la práctica anterior y sigue desde ahí.</p><p>Crea <code>css/estilos.css</code> y enlázala en el <code>head</code> de <strong>todas</strong> las páginas. Organiza la hoja en bloques comentados: variables, reinicio, base, componentes y páginas.</p><pre data-fichero="Estructura"><code>PR3.1/
+├── index.html
+├── habitaciones.html
+├── reservas.html
+├── contacto.html
+├── css/
+│   └── estilos.css
+├── img/
+└── LEEME.md</code></pre></section>
+<section class="paso" id="paso3"><h2><span class="num">3</span>Paleta y contraste</h2><p>Define en <code>:root</code> al menos cinco variables de color (principal, secundario, fondo, texto y acento) escritas en formatos distintos (hexadecimal, <code>rgb()</code> y <code>hsl()</code>). Comprueba en DevTools (selector de color) o en WebAIM que <strong>todo el texto cumple 4,5:1</strong> sobre su fondo y anota las relaciones en <code>LEEME.md</code>.</p><pre data-fichero="css/estilos.css"><code>/* ===== Variables ===== */
+:root {
+  --color-principal: #2F6690;
+  --color-acento: hsl(32 88% 62%);
+  --color-texto: rgb(43 43 43);
+  /* … */
+}</code></pre></section>
+<section class="paso" id="paso4"><h2><span class="num">4</span>Tipografía</h2><p>Elige dos familias como máximo (una para títulos y otra para el texto) con su pila de alternativas. Si usas una fuente web, alójala en <code>fuentes/</code> con <code>@font-face</code> en formato <code>woff2</code> (evita enviar datos a terceros: RGPD). Tamaños en <code>rem</code>, <code>line-height</code> sin unidad y líneas de 65 caracteres como máximo en los párrafos.</p></section>
+<section class="paso" id="paso5"><h2><span class="num">5</span>Selectores</h2><p>Usa en tu hoja, con sentido, <strong>todos</strong> estos tipos de selector y documenta un ejemplo de cada uno en una tabla del <code>LEEME.md</code> (selector, a qué elementos afecta, especificidad):</p><ul><li>Tipo, clase y agrupación (<code>h1, h2</code>).</li><li>Descendiente (<code>nav a</code>) e hijo directo (<code>ul &gt; li</code>).</li><li>Atributo: por ejemplo, <code>a[href^="http"]</code> para marcar los enlaces externos o <code>a[href^="tel:"]</code>.</li><li>Pseudoclases <code>:hover</code> y <code>:focus-visible</code> (siempre juntas) y una estructural (<code>:nth-child</code>) para las filas de la tabla de tarifas.</li><li>Un pseudoelemento (<code>::before</code>, <code>::after</code> o <code>::first-letter</code>) decorativo.</li></ul><div class="aviso"><p>No uses identificadores (<code>#id</code>) para dar estilo ni <code>!important</code>: dificultan la cascada.</p></div></section>
+<section class="paso" id="paso6"><h2><span class="num">6</span>Cascada y herencia</h2><p>Provoca a propósito un conflicto entre dos reglas para el mismo elemento, captura la pestaña <strong>Estilos</strong> de DevTools donde se ve la declaración tachada y explica en <code>LEEME.md</code> por qué gana la otra (origen, especificidad u orden). Explica también qué propiedades de <code>body</code> heredan los párrafos y cuáles no.</p></section>
+<section class="paso" id="paso7"><h2><span class="num">7</span>Valida y publica</h2><p>Pasa <code>estilos.css</code> por el <a href="https://jigsaw.w3.org/css-validator/#validate_by_upload">validador CSS del W3C</a> hasta tener <strong>0 errores</strong> y vuelve a validar el HTML. Haz commits con mensajes claros y publica el sitio en GitHub Pages.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1 a 3 y 7 aplicados a <code>index.html</code>, con al menos cuatro tipos de selector.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos en todas las páginas, con 0 errores en los dos validadores y el contraste comprobado.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Añade un tema oscuro con <code>@media (prefers-color-scheme: dark)</code> redefiniendo solo las variables, y una hoja de impresión con <code>@media print</code>.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>Ninguna página tiene atributos <code>style</code> ni elementos <code>&lt;style&gt;</code>: todo está en <code>css/estilos.css</code>.</li><li>La paleta está en variables y todo el texto cumple 4,5:1.</li><li>La tabla de selectores del <code>LEEME.md</code> recoge los siete tipos pedidos.</li><li>Los enlaces y botones tienen <code>:hover</code> y <code>:focus-visible</code>.</li><li>Validador CSS: 0 errores · Validador HTML: 0 errores.</li><li>La comparativa del paso 1 enumera al menos cuatro ventajas de las hojas de estilo.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PR3.1</code> como <code>PR3.1_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de GitHub Pages.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>calificable</strong> (instrumento IE3) de la UP3. Evalúa los criterios 2g y 2h del RA2 con la rúbrica de prácticas web del anexo III de la PD; la validación se comprueba en el validador HTML y en el <strong>validador CSS</strong> del W3C. Puede requerirse su defensa oral (IE6).</p>
+
+<table>
+  <caption>Rúbrica de prácticas web (anexo III de la PD)</caption>
+  <thead><tr><th>Criterio</th><th>Peso</th><th>Excelente (10)</th><th>Adecuado (5-7)</th><th>Insuficiente (0-4)</th></tr></thead>
+  <tbody>
+    <tr><td>Funcionalidad y cumplimiento del enunciado</td><td>30 %</td><td>Cumple todos los pasos y requisitos</td><td>Cumple los requisitos principales</td><td>Faltan requisitos esenciales</td></tr>
+    <tr><td>Corrección y validación (W3C)</td><td>25 %</td><td>Sin errores de validación</td><td>Errores menores</td><td>Errores graves o no valida</td></tr>
+    <tr><td>Semántica, accesibilidad y buenas prácticas</td><td>20 %</td><td>Semántico, accesible y bien estructurado</td><td>Mejorable en semántica o accesibilidad</td><td>Sin estructura semántica</td></tr>
+    <tr><td>Organización del código y documentación</td><td>15 %</td><td>Indentado, comentado, nombres claros, Git</td><td>Organización aceptable</td><td>Desordenado, sin comentarios</td></tr>
+    <tr><td>Entrega en plazo y forma</td><td>10 %</td><td>En plazo y en el formato pedido</td><td>Pequeños defectos de forma</td><td>Fuera de plazo o formato incorrecto</td></tr>
+  </tbody>
+</table>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

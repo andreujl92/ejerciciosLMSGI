@@ -37,27 +37,27 @@ Cada práctica es independiente y trabaja sobre la web base del **Hotel Levante*
 
 | Práctica | Contenido |
 |---|---|
-| **[PR 3.1](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/PR3.1)** | Selectores, colores y tipografía |
-| **[PR 3.2](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/PR3.2)** | El modelo de cajas |
-| **[PR 3.3](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/PR3.3)** | Listas, menús y posicionamiento |
-| **[PR 3.4](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/PR3.4)** | Maquetación con Flexbox |
-| **[PR 3.5](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/PR3.5)** | Maquetación con Grid y diseño adaptable |
-| **[Proyecto 3](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/Proyecto3)** | Sitio web adaptable de un negocio de Benidorm |
+| **[PR 3.1](https://andreujl92.github.io/ejerciciosLMSGI/practicas/PR3.1/index.html)** | Selectores, colores y tipografía |
+| **[PR 3.2](https://andreujl92.github.io/ejerciciosLMSGI/practicas/PR3.2/index.html)** | El modelo de cajas |
+| **[PR 3.3](https://andreujl92.github.io/ejerciciosLMSGI/practicas/PR3.3/index.html)** | Listas, menús y posicionamiento |
+| **[PR 3.4](https://andreujl92.github.io/ejerciciosLMSGI/practicas/PR3.4/index.html)** | Maquetación con Flexbox |
+| **[PR 3.5](https://andreujl92.github.io/ejerciciosLMSGI/practicas/PR3.5/index.html)** | Maquetación con Grid y diseño adaptable |
+| **[Proyecto 3](https://andreujl92.github.io/ejerciciosLMSGI/practicas/Proyecto3/index.html)** | Sitio web adaptable de un negocio de Benidorm |
 
-Web base: **[base-hotel-levante](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/base-hotel-levante)**
+Web base: **[base-hotel-levante](https://andreujl92.github.io/ejerciciosLMSGI/practicas/base-hotel-levante/index.html)**
 
 ### Prácticas progresivas
-Serie encadenada: cada práctica parte del resultado de la anterior hasta completar la web del **Club Náutico Mal Pas**.
+Serie encadenada: cada práctica parte del resultado de la anterior hasta completar la web del **Club Náutico Mal Pas**. Portada de la serie: **[Prácticas progresivas](https://andreujl92.github.io/ejerciciosLMSGI/practicas/progresivas/index.html)**
 
 | Práctica | Contenido |
 |---|---|
-| **[Base](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/progresivas/base)** | Proyecto de partida (HTML sin estilos) |
-| **[PP 3.1](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/progresivas/PP3.1)** | Hoja externa, selectores, color y tipografía |
-| **[PP 3.2](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/progresivas/PP3.2)** | Modelo de cajas, fondos, bordes y sombras |
-| **[PP 3.3](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/progresivas/PP3.3)** | Listas, menú, posicionamiento, float y overflow |
-| **[PP 3.4](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/progresivas/PP3.4)** | Maquetación con Flexbox |
-| **[PP 3.5](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/progresivas/PP3.5)** | Maquetación con CSS Grid |
-| **[PP 3.6](https://github.com/andreujl92/LMSGI_ASIX/tree/main/2026-2027/UNIDADES_DIDACTICAS/UP03_CSS3_maquetacion_diseno_adaptable/practicas/progresivas/PP3.6)** | Diseño adaptable, transiciones y validación |
+| **[Base](https://andreujl92.github.io/ejerciciosLMSGI/practicas/progresivas/base/index.html)** | Proyecto de partida (HTML sin estilos) |
+| **[PP 3.1](https://andreujl92.github.io/ejerciciosLMSGI/practicas/progresivas/PP3.1/index.html)** | Hoja externa, selectores, color y tipografía |
+| **[PP 3.2](https://andreujl92.github.io/ejerciciosLMSGI/practicas/progresivas/PP3.2/index.html)** | Modelo de cajas, fondos, bordes y sombras |
+| **[PP 3.3](https://andreujl92.github.io/ejerciciosLMSGI/practicas/progresivas/PP3.3/index.html)** | Listas, menú, posicionamiento, float y overflow |
+| **[PP 3.4](https://andreujl92.github.io/ejerciciosLMSGI/practicas/progresivas/PP3.4/index.html)** | Maquetación con Flexbox |
+| **[PP 3.5](https://andreujl92.github.io/ejerciciosLMSGI/practicas/progresivas/PP3.5/index.html)** | Maquetación con CSS Grid |
+| **[PP 3.6](https://andreujl92.github.io/ejerciciosLMSGI/practicas/progresivas/PP3.6/index.html)** | Diseño adaptable, transiciones y validación |
 
 ---
 
@@ -70,6 +70,7 @@ Serie encadenada: cada práctica parte del resultado de la anterior hasta comple
 ├── EG3.2_tarjetas-de-habitaciones.html  # Ejemplo Guiado 3.2
 ├── EG3.3_portada-adaptable.html         # Ejemplo Guiado 3.3
 ├── LAB3_laboratorio-css.html            # Laboratorio CSS interactivo
+├── practicas/                           # Enunciados de prácticas (PR, Proyecto y progresivas)
 └── assets/
     ├── logo.svg                         # Logotipo LMSGI
     ├── player.css                       # Estilos del reproductor interactivo

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Formulario de reserva del Hotel Levante">
+  <title>Reservas · Hotel Levante · Benidorm</title>
+  <!-- Enlaza aquí tu hoja de estilos: <link rel="stylesheet" href="css/estilos.css"> -->
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="img/logo.svg" alt="Hotel Levante, ir a la portada" width="200" height="120"></a>
+    <nav aria-label="Menú principal">
+      <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="habitaciones.html">Habitaciones</a></li>
+          <li><a href="reservas.html" aria-current="page">Reservas</a></li>
+          <li><a href="contacto.html">Contacto</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main id="contenido">
+    <h1>Reserva tu habitación</h1>
+    <form action="https://httpbin.org/post" method="post">
+      <fieldset>
+        <legend>Tus datos</legend>
+        <p><label for="nombre">Nombre y apellidos</label>
+          <input type="text" id="nombre" name="nombre" autocomplete="name" required></p>
+        <p><label for="correo">Correo electrónico</label>
+          <input type="email" id="correo" name="correo" autocomplete="email" required></p>
+        <p><label for="telefono">Teléfono</label>
+          <input type="tel" id="telefono" name="telefono" autocomplete="tel" pattern="[0-9 +]{9,15}"></p>
+      </fieldset>
+      <fieldset>
+        <legend>Tu estancia</legend>
+        <p><label for="llegada">Fecha de llegada</label>
+          <input type="date" id="llegada" name="llegada" required></p>
+        <p><label for="noches">Noches</label>
+          <input type="number" id="noches" name="noches" min="1" max="30" value="2" required></p>
+        <p><label for="tipo">Habitación</label>
+          <select id="tipo" name="tipo">
+            <option>Individual</option>
+            <option selected>Doble</option>
+            <option>Suite</option>
+          </select></p>
+        <p><label for="observaciones">Observaciones</label>
+          <textarea id="observaciones" name="observaciones" rows="4"></textarea></p>
+      </fieldset>
+      <p><input type="checkbox" id="privacidad" name="privacidad" required>
+        <label for="privacidad">He leído y acepto la <a href="privacidad.html">política de privacidad</a></label></p>
+      <p><button type="submit">Enviar reserva</button></p>
+    </form>
+  </main>
+  <footer>
+    <address>Hotel Levante · Avda. del Mediterráneo, 1 · 03503 Benidorm (Alicante)</address>
+    <p><a href="tel:+34965000000">+34 965 000 000</a> · <a href="mailto:recepcion@hotellevante.es">recepcion@hotellevante.es</a></p>
+    <p><a href="privacidad.html">Privacidad</a> · &copy; 2026 Hotel Levante</p>
+  </footer>
+</body>
+</html>

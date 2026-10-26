@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Prof. Andreu Juan Luna">
+  <meta name="description" content="Práctica 3.2 de LMSGI (1.º ASIR): El modelo de cajas">
+  <title>Práctica 3.2 · El modelo de cajas · LMSGI</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/enunciado.css">
+  <link rel="icon" href="../img/logo.svg">
+</head>
+<body>
+  <header class="cabecera">
+    <div class="contenedor">
+      <img src="../img/logo.svg" alt="Logotipo del módulo LMSGI">
+      <div>
+        <div class="modulo">Lenguajes de Marcas y Sistemas de Gestión de Información · 1.º ASIR</div>
+        <div class="autor">Prof. Andreu Juan Luna</div>
+      </div>
+      <div class="curso">UP3 · Curso 2026-2027</div>
+    </div>
+  </header>
+  <section class="portada">
+    <div class="contenedor">
+      <span class="etiqueta">Práctica 3.2 · Cajas, márgenes y bordes</span>
+      <h1>Práctica 3.2 — El modelo de cajas</h1>
+      <p>Calcula, comprueba y aplica el modelo de cajas: primero predices el tamaño de unas cajas y lo verificas en DevTools; después maquetas con él las tarjetas de habitaciones y los botones de la web del hotel.</p>
+    </div>
+  </section>
+
+  <main class="contenedor">
+    <dl class="ficha"><div><dt>UP</dt><dd>UP3</dd></div><div><dt>Criterios</dt><dd>RA2 · 2h</dd></div><div><dt>Duración</dt><dd>2 sesiones</dd></div><div><dt>Agrupamiento</dt><dd>Individual</dd></div><div><dt>Entrega</dt><dd>Aules · ZIP + URL del repositorio</dd></div><div><dt>Tipo</dt><dd>Desarrollo · calificable</dd></div></dl>
+
+    <h2>Objetivos</h2>
+    <ul><li>Calcular el tamaño de una caja a partir de su contenido, relleno, borde y margen.</li><li>Diferenciar <code>content-box</code> y <code>border-box</code>, bloque, en línea e <code>inline-block</code>.</li><li>Usar márgenes, rellenos, bordes, fondos y sombras para dar forma a los componentes (CE 2h).</li><li>Inspeccionar el modelo de cajas con DevTools (CE 2f).</li></ul>
+
+    <h2>Recursos</h2>
+    <ul><li><a href="recursos/cajas.html">cajas.html</a>: seis cajas para el ejercicio de cálculo (paso 1).</li><li>Tu PR 3.1. Si tu PR 2.5 está incompleta, parte de la <a href="../base-hotel-levante/index.html">web base del Hotel Levante</a> (carpeta <code>practicas/base-hotel-levante/</code>, sin CSS).</li><li>Ejemplo guiado <a href="../../EG3.2_tarjetas-de-habitaciones.html">EG 3.2 · Tarjetas de habitaciones</a> (pasos 1-5) y teoría, sección 6.</li><li>Plantilla <a href="recursos/LEEME-plantilla.md" download>LEEME-plantilla.md</a>.</li></ul>
+
+    <nav class="indice" aria-label="Pasos de la práctica"><strong>Pasos</strong><ol><li><a href="#paso1">Predice y comprueba</a></li><li><a href="#paso2">Reinicio y contenedor</a></li><li><a href="#paso3">Tarjetas de habitaciones</a></li><li><a href="#paso4">Botones y enlaces</a></li><li><a href="#paso5">Ritmo vertical</a></li><li><a href="#paso6">Fondo de la portada</a></li><li><a href="#paso7">Valida y publica</a></li></ol></nav>
+
+    <section class="paso" id="paso1"><h2><span class="num">1</span>Predice y comprueba</h2><p>Abre <a href="recursos/cajas.html">cajas.html</a>. <strong>Sin abrir DevTools</strong>, calcula para cada caja el ancho visible, el alto visible y el espacio horizontal que ocupa con sus márgenes, y apúntalo en la tabla del <code>LEEME.md</code>. Después compruébalo en DevTools &gt; Calculado y explica cada diferencia (colapso de márgenes, <code>box-sizing</code>, elementos en línea…).</p></section>
+<section class="paso" id="paso2"><h2><span class="num">2</span>Reinicio y contenedor</h2><p>Trabaja sobre una copia de tu sitio de la PR 2.5 en la carpeta <code>lmsgi/UP3/PR3.2/</code> de tu repositorio. Cada práctica de la UP3 continúa la hoja de estilos de la anterior: copia la carpeta de la práctica anterior y sigue desde ahí.</p><p>Añade a tu hoja el reinicio <code>box-sizing: border-box</code> para todos los elementos y quita el margen de <code>body</code>. Crea una clase <code>.contenedor</code> que centre el contenido con un ancho máximo y un relleno lateral, y úsala en <code>main</code>, en la cabecera y en el pie.</p><pre data-fichero="css/estilos.css"><code>.contenedor {
+  width: min(100% - 2rem, 1100px);
+  margin-inline: auto;
+}</code></pre></section>
+<section class="paso" id="paso3"><h2><span class="num">3</span>Tarjetas de habitaciones</h2><p>Convierte cada <code>article</code> de <code>habitaciones.html</code> en una tarjeta: fondo, relleno, borde fino, <code>border-radius</code> y <code>box-shadow</code>. Las imágenes deben ocupar el ancho de la tarjeta (<code>width: 100%</code>, <code>height: auto</code>, <code>display: block</code>) y separarse del texto con margen.</p></section>
+<section class="paso" id="paso4"><h2><span class="num">4</span>Botones y enlaces</h2><p>Crea una clase <code>.boton</code> para los enlaces «Reservar» y el botón del formulario, con <code>display: inline-block</code>, relleno en <code>em</code> o <code>rem</code>, esquinas redondeadas y un tamaño mínimo de 44 × 44 px para que sea fácil de pulsar en el móvil. Añade sus estados <code>:hover</code>, <code>:focus-visible</code> y <code>:active</code>. <strong>No elimines el contorno del foco</strong> sin sustituirlo por otro visible.</p></section>
+<section class="paso" id="paso5"><h2><span class="num">5</span>Ritmo vertical</h2><p>Ajusta los márgenes de títulos, párrafos y secciones con una escala coherente (por ejemplo, 0,5 – 1 – 1,5 – 3 rem) guardada en variables. Comprueba en DevTools que conoces dónde colapsan los márgenes y documenta un caso en el <code>LEEME.md</code>.</p></section>
+<section class="paso" id="paso6"><h2><span class="num">6</span>Fondo de la portada</h2><p>Pon la imagen de la fachada como fondo de la bienvenida de la portada con <code>background-size: cover</code> y un degradado oscuro encima para que el texto blanco cumpla el contraste. Si la imagen es informativa, deja el <code>img</code> en el HTML; si es decorativa, puede ir en CSS.</p></section>
+<section class="paso" id="paso7"><h2><span class="num">7</span>Valida y publica</h2><p>0 errores en los validadores CSS y HTML. Commits con mensajes claros y publicación en GitHub Pages.</p></section>
+
+    <h2>Niveles de realización</h2>
+    <div class="niveles">
+      <div class="nivel basico"><h3>Básico</h3><p>Pasos 1, 2, 3 y 7.</p></div>
+      <div class="nivel estandar"><h3>Estándar</h3><p>Todos los pasos, con la tabla de cálculo completa y explicada.</p></div>
+      <div class="nivel ampliacion"><h3>Ampliación</h3><p>Añade un modo «tarjeta destacada» para la suite con <code>outline</code> y <code>outline-offset</code>, y compara en el <code>LEEME.md</code> <code>outline</code>, <code>border</code> y <code>box-shadow</code> en el modelo de cajas.</p></div>
+    </div>
+
+    <h2>Antes de entregar, comprueba que…</h2>
+    <ul class="comprobacion"><li>La tabla del paso 1 tiene las seis cajas con la predicción, el valor real y la explicación.</li><li>Todos los elementos usan <code>border-box</code> y el contenido está centrado con <code>.contenedor</code>.</li><li>Las tarjetas tienen relleno, borde, radio y sombra; las imágenes no se desbordan.</li><li>Los botones miden al menos 44 × 44 px y tienen foco visible.</li><li>El texto de la portada cumple 4,5:1 sobre el fondo.</li><li>Validadores CSS y HTML: 0 errores.</li><li>Declaración de uso de IA en <code>LEEME.md</code>.</li></ul>
+
+    <h2>Entrega</h2>
+    <p>Comprime la carpeta <code>PR3.2</code> como <code>PR3.2_Apellido_Nombre.zip</code>, súbela a Aules y escribe en el comentario la URL de GitHub Pages.</p>
+    <div class="aviso info">
+      <p><strong>Uso de inteligencia artificial.</strong> Puedes usar asistentes de IA para entender un error o resolver una duda, pero no para hacer la práctica por ti. Si los usas, decláralo en el fichero <code>LEEME.md</code> de tu entrega (qué herramienta, para qué y qué cambiaste tú). Debes poder explicar y defender todo lo que entregues (instrumento IE6). Presentar código generado sin declararlo supone un 0 en la práctica (PD, apartado 6.5).</p>
+    </div>
+
+    <h2>Evaluación</h2>
+    <p>Práctica <strong>calificable</strong> (instrumento IE3) de la UP3. Evalúa los criterios 2h del RA2 con la rúbrica de prácticas web del anexo III de la PD; la validación se comprueba en el validador HTML y en el <strong>validador CSS</strong> del W3C. Puede requerirse su defensa oral (IE6).</p>
+
+<table>
+  <caption>Rúbrica de prácticas web (anexo III de la PD)</caption>
+  <thead><tr><th>Criterio</th><th>Peso</th><th>Excelente (10)</th><th>Adecuado (5-7)</th><th>Insuficiente (0-4)</th></tr></thead>
+  <tbody>
+    <tr><td>Funcionalidad y cumplimiento del enunciado</td><td>30 %</td><td>Cumple todos los pasos y requisitos</td><td>Cumple los requisitos principales</td><td>Faltan requisitos esenciales</td></tr>
+    <tr><td>Corrección y validación (W3C)</td><td>25 %</td><td>Sin errores de validación</td><td>Errores menores</td><td>Errores graves o no valida</td></tr>
+    <tr><td>Semántica, accesibilidad y buenas prácticas</td><td>20 %</td><td>Semántico, accesible y bien estructurado</td><td>Mejorable en semántica o accesibilidad</td><td>Sin estructura semántica</td></tr>
+    <tr><td>Organización del código y documentación</td><td>15 %</td><td>Indentado, comentado, nombres claros, Git</td><td>Organización aceptable</td><td>Desordenado, sin comentarios</td></tr>
+    <tr><td>Entrega en plazo y forma</td><td>10 %</td><td>En plazo y en el formato pedido</td><td>Pequeños defectos de forma</td><td>Fuera de plazo o formato incorrecto</td></tr>
+  </tbody>
+</table>
+  </main>
+  <footer class="pie">LMSGI · CFGS Administración de Sistemas Informáticos en Red · Prof. Andreu Juan Luna · Curso 2026-2027</footer>
+</body>
+</html>

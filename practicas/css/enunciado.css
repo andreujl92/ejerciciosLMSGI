@@ -1,0 +1,120 @@
+/* =========================================================
+   Enunciados de prácticas · LMSGI · Prof. Andreu Juan Luna
+   ========================================================= */
+:root {
+  --naranja: #F3A447;
+  --naranja-oscuro: #B76E12;
+  --salvia: #A5B592;
+  --amarillo: #E7BC29;
+  --rosa: #D092A7;
+  --lila: #9C85C0;
+  --azul: #809EC2;
+  --oscuro: #444D26;
+  --texto: #34362F;
+  --suave: #6E7064;
+  --fondo: #FFFFFF;
+  --fondo-alt: #FAF8F4;
+  --borde: #E6E1D8;
+  --tinta: #FDF0DF;
+  --codigo-fondo: #2F2B36;
+  --codigo-texto: #ECE8E1;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--fondo-alt); color: var(--texto);
+  font-family: "Open Sans", system-ui, -apple-system, "Segoe UI", sans-serif; line-height: 1.65; font-size: 17px;
+}
+a { color: var(--naranja-oscuro); }
+.contenedor { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+/* ---------- cabecera ---------- */
+.cabecera { background: #fff; border-bottom: 4px solid var(--naranja); }
+.cabecera .contenedor { display: flex; align-items: center; gap: 16px; padding-top: 16px; padding-bottom: 16px; }
+.cabecera img { width: 56px; height: 56px; flex: none; }
+.cabecera .modulo { font-weight: 700; color: var(--oscuro); line-height: 1.3; }
+.cabecera .autor { font-size: .9rem; color: var(--suave); }
+.cabecera .curso { margin-left: auto; font-size: .85rem; color: var(--suave); text-align: right; }
+
+.portada { background: linear-gradient(120deg, var(--salvia) 0%, var(--naranja) 40%, var(--rosa) 75%, var(--azul) 100%); color: #fff; }
+.portada .contenedor { padding-top: 34px; padding-bottom: 34px; }
+.etiqueta { display: inline-block; font-size: .78rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  background: rgba(255,255,255,.22); padding: 4px 12px; border-radius: 999px; }
+.portada h1 { font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.2; margin: 12px 0 8px; font-weight: 700; }
+.portada p { margin: 0; font-size: 1.05rem; opacity: .96; }
+
+/* ---------- cuerpo ---------- */
+main.contenedor { background: #fff; padding-top: 28px; padding-bottom: 40px; box-shadow: 0 0 0 1px var(--borde); }
+h2 { color: var(--oscuro); font-size: 1.45rem; margin: 2.2em 0 .6em; padding-bottom: 6px; border-bottom: 2px solid var(--tinta); }
+h3 { color: var(--oscuro); font-size: 1.12rem; margin: 1.6em 0 .4em; }
+.ficha { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 10px; margin: 0 0 8px; }
+.ficha div { background: var(--fondo-alt); border: 1px solid var(--borde); border-radius: 10px; padding: 10px 14px; }
+.ficha dt { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--suave); }
+.ficha dd { margin: 2px 0 0; font-weight: 600; color: var(--oscuro); }
+
+/* pasos numerados */
+.paso { position: relative; padding-left: 58px; }
+.paso > h2 { border: 0; margin-top: 2em; }
+.paso > h2 .num {
+  position: absolute; left: 0; width: 42px; height: 42px; border-radius: 50%; background: var(--naranja); color: #fff;
+  display: grid; place-items: center; font-size: 1.1rem; margin-top: -4px;
+}
+
+code { font-family: Consolas, "DejaVu Sans Mono", monospace; background: #F2EEE6; padding: 1px 5px; border-radius: 4px; font-size: .9em; }
+pre { background: var(--codigo-fondo); color: var(--codigo-texto); padding: 16px 18px; border-radius: 10px; overflow-x: auto;
+  font-family: Consolas, "DejaVu Sans Mono", monospace; font-size: .9rem; line-height: 1.55; }
+pre code { background: none; padding: 0; color: inherit; font-size: inherit; }
+pre[data-fichero]::before { content: attr(data-fichero); display: block; color: var(--naranja); font-size: .78rem; margin-bottom: 8px; }
+kbd { font-family: Consolas, monospace; background: #F2EEE6; border: 1px solid #DDD5C6; border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; font-size: .85em; }
+
+.aviso { border-left: 5px solid var(--naranja); background: var(--tinta); padding: 12px 16px; border-radius: 0 10px 10px 0; margin: 16px 0; }
+.aviso.info { border-color: var(--azul); background: #ECF1F7; }
+.aviso.ok { border-color: var(--salvia); background: #EEF2E9; }
+.aviso > :first-child { margin-top: 0; } .aviso > :last-child { margin-bottom: 0; }
+
+.niveles { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; }
+.nivel { border: 1px solid var(--borde); border-top: 5px solid var(--salvia); border-radius: 10px; padding: 12px 16px; }
+.nivel.estandar { border-top-color: var(--naranja); }
+.nivel.ampliacion { border-top-color: var(--lila); }
+.nivel h3 { margin-top: 0; }
+
+table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: .95rem; }
+th, td { border: 1px solid var(--borde); padding: 8px 10px; text-align: left; vertical-align: top; }
+thead th { background: var(--naranja); color: #fff; border-color: var(--naranja); }
+tbody tr:nth-child(even) { background: var(--fondo-alt); }
+caption { text-align: left; font-weight: 700; color: var(--oscuro); padding-bottom: 6px; }
+
+.comprobacion { list-style: none; padding-left: 0; }
+.comprobacion li { position: relative; padding-left: 34px; margin: 8px 0; }
+.comprobacion li::before { content: ""; position: absolute; left: 0; top: 4px; width: 20px; height: 20px; border: 2px solid var(--salvia); border-radius: 5px; }
+
+.pie { color: var(--suave); font-size: .85rem; padding: 18px 20px 30px; text-align: center; }
+.indice { background: var(--fondo-alt); border: 1px solid var(--borde); border-radius: 10px; padding: 10px 18px; }
+.indice ol { margin: 6px 0; padding-left: 20px; columns: 2; }
+/* ---------- serie progresiva: ruta, capturas y evolución ---------- */
+.ruta ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px; padding: 0; margin: 0 0 18px; }
+.ruta li a, .ruta li span { display: inline-block; padding: 3px 12px; border-radius: 999px; border: 1px solid var(--borde); font-size: .85rem; text-decoration: none; }
+.ruta li a { color: var(--suave); background: var(--fondo-alt); }
+.ruta li[aria-current] span { background: var(--naranja); border-color: var(--naranja); color: #fff; font-weight: 700; }
+.resultado { display: grid; grid-template-columns: 3fr 1fr; gap: 14px; align-items: start; margin: 12px 0 8px; }
+.resultado figure, .serie figure { margin: 0; border: 1px solid var(--borde); border-radius: 10px; overflow: hidden; background: var(--fondo-alt); }
+.resultado .captura { max-height: 540px; overflow-y: auto; }
+.resultado img, .serie img { display: block; width: 100%; height: auto; }
+.resultado figcaption, .serie figcaption { font-size: .85rem; color: var(--suave); padding: 6px 10px; border-top: 1px solid var(--borde); }
+.serie { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; }
+@media (max-width: 640px) { .resultado { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  body { font-size: 16px; }
+  .cabecera .curso { display: none; }
+  .paso { padding-left: 0; }
+  .paso > h2 .num { position: static; display: inline-grid; margin-right: 8px; width: 34px; height: 34px; }
+  .indice ol { columns: 1; }
+  table { display: block; overflow-x: auto; }
+}
+@media print {
+  body { background: #fff; font-size: 12pt; }
+  .portada { color: var(--oscuro); background: none; border-bottom: 3px solid var(--naranja); }
+  .etiqueta { background: var(--tinta); }
+  main.contenedor { box-shadow: none; }
+  pre { white-space: pre-wrap; }
+}
